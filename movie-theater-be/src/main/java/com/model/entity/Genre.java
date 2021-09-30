@@ -8,9 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
