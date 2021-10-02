@@ -43,6 +43,10 @@ public class Movie {
     @ManyToMany(mappedBy = "movies")
     private Set<Showtime> showtimes;
 
+    @ManyToOne
+    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    private Account account;
+
     public long getId() {
         return id;
     }
@@ -177,5 +181,13 @@ public class Movie {
 
     public Set<Showtime> getShowtimes() {
         return showtimes;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }

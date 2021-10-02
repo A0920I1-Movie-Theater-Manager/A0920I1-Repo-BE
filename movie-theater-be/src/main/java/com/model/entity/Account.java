@@ -37,6 +37,9 @@ public class Account {
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    private List<Movie> movies;
+
     public long getId() {
         return id;
     }
@@ -165,5 +168,11 @@ public class Account {
         this.comments = comments;
     }
 
+    public List<Movie> getMovies() {
+        return movies;
+    }
 
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+    }
 }
