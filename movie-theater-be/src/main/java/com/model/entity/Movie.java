@@ -26,6 +26,8 @@ public class Movie {
     private int runningTime;
     private String production;
     private String trailerUrl;
+
+    @Column(columnDefinition="LONGTEXT")
     private String content;
 
     @Type(type = "org.hibernate.type.NumericBooleanType")
