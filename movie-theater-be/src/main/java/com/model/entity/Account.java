@@ -31,7 +31,7 @@ public class Account {
     private String imageUrl;
 
     @Type(type = "org.hibernate.type.NumericBooleanType")
-    private boolean delete;
+    private boolean  enabled;
 
     @ManyToMany
     @JoinTable(name = "account_role", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -144,12 +144,12 @@ public class Account {
         this.imageUrl = imageUrl;
     }
 
-    public boolean isDelete() {
-        return delete;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setDelete(boolean delete) {
-        this.delete = delete;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public Set<Role> getRoles() {
