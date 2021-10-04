@@ -31,7 +31,7 @@ public class Account {
     private String imageUrl;
 
     @Type(type = "org.hibernate.type.NumericBooleanType")
-    private boolean delete;
+    private boolean deleted;
 
     @ManyToMany
     @JoinTable(name = "account_role", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -144,14 +144,6 @@ public class Account {
         this.imageUrl = imageUrl;
     }
 
-    public boolean isDelete() {
-        return delete;
-    }
-
-    public void setDelete(boolean delete) {
-        this.delete = delete;
-    }
-
     public Set<Role> getRoles() {
         return roles;
     }
@@ -166,5 +158,13 @@ public class Account {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }
