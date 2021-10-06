@@ -1,19 +1,8 @@
-package com.model.entity;
+package com.model.dto.hue;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import org.hibernate.annotations.Type;
-
-import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Set;
 
-@Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Movie {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class MovieDTO {
     private long id;
 
     private String title;
@@ -27,25 +16,16 @@ public class Movie {
     private String production;
     private String trailerUrl;
     private String content;
-
-    @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean is3D;
+    private long accountId;
 
-    @ManyToMany(mappedBy = "movies")
-    private Set<Genre> genres;
+    public boolean isIs3D() {
+        return is3D;
+    }
 
-    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
-    private List<Comment> comments;
-
-    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
-    private List<MovieImage> movieImages;
-
-    @ManyToMany(mappedBy = "movies")
-    private Set<Showtime> showtimes;
-
-    @ManyToOne
-    @JoinColumn(name = "account_id", referencedColumnName = "id")
-    private Account account;
+    public void setIs3D(boolean is3D) {
+        this.is3D = is3D;
+    }
 
     public long getId() {
         return id;
@@ -143,51 +123,11 @@ public class Movie {
         this.content = content;
     }
 
-    public boolean isIs3D() {
-        return is3D;
+    public long getAccountId() {
+        return accountId;
     }
 
-    public void setIs3D(boolean is3D) {
-        this.is3D = is3D;
-    }
-
-    public Set<Genre> getGenres() {
-        return genres;
-    }
-
-    public void setGenres(Set<Genre> genres) {
-        this.genres = genres;
-    }
-
-    public void setShowtimes(Set<Showtime> showtimes) {
-        this.showtimes = showtimes;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public List<MovieImage> getMovieImages() {
-        return movieImages;
-    }
-
-    public void setMovieImages(List<MovieImage> movieImages) {
-        this.movieImages = movieImages;
-    }
-
-    public Set<Showtime> getShowtimes() {
-        return showtimes;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setAccountId(long accountId) {
+        this.accountId = accountId;
     }
 }

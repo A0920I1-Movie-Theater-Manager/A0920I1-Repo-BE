@@ -1,6 +1,5 @@
 package com.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.Type;
@@ -8,7 +7,6 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
@@ -31,25 +29,16 @@ public class Account {
     private String imageUrl;
 
     @Type(type = "org.hibernate.type.NumericBooleanType")
-    private boolean delete;
+    private boolean deleted;
 
-    @ManyToMany
-    @JoinTable(name = "account_role", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    private List<AccountRole> accountRoles;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Movie> movies;
-
-    public List<Movie> getMovies() {
-        return movies;
-    }
-
-    public void setMovies(List<Movie> movies) {
-        this.movies = movies;
-    }
 
     public long getId() {
         return id;
@@ -155,27 +144,35 @@ public class Account {
         this.imageUrl = imageUrl;
     }
 
-    public boolean isDelete() {
-        return delete;
+    public boolean isDeleted() {
+        return deleted;
     }
 
-    public void setDelete(boolean delete) {
-        this.delete = delete;
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public List<AccountRole> getAccountRoles() {
+        return accountRoles;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setAccountRoles(List<AccountRole> accountRoles) {
+        this.accountRoles = accountRoles;
     }
 
-    public List<Comment> getComments() {
-        return comments;
-    }
+//    public List<Comment> getComments() {
+//        return comments;
+//    }
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+//    public List<Movie> getMovies() {
+//        return movies;
+//    }
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
     }
 }
