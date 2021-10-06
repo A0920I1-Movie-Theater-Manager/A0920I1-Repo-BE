@@ -3,8 +3,10 @@ package com.model.entity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.Type;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -18,6 +20,9 @@ public class Booking {
     private double totalPrice;
     private int point;
     private String bookingCode;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime dayTimeBooking;
 
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean received;
@@ -36,6 +41,7 @@ public class Booking {
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account account;
+
 
     public long getId() {
         return id;
