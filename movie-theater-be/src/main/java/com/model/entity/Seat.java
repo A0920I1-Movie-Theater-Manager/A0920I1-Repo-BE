@@ -68,9 +68,9 @@ public class Seat {
         this.screen = screen;
     }
 
-    public Set<Booking> getBookings() {
-        return bookings;
-    }
+//    public Set<Booking> getBookings() {
+//        return bookings;
+//    }
 
     public void setBookings(Set<Booking> bookings) {
         this.bookings = bookings;

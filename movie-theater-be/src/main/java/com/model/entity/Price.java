@@ -63,9 +63,9 @@ public class Price {
         this.price = price;
     }
 
-    public List<Showtime> getShowtimes() {
-        return showtimes;
-    }
+//    public List<Showtime> getShowtimes() {
+//        return showtimes;
+//    }
 
     public void setShowtimes(List<Showtime> showtimes) {
         this.showtimes = showtimes;

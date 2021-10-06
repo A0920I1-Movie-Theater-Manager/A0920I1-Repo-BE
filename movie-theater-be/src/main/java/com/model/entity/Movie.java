@@ -179,9 +179,9 @@ public class Movie {
         this.movieImages = movieImages;
     }
 
-    public Set<Showtime> getShowtimes() {
-        return showtimes;
-    }
+//    public Set<Showtime> getShowtimes() {
+//        return showtimes;
+//    }
 
     public Account getAccount() {
         return account;

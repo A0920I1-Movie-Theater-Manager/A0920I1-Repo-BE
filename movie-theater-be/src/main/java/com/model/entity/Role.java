@@ -34,9 +34,9 @@ public class Role {
         this.name = name;
     }
 
-    public List<AccountRole> getAccountRoles() {
-        return accountRoles;
-    }
+//    public List<AccountRole> getAccountRoles() {
+//        return accountRoles;
+//    }
 
     public void setAccountRoles(List<AccountRole> accountRoles) {
         this.accountRoles = accountRoles;

@@ -152,25 +152,25 @@ public class Account {
         this.deleted = deleted;
     }
 
-    public List<AccountRole> getAccountRoles() {
-        return accountRoles;
-    }
+//    public List<AccountRole> getAccountRoles() {
+//        return accountRoles;
+//    }
 
     public void setAccountRoles(List<AccountRole> accountRoles) {
         this.accountRoles = accountRoles;
     }
 
-    public List<Comment> getComments() {
-        return comments;
-    }
+//    public List<Comment> getComments() {
+//        return comments;
+//    }
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
 
-    public List<Movie> getMovies() {
-        return movies;
-    }
+//    public List<Movie> getMovies() {
+//        return movies;
+//    }
 
     public void setMovies(List<Movie> movies) {
         this.movies = movies;
