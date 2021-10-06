@@ -8,5 +8,8 @@ import java.util.List;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account,Long> {
-
+    //AnhLT
+    Account findByEmail(String email);
+    //AnhLT
+    boolean existsByEmail(String email);
 }

@@ -1,6 +1,5 @@
 package com.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.Type;
@@ -31,7 +30,12 @@ public class Account {
     private String imageUrl;
 
     @Type(type = "org.hibernate.type.NumericBooleanType")
-    private boolean delete;
+    private boolean enable;
+
+    //AnhLT
+    private String provider;
+
+    //end AnhlT
 
     @ManyToMany
     @JoinTable(name = "account_role", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -144,12 +148,12 @@ public class Account {
         this.imageUrl = imageUrl;
     }
 
-    public boolean isDelete() {
-        return delete;
+    public boolean isEnable() {
+        return enable;
     }
 
-    public void setDelete(boolean delete) {
-        this.delete = delete;
+    public void setEnable(boolean delete) {
+        this.enable = delete;
     }
 
     public Set<Role> getRoles() {
@@ -167,4 +171,14 @@ public class Account {
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
+
+    //anhLT
+    public String getProvider() {
+        return provider;
+    }
+
+    public void setProvider(String provider) {
+        this.provider = provider;
+    }
+    // end AnhlT
 }
