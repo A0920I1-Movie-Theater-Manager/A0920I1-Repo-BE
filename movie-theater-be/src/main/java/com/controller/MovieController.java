@@ -132,6 +132,13 @@ public class MovieController {
         return accountService.listAccountByCodeEmployee();
     }
 
-
+    //HueHV, phương thức thêm lịch chiếu
+    @PostMapping("/add-genre")
+    public ResponseEntity<?> addGenreToMovie(List<Integer> genre, long movie_id){
+        for(int i=0;i<genre.size();i++){
+            genreService.addGenreToMovie(genre.get(i), movie_id);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 }
