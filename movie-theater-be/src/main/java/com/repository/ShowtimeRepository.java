@@ -27,12 +27,12 @@ public interface ShowtimeRepository extends JpaRepository<Showtime, Long> {
     //HueHV
     @Query(value = "select * " +
             "from showtime " +
-            "where show_day = ?1 and show_time = ?2 limit 1 ", nativeQuery = true)
-    Showtime getIdByShowDayAndShowTime(LocalDate show_date, LocalTime show_time);
+            "where show_time = ?1 and price_id =?2 limit 1 ", nativeQuery = true)
+    Showtime getIdByShowDayAndShowTime(LocalTime show_time, long price_id);
 
     //HueHV
     @Transactional
     @Modifying
-    @Query(value = "insert into showtime(show_time, show_day, price_id) values(?1, ?2, ?3)", nativeQuery = true)
-    void addShowTime(LocalTime showTime, LocalDate showDay, long price_id);
+    @Query(value = "insert into showtime(show_time, price_id) values(?1, ?2)", nativeQuery = true)
+    void addShowTime(LocalTime showTime, long price_id);
 }

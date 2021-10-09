@@ -11,11 +11,11 @@ public interface ShowtimeService {
     List<Showtime> listShowTimes();
 
     //HueHV
-    Showtime getIdByShowDayAndShowTime(LocalDate show_date, LocalTime show_time);
+    Showtime getIdByShowDayAndShowTime(LocalTime show_time,  long price_id);
 
     //HueHV
     void joinTableMovieAndShowtime(long movie_id, long showtime_id);
 
     //HueHV
-    void addShowTimes(LocalTime showTime, LocalDate showDay, long price_id);
+    void addShowTimes(LocalTime showTime,long price_id);
 }

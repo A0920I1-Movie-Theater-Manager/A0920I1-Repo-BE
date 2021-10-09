@@ -22,8 +22,8 @@ public class ShowtimeServiceImpl implements ShowtimeService {
     }
 
     @Override
-    public Showtime getIdByShowDayAndShowTime(LocalDate show_date, LocalTime show_time) {
-        return showtimeRepository.getIdByShowDayAndShowTime(show_date, show_time);
+    public Showtime getIdByShowDayAndShowTime(LocalTime show_time,  long price_id) {
+        return showtimeRepository.getIdByShowDayAndShowTime(show_time, price_id);
     }
 
     //HueHV
@@ -34,7 +34,7 @@ public class ShowtimeServiceImpl implements ShowtimeService {
 
     //HueHV
     @Override
-    public void addShowTimes(LocalTime showTime, LocalDate showDay, long price_id) {
-        showtimeRepository.addShowTime(showTime, showDay, price_id);
+    public void addShowTimes(LocalTime showTime, long price_id) {
+        showtimeRepository.addShowTime(showTime, price_id);
     }
 }

@@ -25,6 +25,11 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
+    public List<Movie> listAllMovie(String name) {
+        return movieRepository.listAllMovie(name);
+    }
+
+    @Override
     public void createMovie(String title, LocalDate showing_From, LocalDate showing_To, String cast, String director, LocalDate release_Date, String rated, int running_Time,
                             String production,String trailer_Url, String content, boolean is3D, long account_Id) {
         movieRepository.createMovie(title, showing_From, showing_To, cast, director, release_Date, rated, running_Time, production, trailer_Url, content, is3D, account_Id);

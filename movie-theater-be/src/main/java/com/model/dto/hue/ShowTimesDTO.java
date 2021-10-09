@@ -7,7 +7,6 @@ public class ShowTimesDTO {
     private long id;
 
     private LocalTime show_time;
-    private LocalDate show_day;
     private long price_id;
 
     private long movie_id;
@@ -34,14 +33,6 @@ public class ShowTimesDTO {
 
     public void setShow_time(LocalTime show_time) {
         this.show_time = show_time;
-    }
-
-    public LocalDate getShow_day() {
-        return show_day;
-    }
-
-    public void setShow_day(LocalDate show_day) {
-        this.show_day = show_day;
     }
 
     public long getPrice_id() {

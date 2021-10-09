@@ -13,13 +13,19 @@ import java.util.List;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
 
+    //HueHV
     @Query(value = "SELECT * FROM movie", nativeQuery = true)
     List<Movie> findAllMovie();
 
-
+    //HueHV
     @Query(value = "select * from movie where id = ?1", nativeQuery = true)
     Movie findMovieById(long id);
 
+    //HueHV
+    @Query(nativeQuery = true, value = "select * from movie where title like %?1%")
+    List<Movie> listAllMovie(String title);
+
+    //HueHV
     @Transactional
     @Modifying
     @Query(value = "insert into movie(title, showing_From, showing_To, cast, director, release_Date, rated, running_Time,production, trailer_Url, content, is3D, account_Id) " +
@@ -27,6 +33,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     void createMovie(String title, LocalDate showing_From, LocalDate showing_To, String cast, String director, LocalDate release_Date, String rated, int running_Time,
                      String production,String trailer_Url, String content, boolean is3D, long account_Id);
 
+    //HueHV
     @Transactional
     @Modifying
     @Query(value = "update movie set title = ?1, showing_From = ?2, showing_To = ?3, cast = ?4, director = ?5, release_Date = ?6, rated = ?7, running_Time = ?8,  " +
