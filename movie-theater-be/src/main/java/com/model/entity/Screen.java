@@ -2,12 +2,13 @@ package com.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Screen {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,9 +55,9 @@ public class Screen {
         this.showtime = showtime;
     }
 
-//    public List<Seat> getSeats() {
-//        return seats;
-//    }
+    public List<Seat> getSeats() {
+        return seats;
+    }
 
     public void setSeats(List<Seat> seats) {
         this.seats = seats;

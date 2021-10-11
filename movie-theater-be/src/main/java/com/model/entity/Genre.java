@@ -1,14 +1,16 @@
 package com.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,9 +37,9 @@ public class Genre {
         this.name = name;
     }
 
-//    public Set<Movie> getMovies() {
-//        return movies;
-//    }
+    public Set<Movie> getMovies() {
+        return movies;
+    }
 
     public void setMovies(Set<Movie> movies) {
         this.movies = movies;

@@ -2,13 +2,14 @@ package com.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Promotion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -80,9 +81,9 @@ public class Promotion {
         this.discount = discount;
     }
 
-//    public List<Booking> getBookings() {
-//        return bookings;
-//    }
+    public List<Booking> getBookings() {
+        return bookings;
+    }
 
     public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;

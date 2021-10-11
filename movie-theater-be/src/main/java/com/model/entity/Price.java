@@ -2,13 +2,14 @@ package com.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Price {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,9 +64,9 @@ public class Price {
         this.price = price;
     }
 
-//    public List<Showtime> getShowtimes() {
-//        return showtimes;
-//    }
+    public List<Showtime> getShowtimes() {
+        return showtimes;
+    }
 
     public void setShowtimes(List<Showtime> showtimes) {
         this.showtimes = showtimes;

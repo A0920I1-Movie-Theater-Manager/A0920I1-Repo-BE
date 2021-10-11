@@ -2,6 +2,7 @@ package com.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Seat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -68,9 +69,9 @@ public class Seat {
         this.screen = screen;
     }
 
-//    public Set<Booking> getBookings() {
-//        return bookings;
-//    }
+    public Set<Booking> getBookings() {
+        return bookings;
+    }
 
     public void setBookings(Set<Booking> bookings) {
         this.bookings = bookings;

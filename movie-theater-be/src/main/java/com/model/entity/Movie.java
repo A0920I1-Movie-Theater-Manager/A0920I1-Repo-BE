@@ -1,7 +1,9 @@
 package com.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -10,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,17 +33,22 @@ public class Movie {
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean is3D;
 
+
     @ManyToMany(mappedBy = "movies")
     private Set<Genre> genres;
+
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
+
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     private List<MovieImage> movieImages;
 
+
     @ManyToMany(mappedBy = "movies")
     private Set<Showtime> showtimes;
+
 
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "id")
@@ -179,9 +186,9 @@ public class Movie {
         this.movieImages = movieImages;
     }
 
-//    public Set<Showtime> getShowtimes() {
-//        return showtimes;
-//    }
+    public Set<Showtime> getShowtimes() {
+        return showtimes;
+    }
 
     public Account getAccount() {
         return account;
