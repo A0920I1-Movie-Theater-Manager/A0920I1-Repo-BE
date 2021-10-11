@@ -23,4 +23,10 @@ public interface UserService {
 	Optional<Account> findUserById(Long id);
 
 	LocalUser processUserRegistration(String registrationId, Map<String, Object> attributes, OidcIdToken idToken, OidcUserInfo userInfo);
+
+    boolean checkEmail(String email);
+
+	boolean checkPhone(String phone);
+
+	boolean checkUsername(String username);
 }

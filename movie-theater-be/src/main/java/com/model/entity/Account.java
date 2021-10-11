@@ -29,12 +29,12 @@ public class Account {
     private int totalPoint;
     private String imageUrl;
 
+
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean enable;
 
     //AnhLT
     private String provider;
-
     //end AnhlT
 
     @ManyToMany

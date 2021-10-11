@@ -67,7 +67,13 @@ public class UserServiceImpl implements com.service.serviceAnhLT.UserService {
 		user.setIdCard(formDTO.getIdCard());
 		user.setUsername(formDTO.getUsername());
 		user.setPassword(passwordEncoder.encode(formDTO.getPassword()));
-		user.setBirthday(LocalDate.parse(formDTO.getBirthday(), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+		LocalDate birth;
+		if (formDTO.getBirthday()==null){
+			birth = null;
+		}else {
+			birth = LocalDate.parse(formDTO.getBirthday(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		}
+		user.setBirthday(birth);
 		user.setGender(formDTO.getGender());
 		final HashSet<Role> roles = new HashSet<Role>();
 		roles.add(roleRepository.findByName(Role.ROLE_USER));
@@ -105,6 +111,21 @@ public class UserServiceImpl implements com.service.serviceAnhLT.UserService {
 		}
 
 		return LocalUser.create(user, attributes, idToken, userInfo);
+	}
+
+	@Override
+	public boolean checkEmail(String email) {
+		return userRepository.existsByEmail(email);
+	}
+
+	@Override
+	public boolean checkPhone(String phone) {
+		return userRepository.existsByPhone(phone);
+	}
+
+	@Override
+	public boolean checkUsername(String username) {
+		return userRepository.existsByUsername(username);
 	}
 
 	private Account updateExistingUser(Account existingUser, OAuth2UserInfo oAuth2UserInfo) {

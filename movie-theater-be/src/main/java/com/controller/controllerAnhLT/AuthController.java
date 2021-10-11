@@ -3,7 +3,6 @@ package com.controller.controllerAnhLT;
 import com.dto.dtoAnhLT.*;
 import com.exceptionAnhLT.UserAlreadyExistAuthenticationException;
 import com.securityAnhLT.jwt.TokenProvider;
-import com.service.AccountService;
 import com.service.serviceAnhLT.UserService;
 import com.utilAnhLT.GeneralUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,8 +43,6 @@ public class AuthController {
 
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-		System.out.println(signUpRequest.getSocialProvider());
-		System.out.println(signUpRequest.getBirthday());
 		signUpRequest.setSocialProvider(SocialProvider.LOCAL);
 		try {
 			userService.registerNewUser(signUpRequest);
@@ -54,5 +51,18 @@ public class AuthController {
 			return new ResponseEntity<>(new ApiResponse(false, "Email Address already in use!"), HttpStatus.BAD_REQUEST);
 		}
 		return ResponseEntity.ok().body(new ApiResponse(true, "User registered successfully"));
+	}
+
+	@PostMapping("/check-email")
+	public boolean checkEmail(@RequestBody String email){
+		return userService.checkEmail(email);
+	}
+	@PostMapping("/check-phone")
+	public boolean checkPhone(@RequestBody String phone){
+		return userService.checkPhone(phone);
+	}
+	@PostMapping("/check-username")
+	public boolean checkUsername(@RequestBody String username){
+		return userService.checkUsername(username);
 	}
 }
