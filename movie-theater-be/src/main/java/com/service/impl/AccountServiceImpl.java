@@ -1,6 +1,7 @@
 package com.service.impl;
 
 
+import com.model.dto.employeeAccount.CreateEmployeeAccount;
 import com.model.dto.employeeAccount.UpdateEmployeeAccount;
 import com.model.entity.Account;
 import com.repository.AccountRepository;
@@ -12,18 +13,23 @@ import java.util.List;
 
 @Service
 public class AccountServiceImpl implements AccountService {
+
     @Autowired
     private AccountRepository accountRepository;
+
+    // Danh sách nhân viên HoangLV
     @Override
     public List<Account> getAllEmployeeAccount() {
         return accountRepository.getAllAccountEmployee();
     }
 
+    // Lấy nhân viên theo id HoangLV
     @Override
     public Account getAccountById(long id) {
         return accountRepository.getAccountById(id);
     }
 
+    // Chỉnh sửa thông tin nhân viên HoangLV
     @Override
     public void updateEmployeeAccount(UpdateEmployeeAccount updateEmployeeAccount) {
         accountRepository.updateEmployeeAccount(updateEmployeeAccount.getUsername(),
@@ -38,5 +44,46 @@ public class AccountServiceImpl implements AccountService {
                 updateEmployeeAccount.getImageUrl(),
                 updateEmployeeAccount.getAccountCode(),
                 updateEmployeeAccount.getId());
+    }
+
+    // Thêm mới nhân viên HoangLV
+    @Override
+    public void createEmployeeAccount(CreateEmployeeAccount createEmployeeAccount) {
+        accountRepository.createEmployeeAccount(createEmployeeAccount.getAccountCode(),
+                createEmployeeAccount.getAddress(),
+                createEmployeeAccount.getBirthday(),
+                createEmployeeAccount.getEmail(),
+                createEmployeeAccount.getFullname(),
+                createEmployeeAccount.getGender(),
+                createEmployeeAccount.getIdCard(),
+                createEmployeeAccount.getImageUrl(),
+                createEmployeeAccount.getPassword(),
+                createEmployeeAccount.getPhone(),
+                createEmployeeAccount.getUsername(),
+                createEmployeeAccount.isDeleted(),
+                createEmployeeAccount.getTotalPoint()
+        );
+    }
+
+    // phân quyền cho nhân viên HoangLV
+    @Override
+    public void createAccountRole(long accountId, long roleId) {
+        accountRepository.createAccountRole(accountId,roleId);
+    }
+
+    // lấy nhân viên theo mã nhân viên HoangLV
+    @Override
+    public Account findAccountByEmployeeName(String accountCode) {
+        return accountRepository.findAccountByEmployeeName(accountCode);
+    }
+
+    @Override
+    public void deleteEmployeeAccountById(Long id) {
+        accountRepository.deleteEmployeeAccountById(id);
+    }
+
+    @Override
+    public List<Account> findEmployeeAccountByFullNameOrAccountCode(String search) {
+        return accountRepository.findEmployeeAccountByFullNameOrAccountCode(search);
     }
 }
