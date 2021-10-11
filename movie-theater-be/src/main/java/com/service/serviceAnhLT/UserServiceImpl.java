@@ -24,10 +24,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-/**
- * @author Chinna
- * @since 26/3/18
- */
+
 @Service
 public class UserServiceImpl implements com.service.serviceAnhLT.UserService {
 
