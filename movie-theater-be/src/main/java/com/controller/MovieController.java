@@ -22,6 +22,9 @@ public class MovieController {
     MovieService movieService;
 
     @Autowired
+    PriceService priceService;
+
+    @Autowired
     ScreenService screenService;
 
     @Autowired
@@ -39,13 +42,13 @@ public class MovieController {
 
     // HueHV, phương thức hiển thị tất cả danh sách phim
     @GetMapping("/list-movie")
-    public List<Movie> getAllMovie(@RequestParam Optional<String> name) {
+    public List<Movie> getAllMovie(@RequestParam(value = "title") Optional<String> title) {
         String stringAfterCheck = "";
-        if(!name.isPresent()){
+        if(!title.isPresent()){
             return movieService.getAllMovie();
         }
         else{
-            stringAfterCheck = name.get();
+            stringAfterCheck = title.get();
             return movieService.listAllMovie(stringAfterCheck);
         }
     }
@@ -56,7 +59,9 @@ public class MovieController {
         if (movie == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
-            movieService.createMovie(movie.getTitle(), movie.getShowingFrom(), movie.getShowingTo(), movie.getCast(), movie.getDirector(), movie.getReleaseDate(), movie.getRated(),
+            movieService.createMovie(movie.getTitle(), movie.getShowingFrom(), movie.getShowingTo(),
+                    movie.getCast(), movie.getDirector(),
+                    movie.getReleaseDate(), movie.getRated(),
                     movie.getRunningTime(), movie.getProduction(), movie.getTrailerUrl(),
                     movie.getContent(), movie.isIs3D(), movie.getAccountId());
             return new ResponseEntity<>(HttpStatus.OK);
@@ -95,7 +100,15 @@ public class MovieController {
         return movieImageService.listImageMovieById(id);
     }
 
-    // HueHV, phương thức thêm ảnh cho 1 bộ phim
+    //HueHV
+    @GetMapping("/get-id")
+    public Movie getIdMovieByName(@RequestParam(value = "title")String title){
+        System.out.println("start");
+        System.out.println(movieService.getIdMovieByName(title));
+        return movieService.getIdMovieByName(title);
+    }
+
+    // HueHV, phương thức thêm ảnh cho 1 bộ phim        >>>>>>>>>>>>>>>>>>>2
     @PostMapping("/add-image-movie")
     public ResponseEntity<?> addImageMovie(@RequestBody MovieImageDTO movieImage) {
         if (movieImage == null) {
@@ -106,7 +119,7 @@ public class MovieController {
         }
     }
 
-    //HueHV, phương thức thêm giờ chiếu cho 1 bộ phim   >>>>>>>>>>>>>>>>>>>
+    //HueHV, phương thức thêm giờ chiếu cho 1 bộ phim   >>>>>>>>>>>>>>>>>>>3
     @PostMapping("/add-show-times")
     public ResponseEntity<?> addShowTimes(@RequestBody ShowTimesDTO showtime) {
         if (showtime == null) {
@@ -127,20 +140,23 @@ public class MovieController {
         return accountService.listAccountByCodeEmployee();
     }
 
-    //HueHV, phương thức thêm thể loại cho 1 bộ phim
-//    @PostMapping("/add-genre")
-//    public ResponseEntity<?> addGenreToMovie(@RequestBody List<GenreMovieDTO> genre) {
-//        for (int i = 0; i < genre.size(); i++) {
-//            genreService.addGenreToMovie(genre.get(i).getGenre_id(), genre.get(i).getMovie_id());
-//        }
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
+    //HueHV, phương thức thêm thể loại cho 1 bộ phim   >>>>>>>>>>>>>>>>>>>2
     @PostMapping("/add-genre")
     public ResponseEntity<?> addGenreToMovie(@RequestBody GenreMovieDTO genreMovieDTO) {
             genreService.addGenreToMovie(genreMovieDTO.getGenre_id(), genreMovieDTO.getMovie_id());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    //HueHV, phương thức lấy danh sách thể loại phim
+    @GetMapping(value = "/list-genre")
+    public List<Genre> getAllGenre(){
+        return genreService.findAll();
+    }
 
+    //HueHV, phương thức lấy danh sách giá phim
+    @GetMapping("/list-price")
+    public List<Price> getAllListPrice(){
+        return priceService.listPrice();
+    }
 
 }

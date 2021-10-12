@@ -25,7 +25,11 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     @Query(nativeQuery = true, value = "select * from movie where title like %?1%")
     List<Movie> listAllMovie(String title);
 
+    //HueHv
+    @Query(nativeQuery = true, value = "select * from movie where title like %?1% limit 1")
+    Movie getIdMovieByName(String title);
     //HueHV
+
     @Transactional
     @Modifying
     @Query(value = "insert into movie(title, showing_From, showing_To, cast, director, release_Date, rated, running_Time,production, trailer_Url, content, is3D, account_Id) " +
