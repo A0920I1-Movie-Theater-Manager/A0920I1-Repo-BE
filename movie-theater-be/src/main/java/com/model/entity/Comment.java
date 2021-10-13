@@ -1,8 +1,8 @@
 package com.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -14,6 +14,8 @@ public class Comment {
     private long id;
     private String content;
 
+    @Type(type = "org.hibernate.type.NumericBooleanType")
+    private boolean seen;
     @ManyToOne
     @JoinColumn(name = "movie_id", referencedColumnName = "id")
     private Movie movie;
@@ -52,5 +54,13 @@ public class Comment {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public boolean isSeen() {
+        return seen;
+    }
+
+    public void setSeen(boolean seen) {
+        this.seen = seen;
     }
 }

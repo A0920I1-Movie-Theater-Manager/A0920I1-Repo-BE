@@ -1,6 +1,7 @@
 package com.repository;
 
 import com.model.dto.TopFiveMovieDTO;
+import com.model.entity.Comment;
 import com.model.entity.Movie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -28,9 +29,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     //    TuHC - tim kiem phim theo ten phim, dao dien, dien vien va phim dang duoc chieu
     @Query(value = "SELECT * FROM movietheater.movie " +
-            "where (movie.title like %:keyword% " +
-            "or movie.cast like %:keyword% " +
-            "or movie.director like %:keyword%) " +
+            "where (movie.title like %:keyword%) "+
             "and (:today between showing_from and showing_to)", nativeQuery = true)
     List<Movie> searchMovie(@Param("keyword") String keyword, @Param("today") LocalDate today);
 
@@ -65,4 +64,6 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
             "order by count(movie.id)desc " +
             "limit 5", nativeQuery = true)
     List<Movie> listTopFiveMovie();
+
+
 }

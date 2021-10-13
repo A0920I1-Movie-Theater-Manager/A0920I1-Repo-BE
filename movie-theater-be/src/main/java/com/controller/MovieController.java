@@ -1,8 +1,8 @@
 package com.controller;
 
-import com.model.dto.TopFiveMovieDTO;
+import com.model.entity.Comment;
 import com.model.entity.Movie;
-import com.model.entity.MovieImage;
+import com.service.CommentService;
 import com.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -21,24 +20,8 @@ public class MovieController {
 
     @Autowired
     private MovieService movieService;
-
-//    @GetMapping(value = "/all-movie")
-//    public ResponseEntity<?> getMovieShowing(){
-//        HashMap<String, Object> hmap = new HashMap<String, Object>();
-//
-//        List<Movie> movieShowings = movieService.findAllMovieShowing(today);
-//        List<Movie> movieComings = movieService.findAllMovieComingSoon(today);
-//        List<Movie> movieTopFives = movieService.listTopFiveMovie();
-//
-//        hmap.put("movieShowings", movieShowings);
-//        hmap.put("movieComings", movieComings);
-//        hmap.put("movieTopFives", movieTopFives);
-//        if (movieShowings.isEmpty() || movieComings.isEmpty() || movieTopFives.isEmpty()) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        } else {
-//            return new ResponseEntity<>(hmap, HttpStatus.OK);
-//        }
-//    }
+    @Autowired
+    private CommentService commentService;
 
     //    TuHC - danh sach phim dang chieu
     @GetMapping(value = "/movie-showing")
@@ -95,4 +78,21 @@ public class MovieController {
         }
     }
 
+//    TuHC - lay comment cho 1 bo phim
+    @GetMapping(value = "/get-comment/{id}")
+    public ResponseEntity<List<Comment>> getAllCommentByMovieId(@PathVariable("id") long id){
+        List<Comment> comments = commentService.findAllCommentByMovieId(id);
+
+        if(comments.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }else {
+            return new ResponseEntity<>(comments, HttpStatus.OK);
+        }
+    }
+
+    @PostMapping(value = "/add-comment")
+    public ResponseEntity<Comment> addNewComment(@RequestBody Comment comment){
+        commentService.addNewComment(comment.getContent(), comment.getMovie());
+        return new ResponseEntity(HttpStatus.OK);
+    }
 }
