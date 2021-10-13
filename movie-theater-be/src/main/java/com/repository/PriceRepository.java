@@ -2,7 +2,6 @@ package com.repository;
 
 
 import com.model.entity.Price;
-import org.hibernate.annotations.Type;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

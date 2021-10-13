@@ -83,7 +83,6 @@ public class MovieController {
             movieService.updateMovie(movie.getTitle(), movie.getShowingFrom(), movie.getShowingTo(), movie.getCast(), movie.getDirector(), movie.getReleaseDate(), movie.getRated(),
                     movie.getRunningTime(), movie.getProduction(), movie.getTrailerUrl(),
                     movie.getContent(), movie.isIs3D(), movie.getAccountId(), id);
-            System.out.println("update");
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }
@@ -103,8 +102,6 @@ public class MovieController {
     //HueHV
     @GetMapping("/get-id")
     public Movie getIdMovieByName(@RequestParam(value = "title")String title){
-        System.out.println("start");
-        System.out.println(movieService.getIdMovieByName(title));
         return movieService.getIdMovieByName(title);
     }
 
@@ -128,7 +125,6 @@ public class MovieController {
             showtimeService.addShowTimes(showtime.getShow_time(), showtime.getPrice_id());
             // tìm id của showtime thông qua giờ chiếu và ngày chiếu vừa thêm để nối 2 bảng
             Showtime showTimes = showtimeService.getIdByShowDayAndShowTime(showtime.getShow_time(), showtime.getPrice_id());
-            System.out.println(showTimes.getId() + " " + showtime.getMovie_id());
             showtimeService.joinTableMovieAndShowtime(showTimes.getId(), showtime.getMovie_id());
             return new ResponseEntity<>(HttpStatus.OK);
         }

@@ -1,6 +1,5 @@
 package com.service.impl;
 
-import com.model.entity.Movie;
 import com.model.entity.Screen;
 import com.repository.ScreenRepository;
 import com.service.ScreenService;

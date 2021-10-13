@@ -4,9 +4,6 @@ public class GenreMovieDTO {
     private long genre_id;
     private long movie_id;
 
-    public GenreMovieDTO() {
-    }
-
     public long getMovie_id() {
         return movie_id;
     }

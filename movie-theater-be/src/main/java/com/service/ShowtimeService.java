@@ -2,7 +2,6 @@ package com.service;
 
 import com.model.entity.Showtime;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
