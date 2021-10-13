@@ -31,22 +31,24 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void createMember(AccountDTO accountDTO) {
-        accountRepository.createMember(accountDTO.getAccountCode(),accountDTO.getAddress(),accountDTO.getBirthday(),accountDTO.getDeleted(),
-                accountDTO.getEmail(),accountDTO.getFullname(),accountDTO.getGender(),accountDTO.getIdCard(),accountDTO.getImageUrl(),
-                accountDTO.getPassword(),accountDTO.getPhone(),accountDTO.getTotalPoint(),accountDTO.getUsername());
+        accountRepository.createMember(accountDTO.getAccountCode(),accountDTO.getAddress(),accountDTO.getBirthday(),
+               accountDTO.isDeleted(), accountDTO.getEmail(),accountDTO.getFullname(),accountDTO.getGender(),accountDTO.getIdCard(),
+                accountDTO.getImageUrl(),accountDTO.getPassword(),accountDTO.getPhone(),accountDTO.getTotalPoint(),accountDTO.getUsername());
     }
 
     @Override
     public void deleteMember(long id) {
-//        accountRepository.deleteMemberMovie(id);
-//        accountRepository.deleteMemberComment(id);
-//        accountRepository.deleteMemberRole(id);
         accountRepository.deleteMember(id);
     }
 
     @Override
     public Account findByIdMember(long id) {
         return accountRepository.findByIdMember(id);
+    }
+
+    @Override
+    public List<Account> findByNameMember(String name) {
+        return accountRepository.searchNameMember(name);
     }
 
 

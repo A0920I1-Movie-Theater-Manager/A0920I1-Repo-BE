@@ -16,18 +16,18 @@ public class AccountDTO {
     private String gender;
     private int totalPoint;
     private String imageUrl;
-    private long deleted;
+    private boolean deleted ;
 
     private long roleId;
 
     public AccountDTO() {
     }
 
-    public long getDeleted() {
+    public boolean isDeleted() {
         return deleted;
     }
 
-    public void setDeleted(long deleted) {
+    public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
 

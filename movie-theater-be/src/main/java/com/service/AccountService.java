@@ -13,4 +13,5 @@ public interface AccountService {
     void createMember(AccountDTO accountDTO);
     void deleteMember(long id);
     Account findByIdMember(long id);
+    List<Account> findByNameMember(String name);
 }

@@ -43,14 +43,20 @@ public class AccountController {
         accountService.createMember(accountDTO);
         return new ResponseEntity<AccountDTO>(HttpStatus.CREATED);
     }
-    @GetMapping("/findById-member/{id}")
-    public ResponseEntity<Account> getIdMember(@PathVariable ("id") long id,@RequestBody Account account){
+    @GetMapping("/public/findById-member/{id}")
+    public ResponseEntity<Account> getIdMember(@PathVariable ("id") long id){
        Account accounts = accountService.findByIdMember(id);
+        System.out.println();
         return new ResponseEntity<Account>(accounts,HttpStatus.OK);
     }
     @DeleteMapping("delete-member/{id}")
-    public ResponseEntity<?> deleteMember(@PathVariable("id") long id){
+    public ResponseEntity<Void> deleteMember(@PathVariable("id") long id){
         accountService.deleteMember(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @GetMapping("searchName-member")
+    public ResponseEntity<List<Account>> searchNameMember(@RequestParam("name") String name){
+      List<Account> accounts = accountService.findByNameMember(name);
+        return new ResponseEntity<List<Account>>(accounts,HttpStatus.OK);
     }
 }
