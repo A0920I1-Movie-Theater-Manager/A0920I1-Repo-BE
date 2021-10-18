@@ -1,6 +1,8 @@
 package com.model.dto.hue;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 
 public class MovieDTO {
     private long id;
@@ -18,6 +20,39 @@ public class MovieDTO {
     private String content;
     private boolean is3D;
     private long accountId;
+
+    private List<String> genres;
+    private List<String> movieImages;
+    private List<ShowTimesDTO> showtime;
+
+//    private List<Comment> comments;
+
+    public List<String> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<String> genres) {
+        this.genres = genres;
+    }
+
+    public List<String> getMovieImages() {
+        return movieImages;
+    }
+
+    public void setMovieImages(List<String> movieImages) {
+        this.movieImages = movieImages;
+    }
+
+    public List<ShowTimesDTO> getShowtime() {
+        return showtime;
+    }
+
+    public void setShowtime(List<ShowTimesDTO> showtime) {
+        this.showtime = showtime;
+    }
+
+    public MovieDTO() {
+    }
 
     public boolean isIs3D() {
         return is3D;
@@ -130,4 +165,6 @@ public class MovieDTO {
     public void setAccountId(long accountId) {
         this.accountId = accountId;
     }
+
+
 }

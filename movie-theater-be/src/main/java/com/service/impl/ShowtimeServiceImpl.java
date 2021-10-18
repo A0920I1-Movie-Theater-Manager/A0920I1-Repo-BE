@@ -1,5 +1,6 @@
 package com.service.impl;
 
+import com.model.dto.hue.ShowTimesDTO;
 import com.model.entity.Showtime;
 import com.repository.ShowtimeRepository;
 import com.service.ShowtimeService;
@@ -21,7 +22,7 @@ public class ShowtimeServiceImpl implements ShowtimeService {
     }
 
     @Override
-    public Showtime getIdByShowDayAndShowTime(LocalTime show_time,  long price_id) {
+    public Showtime getIdByShowDayAndShowTime(LocalTime show_time, long price_id) {
         return showtimeRepository.getIdByShowDayAndShowTime(show_time, price_id);
     }
 

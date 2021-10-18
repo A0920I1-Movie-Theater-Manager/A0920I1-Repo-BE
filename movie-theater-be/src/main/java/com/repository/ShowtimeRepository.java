@@ -34,4 +34,10 @@ public interface ShowtimeRepository extends JpaRepository<Showtime, Long> {
     @Modifying
     @Query(value = "insert into showtime(show_time, price_id) values(?1, ?2)", nativeQuery = true)
     void addShowTime(LocalTime showTime, long price_id);
+
+    //HueHV
+    @Transactional
+    @Modifying
+    @Query(value = "update showtime set show_time=?1, price_id=?2 where id=?3", nativeQuery = true)
+    void updateShowTime(LocalTime showTime, long price_id, long id);
 }

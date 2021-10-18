@@ -16,5 +16,12 @@ public interface GenreRepository extends JpaRepository<Genre, Long> {
     @Query(nativeQuery = true, value = "insert into genre_movie (genre_id, movie_id) values (?1, ?2);")
     void addGenreToMovie(long genre_id, long movie_id);
 
+    //HueHV
+    @Transactional
+    @Modifying
+    @Query(nativeQuery = true, value = "update genre_movie set genre_id=?1 where movie_id=?2")
+    void updateGenreToMovie(long genre_id, long movie_id);
+
+
 
 }

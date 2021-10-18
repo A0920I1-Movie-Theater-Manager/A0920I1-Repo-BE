@@ -8,6 +8,7 @@ import com.model.entity.*;
 import com.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,16 +55,35 @@ public class MovieController {
     }
 
     //HueHV, phương thức tạo mới 1 bộ phim
-    @PostMapping(value = "/create-movie")
+    @PostMapping(value = "/create-movie", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createMovie(@RequestBody MovieDTO movie) {
         if (movie == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
-            movieService.createMovie(movie.getTitle(), movie.getShowingFrom(), movie.getShowingTo(),
-                    movie.getCast(), movie.getDirector(),
+            movieService.createMovie(movie.getTitle().trim(), movie.getShowingFrom(), movie.getShowingTo(),
+                    movie.getCast().trim(), movie.getDirector().trim(),
                     movie.getReleaseDate(), movie.getRated(),
-                    movie.getRunningTime(), movie.getProduction(), movie.getTrailerUrl(),
-                    movie.getContent(), movie.isIs3D(), movie.getAccountId());
+                    movie.getRunningTime(), movie.getProduction().trim(), movie.getTrailerUrl().trim(),
+                    movie.getContent().trim(), movie.isIs3D(), movie.getAccountId());
+            long idMovie = movieService.getIdMovieByName(movie.getTitle()).getId();
+            for(int i = 0;i<movie.getMovieImages().size();i++){
+                System.out.println(movie.getMovieImages().get(i));
+                movieImageService.addImageByIdMovie(movie.getMovieImages().get(i), idMovie);
+            }
+            for(int i =0;i < movie.getGenres().size(); i++){
+                genreService.addGenreToMovie(Long.parseLong(movie.getGenres().get(i)), idMovie);
+            }
+            for(int i =0;i < movie.getShowtime().size(); i++){
+                showtimeService.addShowTimes(movie.getShowtime().get(i).getShowtime(), movie.getShowtime().get(i).getPrice());
+            }
+            for(int i =0;i < movie.getShowtime().size(); i++){
+                long showTimesDTO = showtimeService.getIdByShowDayAndShowTime(movie.getShowtime().get(i).getShowtime(), movie.getShowtime().get(i).getPrice()).getId();
+                showtimeService.joinTableMovieAndShowtime(idMovie, showTimesDTO);
+            }
+
+
+
+
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }
@@ -80,9 +100,11 @@ public class MovieController {
         if (movie == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            movieService.updateMovie(movie.getTitle(), movie.getShowingFrom(), movie.getShowingTo(), movie.getCast(), movie.getDirector(), movie.getReleaseDate(), movie.getRated(),
-                    movie.getRunningTime(), movie.getProduction(), movie.getTrailerUrl(),
-                    movie.getContent(), movie.isIs3D(), movie.getAccountId(), id);
+            movieService.updateMovie(movie.getTitle().trim(), movie.getShowingFrom(), movie.getShowingTo(),
+                    movie.getCast().trim(), movie.getDirector().trim(), movie.getReleaseDate(), movie.getRated(),
+                    movie.getRunningTime(), movie.getProduction().trim(), movie.getTrailerUrl().trim(),
+                    movie.getContent().trim(), movie.isIs3D(), movie.getAccountId(), id);
+
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }
@@ -105,30 +127,6 @@ public class MovieController {
         return movieService.getIdMovieByName(title);
     }
 
-    // HueHV, phương thức thêm ảnh cho 1 bộ phim        >>>>>>>>>>>>>>>>>>>2
-    @PostMapping("/add-image-movie")
-    public ResponseEntity<?> addImageMovie(@RequestBody MovieImageDTO movieImage) {
-        if (movieImage == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            movieImageService.addImageByIdMovie(movieImage.getImage_url(), movieImage.getMovie_id());
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-    }
-
-    //HueHV, phương thức thêm giờ chiếu cho 1 bộ phim   >>>>>>>>>>>>>>>>>>>3
-    @PostMapping("/add-show-times")
-    public ResponseEntity<?> addShowTimes(@RequestBody ShowTimesDTO showtime) {
-        if (showtime == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            showtimeService.addShowTimes(showtime.getShow_time(), showtime.getPrice_id());
-            // tìm id của showtime thông qua giờ chiếu và ngày chiếu vừa thêm để nối 2 bảng
-            Showtime showTimes = showtimeService.getIdByShowDayAndShowTime(showtime.getShow_time(), showtime.getPrice_id());
-            showtimeService.joinTableMovieAndShowtime(showTimes.getId(), showtime.getMovie_id());
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-    }
 
     //HueHV, phương thức lấy danh sách account của nhân viên
     @GetMapping("/list-employee")

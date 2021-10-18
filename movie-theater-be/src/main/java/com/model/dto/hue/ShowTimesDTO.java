@@ -5,10 +5,15 @@ import java.time.LocalTime;
 public class ShowTimesDTO {
     private long id;
 
-    private LocalTime show_time;
-    private long price_id;
+    private LocalTime showtime;
+    private long price;
 
     private long movie_id;
+
+    public ShowTimesDTO(LocalTime showtime, long price) {
+        this.showtime = showtime;
+        this.price = price;
+    }
 
     public long getMovie_id() {
         return movie_id;
@@ -26,19 +31,19 @@ public class ShowTimesDTO {
         this.id = id;
     }
 
-    public LocalTime getShow_time() {
-        return show_time;
+    public LocalTime getShowtime() {
+        return showtime;
     }
 
-    public void setShow_time(LocalTime show_time) {
-        this.show_time = show_time;
+    public void setShowtime(LocalTime showtime) {
+        this.showtime = showtime;
     }
 
-    public long getPrice_id() {
-        return price_id;
+    public long getPrice() {
+        return price;
     }
 
-    public void setPrice_id(long price_id) {
-        this.price_id = price_id;
+    public void setPrice(long price) {
+        this.price = price;
     }
 }

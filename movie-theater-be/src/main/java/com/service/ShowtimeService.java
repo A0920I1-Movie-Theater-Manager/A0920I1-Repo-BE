@@ -1,5 +1,6 @@
 package com.service;
 
+import com.model.dto.hue.ShowTimesDTO;
 import com.model.entity.Showtime;
 
 import java.time.LocalTime;
@@ -10,7 +11,7 @@ public interface ShowtimeService {
     List<Showtime> listShowTimes();
 
     //HueHV
-    Showtime getIdByShowDayAndShowTime(LocalTime show_time,  long price_id);
+    Showtime getIdByShowDayAndShowTime(LocalTime show_time, long price_id);
 
     //HueHV
     void joinTableMovieAndShowtime(long movie_id, long showtime_id);
