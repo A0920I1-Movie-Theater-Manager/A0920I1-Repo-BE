@@ -28,5 +28,5 @@ public interface AccountService {
 
     void deleteEmployeeAccountById(Long id);
 
-    List<Account> findEmployeeAccountByFullNameOrAccountCode(String search);
+    List<Account> findEmployeeAccountByFullNameOrAccountCode(String keyWord);
 }

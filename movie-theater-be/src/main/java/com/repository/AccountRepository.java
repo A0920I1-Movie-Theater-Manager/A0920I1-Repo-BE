@@ -49,7 +49,7 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
 
     //Lấy nhân viên theo mã nhân viên(HoangLV)
     @Query(value = "select * from `account` where account_code = ?1 ", nativeQuery = true)
-    Account findAccountByEmployeeName(String accountCode);
+    Account findAccountByEmployeeName(String keyWord);
 
 
     //Xóa thông tin nhân viên HoangLV

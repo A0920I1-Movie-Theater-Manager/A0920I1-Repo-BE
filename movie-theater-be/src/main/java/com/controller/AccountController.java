@@ -19,6 +19,7 @@ public class AccountController {
     @Autowired
     private AccountService accountService ;
 
+    // danh sánh nhân viên (HoangLV)
     @GetMapping("employee-account-list")
     public ResponseEntity<List<Account>> getAllEmployee() {
         List<Account> listEmployeeDTOS = accountService.getAllEmployeeAccount();
@@ -29,15 +30,16 @@ public class AccountController {
         }
     }
 
+    // tìm kiếm nhân viên (HoangLV)
     @GetMapping("search")
-    public ResponseEntity<List<Account>> searchMeetingRoomByName(@RequestParam(required = false) String search  ){
-        List<Account> accounts = accountService.findEmployeeAccountByFullNameOrAccountCode(search);
+    public ResponseEntity<List<Account>> searchMeetingRoomByName(@RequestParam(required = false) String keyWord  ){
+        List<Account> accounts = accountService.findEmployeeAccountByFullNameOrAccountCode(keyWord);
         return new ResponseEntity<>( accounts,HttpStatus.OK);
     }
 
+    // get nhân viên theo id (HoangLV)
     @GetMapping("employee-account/{id}")
     public ResponseEntity<Account> getEmployeeById(@PathVariable("id") long id) {
-        System.out.println("success!");
         Account account = accountService.getAccountById(id);
         if (account == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -45,12 +47,14 @@ public class AccountController {
         return new ResponseEntity<>(account, HttpStatus.OK);
     }
 
+    // sửa thông tin nhân viên (HoangLV)
     @PutMapping("employee-account-edit")
     public ResponseEntity<?> updateEmployee(@RequestBody UpdateEmployeeAccount updateEmployeeAccount) {
         accountService.updateEmployeeAccount(updateEmployeeAccount);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // thêm mới nhân viên (HoangLV)
     @PostMapping(value="employee-account-create",consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createEmployee(@RequestBody CreateEmployeeAccount createEmployeeAccount){
         createEmployeeAccount.setDeleted(true);
@@ -60,6 +64,8 @@ public class AccountController {
         accountService.createAccountRole(account.getId(),2);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
+    // Xóa nhân viên theo id  nhân viên (HoangLV)
     @DeleteMapping(value = "employee-account-delete/{id}")
     public ResponseEntity<?> deleteByEmployeeId(@PathVariable Long id) {
         if(id == null){

@@ -2,10 +2,8 @@ package com.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
@@ -18,10 +16,10 @@ public class Showtime {
     private long id;
 
     private LocalTime showTime;
-//
+
 
     @ManyToMany
-    @JoinTable(name = "movie_showtime", joinColumns = @JoinColumn(name = "movie_id"), inverseJoinColumns = @JoinColumn(name = "showtime_id"))
+    @JoinTable(name = "movie_showtime", joinColumns = @JoinColumn(name = "showtime_id") , inverseJoinColumns =@JoinColumn(name = "movie_id"))
     private Set<Movie> movies;
 
     @OneToMany(mappedBy = "showtime", cascade = CascadeType.ALL)

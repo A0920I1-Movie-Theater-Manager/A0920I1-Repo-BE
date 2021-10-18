@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity

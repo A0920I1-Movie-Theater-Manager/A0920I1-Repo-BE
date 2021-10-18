@@ -83,7 +83,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<Account> findEmployeeAccountByFullNameOrAccountCode(String search) {
-        return accountRepository.findEmployeeAccountByFullNameOrAccountCode(search);
+    public List<Account> findEmployeeAccountByFullNameOrAccountCode(String keyWord) {
+        return accountRepository.findEmployeeAccountByFullNameOrAccountCode(keyWord);
     }
 }
