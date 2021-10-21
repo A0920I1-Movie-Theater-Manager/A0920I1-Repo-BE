@@ -3,7 +3,9 @@ package com.controller;
 import com.model.dto.employeeAccount.CreateEmployeeAccount;
 import com.model.dto.employeeAccount.UpdateEmployeeAccount;
 import com.model.entity.Account;
+import com.model.entity.Role;
 import com.service.AccountService;
+import com.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,6 +21,7 @@ public class AccountController {
     @Autowired
     private AccountService accountService ;
 
+
     // danh sánh nhân viên (HoangLV)
     @GetMapping("employee-account-list")
     public ResponseEntity<List<Account>> getAllEmployee() {
@@ -31,11 +34,12 @@ public class AccountController {
     }
 
     // tìm kiếm nhân viên (HoangLV)
-    @GetMapping("search")
+    @GetMapping("search-employee")
     public ResponseEntity<List<Account>> searchMeetingRoomByName(@RequestParam(required = false) String keyWord  ){
         List<Account> accounts = accountService.findEmployeeAccountByFullNameOrAccountCode(keyWord);
         return new ResponseEntity<>( accounts,HttpStatus.OK);
     }
+
 
     // get nhân viên theo id (HoangLV)
     @GetMapping("employee-account/{id}")
@@ -46,6 +50,7 @@ public class AccountController {
         }
         return new ResponseEntity<>(account, HttpStatus.OK);
     }
+
 
     // sửa thông tin nhân viên (HoangLV)
     @PutMapping("employee-account-edit")
@@ -74,4 +79,24 @@ public class AccountController {
         accountService.deleteEmployeeAccountById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    // HoangLV
+    @PostMapping("/check-email")
+    public boolean checkEmail(@RequestBody String email){
+        return accountService.checkEmail(email);
+    }
+    @PostMapping("/check-phone")
+    public boolean checkPhone(@RequestBody String phone){
+        return accountService.checkPhone(phone);
+    }
+    @PostMapping("/check-username")
+    public boolean checkUsername(@RequestBody String username){
+        return accountService.checkUsername(username);
+    }
+    @PostMapping("/check-accountCode")
+    public boolean checkAccountCode(@RequestBody String accountCode){
+        System.out.println(accountCode);
+        return accountService.checkAccountCode(accountCode);
+    }
+
 }

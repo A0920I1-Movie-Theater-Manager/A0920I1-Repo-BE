@@ -4,7 +4,9 @@ package com.service.impl;
 import com.model.dto.employeeAccount.CreateEmployeeAccount;
 import com.model.dto.employeeAccount.UpdateEmployeeAccount;
 import com.model.entity.Account;
+import com.model.entity.Role;
 import com.repository.AccountRepository;
+import com.repository.RoleRepository;
 import com.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Autowired
     private AccountRepository accountRepository;
+
 
     // Danh sách nhân viên HoangLV
     @Override
@@ -49,26 +52,28 @@ public class AccountServiceImpl implements AccountService {
     // Thêm mới nhân viên HoangLV
     @Override
     public void createEmployeeAccount(CreateEmployeeAccount createEmployeeAccount) {
-        accountRepository.createEmployeeAccount(createEmployeeAccount.getAccountCode(),
-                createEmployeeAccount.getAddress(),
-                createEmployeeAccount.getBirthday(),
-                createEmployeeAccount.getEmail(),
-                createEmployeeAccount.getFullname(),
-                createEmployeeAccount.getGender(),
-                createEmployeeAccount.getIdCard(),
-                createEmployeeAccount.getImageUrl(),
-                createEmployeeAccount.getPassword(),
-                createEmployeeAccount.getPhone(),
-                createEmployeeAccount.getUsername(),
-                createEmployeeAccount.isDeleted(),
-                createEmployeeAccount.getTotalPoint()
-        );
+
+            accountRepository.createEmployeeAccount(createEmployeeAccount.getAccountCode(),
+                    createEmployeeAccount.getAddress(),
+                    createEmployeeAccount.getBirthday(),
+                    createEmployeeAccount.getEmail(),
+                    createEmployeeAccount.getFullname(),
+                    createEmployeeAccount.getGender(),
+                    createEmployeeAccount.getIdCard(),
+                    createEmployeeAccount.getImageUrl(),
+                    createEmployeeAccount.getPassword(),
+                    createEmployeeAccount.getPhone(),
+                    createEmployeeAccount.getUsername(),
+                    createEmployeeAccount.isDeleted(),
+                    createEmployeeAccount.getTotalPoint()
+            );
+
     }
 
     // phân quyền cho nhân viên HoangLV
     @Override
     public void createAccountRole(long accountId, long roleId) {
-        accountRepository.createAccountRole(accountId,roleId);
+        accountRepository.createAccountRole(accountId, roleId);
     }
 
     // lấy nhân viên theo mã nhân viên HoangLV
@@ -85,5 +90,25 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public List<Account> findEmployeeAccountByFullNameOrAccountCode(String keyWord) {
         return accountRepository.findEmployeeAccountByFullNameOrAccountCode(keyWord);
+    }
+
+    @Override
+    public boolean checkEmail(String email) {
+        return accountRepository.existsByEmail(email);
+    }
+
+    @Override
+    public boolean checkPhone(String phone) {
+        return accountRepository.existsByPhone(phone);
+    }
+
+    @Override
+    public boolean checkUsername(String username) {
+        return accountRepository.existsByUsername(username);
+    }
+
+    @Override
+    public boolean checkAccountCode(String accountCode) {
+        return accountRepository.existsAccountsByAccountCode(accountCode);
     }
 }

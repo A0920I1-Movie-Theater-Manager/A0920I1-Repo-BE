@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface AccountRepository extends JpaRepository<Account,Long> {
+public interface AccountRepository extends JpaRepository<Account, Long> {
 
     // Danh sách nhân viên (HoangLV)
     @Query(value = "select * from account inner join account_role on account.id = account_role.id " +
@@ -39,7 +39,7 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
     @Transactional
     @Modifying
     @Query(value = "insert into account(`account_code`, `address`, `birthday`, `email`, `fullname`, `gender`, `id_card`, `image_url`, `password`, `phone`, `username`,`deleted`,`total_point`) values (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8,?9,?10,?11,?12,?13)", nativeQuery = true)
-    void createEmployeeAccount(String accountCode, String address ,LocalDate birthday,String email,String fullname,String gender,String idCard,String imageUrl,String password,String phone,String username ,boolean deleted,int totalPoint);
+    void createEmployeeAccount(String accountCode, String address, LocalDate birthday, String email, String fullname, String gender, String idCard, String imageUrl, String password, String phone, String username, boolean deleted, int totalPoint);
 
     //Thêm role cho nhân viên(HoangLV)
     @Transactional
@@ -58,5 +58,9 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
     @Query(value = "update `account` set account.deleted = 0 where account.id=?1", nativeQuery = true)
     void deleteEmployeeAccountById(Long id);
 
-
+    //HoangLV
+    boolean existsByEmail(String email);
+    boolean existsByPhone(String phone);
+    boolean existsByUsername(String username);
+    boolean existsAccountsByAccountCode(String accountCode);
 }

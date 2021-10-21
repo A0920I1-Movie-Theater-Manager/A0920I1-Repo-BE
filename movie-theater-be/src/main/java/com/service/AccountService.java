@@ -3,6 +3,7 @@ package com.service;
 import com.model.dto.employeeAccount.CreateEmployeeAccount;
 import com.model.dto.employeeAccount.UpdateEmployeeAccount;
 import com.model.entity.Account;
+import com.model.entity.Role;
 
 import java.util.List;
 
@@ -28,5 +29,13 @@ public interface AccountService {
 
     void deleteEmployeeAccountById(Long id);
 
+    //search nhan vien HoangLV
     List<Account> findEmployeeAccountByFullNameOrAccountCode(String keyWord);
+
+    //HoangLV
+    boolean checkEmail(String email);
+    boolean checkPhone(String phone);
+    boolean checkUsername(String username);
+    boolean checkAccountCode(String accountCode);
+
 }

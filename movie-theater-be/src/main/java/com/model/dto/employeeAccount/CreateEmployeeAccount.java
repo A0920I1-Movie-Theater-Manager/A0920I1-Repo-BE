@@ -16,6 +16,7 @@ public class CreateEmployeeAccount {
     private String email;
     private String gender;
     private String imageUrl;
+    private long role;
     private int totalPoint;
     private boolean deleted ;
 
@@ -113,6 +114,14 @@ public class CreateEmployeeAccount {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public long getRole() {
+        return role;
+    }
+
+    public void setRole(long role) {
+        this.role = role;
     }
 
     public int getTotalPoint() {
