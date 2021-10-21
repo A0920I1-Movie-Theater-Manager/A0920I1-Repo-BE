@@ -1,21 +1,20 @@
-package com.model.entity;
+package com.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class MovieImage {
+public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String imageUrl;
-
-    @ManyToOne
-    @JoinColumn(name = "movie_id", referencedColumnName = "id")
-    private Movie movie;
+    private String name;
+    @OneToMany(mappedBy = "payment", cascade = CascadeType.ALL)
+    private List<Booking> bookings;
 
     public long getId() {
         return id;
@@ -25,19 +24,19 @@ public class MovieImage {
         this.id = id;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getName() {
+        return name;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Movie getMovie() {
-        return movie;
+    public List<Booking> getBookings() {
+        return bookings;
     }
 
-    public void setMovie(Movie movie) {
-        this.movie = movie;
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
     }
 }

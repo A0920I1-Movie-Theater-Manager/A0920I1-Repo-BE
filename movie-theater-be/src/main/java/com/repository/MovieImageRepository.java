@@ -1,9 +1,8 @@
 package com.repository;
 
-import com.model.entity.MovieImage;
+import com.entity.MovieImage;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
 @Repository
 public interface MovieImageRepository extends JpaRepository<MovieImage, Long> {
 }

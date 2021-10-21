@@ -1,4 +1,7 @@
-package com.model.dto;
+package com.dto;
+
+
 
 public class test {
+
 }

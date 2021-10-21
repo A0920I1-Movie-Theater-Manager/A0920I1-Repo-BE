@@ -1,11 +1,10 @@
-package com.model.entity;
+package com.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,7 +24,7 @@ public class Seat {
     private Screen screen;
 
     @ManyToMany
-    @JoinTable(name = "booking_seat", joinColumns = @JoinColumn(name = "booking_id"), inverseJoinColumns = @JoinColumn(name = "seat_id"))
+    @JoinTable(name = "booking_seat", joinColumns = @JoinColumn(name = "seat_id"), inverseJoinColumns = @JoinColumn(name = "booking_id"))
     private Set<Booking> bookings;
 
     public long getId() {

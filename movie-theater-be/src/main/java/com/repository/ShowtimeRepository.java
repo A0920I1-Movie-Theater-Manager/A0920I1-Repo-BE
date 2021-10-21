@@ -1,6 +1,7 @@
 package com.repository;
 
-import com.model.entity.Showtime;
+
+import com.entity.Showtime;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,23 +1,22 @@
-package com.model.entity;
+package com.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Genre {
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String name;
 
-    @ManyToMany
-    @JoinTable(name = "genre_movie", joinColumns = @JoinColumn(name = "genre_id"), inverseJoinColumns = @JoinColumn(name = "movie_id"))
-    private Set<Movie> movies;
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
+    private List<AccountRole> accountRoles;
 
     public long getId() {
         return id;
@@ -35,11 +34,11 @@ public class Genre {
         this.name = name;
     }
 
-    public Set<Movie> getMovies() {
-        return movies;
+    public List<AccountRole> getAccountRoles() {
+        return accountRoles;
     }
 
-    public void setMovies(Set<Movie> movies) {
-        this.movies = movies;
+    public void setAccountRoles(List<AccountRole> accountRoles) {
+        this.accountRoles = accountRoles;
     }
 }
