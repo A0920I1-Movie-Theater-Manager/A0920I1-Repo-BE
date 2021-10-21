@@ -1,6 +1,8 @@
 package com.repository;
 
 import com.model.entity.Movie;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -15,11 +17,21 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     //HueHV
     @Query(value = "SELECT * FROM movie", nativeQuery = true)
-    List<Movie> findAllMovie();
+    Page<Movie> findAllMovie(Pageable pageable);
+
+    @Transactional
+    @Modifying
+    @Query(value = "SELECT * FROM movie " +
+            " where title like %?1% and production like %?2% and release_date like %?3% and is3D like ?4 ", nativeQuery = true)
+    List<Movie> searchMovie(String title, String production,LocalDate releaseDate, String is3D);
 
     //HueHV
     @Query(value = "select * from movie where id = ?1", nativeQuery = true)
     Movie findMovieById(long id);
+
+    //HueHV
+    @Query(nativeQuery = true, value = "select * from movie where title like %?1%")
+    Page<Movie> listAllMovie(String title, Pageable pageable);
 
     //HueHV
     @Query(nativeQuery = true, value = "select * from movie where title like %?1%")

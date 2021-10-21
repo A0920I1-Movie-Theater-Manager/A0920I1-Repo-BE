@@ -1,12 +1,12 @@
-package com.controller;
+package com.controller.hue;
 
-import com.model.dto.hue.GenreMovieDTO;
-import com.model.dto.hue.MovieDTO;
-import com.model.dto.hue.MovieImageDTO;
-import com.model.dto.hue.ShowTimesDTO;
+import com.model.dto.hue.*;
 import com.model.entity.*;
 import com.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -42,16 +42,38 @@ public class MovieController {
 
 
     // HueHV, phương thức hiển thị tất cả danh sách phim
+//    @GetMapping("/list-movie")
+//    public Page<Movie> getAllMovie(@RequestParam(value = "title") Optional<String> title,
+//                                   @PageableDefault(value=10) Pageable pageable) {
+//        String stringAfterCheck = "";
+//        if(!title.isPresent()){
+//            return movieService.getAllMovie(pageable);
+//        }
+//        else {
+//            stringAfterCheck = title.get();
+//            return movieService.listAllMovie(stringAfterCheck, pageable);
+//        }
+//    }
+
+    // HueHV, phương thức hiển thị tất cả danh sách phim
     @GetMapping("/list-movie")
     public List<Movie> getAllMovie(@RequestParam(value = "title") Optional<String> title) {
         String stringAfterCheck = "";
         if(!title.isPresent()){
             return movieService.getAllMovie();
         }
-        else{
+        else {
             stringAfterCheck = title.get();
             return movieService.listAllMovie(stringAfterCheck);
         }
+    }
+
+    @PutMapping("/search")
+    public ResponseEntity<List<Movie>> searchMovie(@RequestBody SearchMovieDTO searchMovieDTO){
+        List<Movie> movies = movieService.searchMovie(searchMovieDTO);
+        System.out.println(searchMovieDTO.getTitle());
+        System.out.println(searchMovieDTO.getReleaseDate());
+        return new ResponseEntity<>(movies, HttpStatus.OK);
     }
 
     //HueHV, phương thức tạo mới 1 bộ phim
@@ -65,7 +87,7 @@ public class MovieController {
                     movie.getReleaseDate(), movie.getRated(),
                     movie.getRunningTime(), movie.getProduction().trim(), movie.getTrailerUrl().trim(),
                     movie.getContent().trim(), movie.isIs3D(), movie.getAccountId());
-            long idMovie = movieService.getIdMovieByName(movie.getTitle()).getId();
+            long idMovie = Long.parseLong(String.valueOf(movieService.getIdMovieByName(movie.getTitle()).getId()));
             for(int i = 0;i<movie.getMovieImages().size();i++){
                 System.out.println(movie.getMovieImages().get(i));
                 movieImageService.addImageByIdMovie(movie.getMovieImages().get(i), idMovie);
@@ -80,8 +102,6 @@ public class MovieController {
                 long showTimesDTO = showtimeService.getIdByShowDayAndShowTime(movie.getShowtime().get(i).getShowtime(), movie.getShowtime().get(i).getPrice()).getId();
                 showtimeService.joinTableMovieAndShowtime(idMovie, showTimesDTO);
             }
-
-
 
 
             return new ResponseEntity<>(HttpStatus.OK);
