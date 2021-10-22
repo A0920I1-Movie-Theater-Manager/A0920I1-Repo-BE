@@ -93,22 +93,22 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public boolean checkEmail(String email) {
+    public boolean checkEmailEmployee(String email) {
         return accountRepository.existsByEmail(email);
     }
 
     @Override
-    public boolean checkPhone(String phone) {
+    public boolean checkPhoneEmployee(String phone) {
         return accountRepository.existsByPhone(phone);
     }
 
     @Override
-    public boolean checkUsername(String username) {
+    public boolean checkUsernameEmployee(String username) {
         return accountRepository.existsByUsername(username);
     }
 
     @Override
-    public boolean checkAccountCode(String accountCode) {
+    public boolean checkAccountCodeEmployee(String accountCode) {
         return accountRepository.existsAccountsByAccountCode(accountCode);
     }
 }

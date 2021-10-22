@@ -3,9 +3,7 @@ package com.controller;
 import com.model.dto.employeeAccount.CreateEmployeeAccount;
 import com.model.dto.employeeAccount.UpdateEmployeeAccount;
 import com.model.entity.Account;
-import com.model.entity.Role;
 import com.service.AccountService;
-import com.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -65,7 +63,7 @@ public class AccountController {
         if(createEmployeeAccount.getAccountCode() != null && createEmployeeAccount.getUsername() != null && createEmployeeAccount.getPassword() != null
                 && createEmployeeAccount.getBirthday() != null && createEmployeeAccount.getGender() != null && createEmployeeAccount.getIdCard() != null
                 && createEmployeeAccount.getEmail() != null && createEmployeeAccount.getAddress() != null && createEmployeeAccount.getFullname() != null
-                && createEmployeeAccount.getIdCard() != null && createEmployeeAccount.getPhone() != null){
+                && createEmployeeAccount.getIdCard() != null && createEmployeeAccount.getPhone() != null && createEmployeeAccount.getImageUrl() != null){
         createEmployeeAccount.setDeleted(true);
         createEmployeeAccount.setTotalPoint(0);
         accountService.createEmployeeAccount(createEmployeeAccount);
@@ -88,22 +86,22 @@ public class AccountController {
     }
 
     // HoangLV
-    @PostMapping("/check-email")
-    public boolean checkEmail(@RequestBody String email){
-        return accountService.checkEmail(email);
+    @PostMapping("/check-email-employee")
+    public boolean checkEmailEmployee(@RequestBody String email){
+        return accountService.checkEmailEmployee(email);
     }
-    @PostMapping("/check-phone")
-    public boolean checkPhone(@RequestBody String phone){
-        return accountService.checkPhone(phone);
+    @PostMapping("/check-phone-employee")
+    public boolean checkPhoneEmployee(@RequestBody String phone){
+        return accountService.checkPhoneEmployee(phone);
     }
-    @PostMapping("/check-username")
-    public boolean checkUsername(@RequestBody String username){
-        return accountService.checkUsername(username);
+    @PostMapping("/check-username-employee")
+    public boolean checkUsernameEmployee(@RequestBody String username){
+        return accountService.checkUsernameEmployee(username);
     }
-    @PostMapping("/check-accountCode")
-    public boolean checkAccountCode(@RequestBody String accountCode){
+    @PostMapping("/check-accountCode-employee")
+    public boolean checkAccountCodeEmployee(@RequestBody String accountCode){
         System.out.println(accountCode);
-        return accountService.checkAccountCode(accountCode);
+        return accountService.checkAccountCodeEmployee(accountCode);
     }
 
 }

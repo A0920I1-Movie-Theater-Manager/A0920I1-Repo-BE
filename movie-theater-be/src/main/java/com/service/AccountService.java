@@ -33,9 +33,9 @@ public interface AccountService {
     List<Account> findEmployeeAccountByFullNameOrAccountCode(String keyWord);
 
     //HoangLV
-    boolean checkEmail(String email);
-    boolean checkPhone(String phone);
-    boolean checkUsername(String username);
-    boolean checkAccountCode(String accountCode);
+    boolean checkEmailEmployee(String email);
+    boolean checkPhoneEmployee(String phone);
+    boolean checkUsernameEmployee(String username);
+    boolean checkAccountCodeEmployee(String accountCode);
 
 }
