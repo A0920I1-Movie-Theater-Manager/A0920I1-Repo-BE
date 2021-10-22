@@ -1,7 +1,7 @@
 package com.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import javax.persistence.*;
 import java.util.Set;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;

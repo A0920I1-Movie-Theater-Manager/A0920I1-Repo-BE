@@ -1,8 +1,9 @@
 package com.model.entity;
-
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
-
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
+import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.time.LocalTime;
 import java.util.List;
