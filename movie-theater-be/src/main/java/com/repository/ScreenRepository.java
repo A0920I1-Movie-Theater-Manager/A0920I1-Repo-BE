@@ -10,6 +10,11 @@ import java.util.List;
 @Repository
 public interface ScreenRepository extends JpaRepository<Screen, Long> {
 
+
     @Query(value = "select * from screen ", nativeQuery = true)
     List<Screen> findAll();
+
+    //AnhLT-Login
+    List<Screen> findAllByName(String name);
+
 }

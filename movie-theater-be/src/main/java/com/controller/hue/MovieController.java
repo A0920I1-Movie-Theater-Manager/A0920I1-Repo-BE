@@ -1,12 +1,10 @@
 package com.controller.hue;
 
-import com.model.dto.hue.*;
+import com.model.dto.hue.MovieDTO;
+import com.model.dto.hue.SearchMovieDTO;
 import com.model.entity.*;
 import com.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

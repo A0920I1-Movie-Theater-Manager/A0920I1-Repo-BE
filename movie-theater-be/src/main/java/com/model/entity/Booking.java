@@ -1,6 +1,9 @@
 package com.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
+
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 

@@ -1,11 +1,17 @@
 package com.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
+
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
+
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 @Entity
 @JsonIdentityInfo(generator= JSOGGenerator.class)
@@ -27,8 +33,14 @@ public class Account {
     private int totalPoint;
     private String imageUrl;
 
+
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean deleted;
+
+    //AnhLT
+    private String provider;
+    //end AnhlT
+
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<AccountRole> accountRoles;
@@ -38,6 +50,21 @@ public class Account {
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Movie> movies;
+
+
+    // AnhLT Login
+    @ManyToMany
+    @JoinTable(name = "account_role", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+    // end AnhLT
 
     public long getId() {
         return id;
@@ -143,6 +170,7 @@ public class Account {
         this.imageUrl = imageUrl;
     }
 
+
     public boolean isDeleted() {
         return deleted;
     }
@@ -150,6 +178,7 @@ public class Account {
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
+
 
     public List<AccountRole> getAccountRoles() {
         return accountRoles;
@@ -174,4 +203,15 @@ public class Account {
     public void setMovies(List<Movie> movies) {
         this.movies = movies;
     }
+
+    //anhLT
+    public String getProvider() {
+        return provider;
+    }
+
+    public void setProvider(String provider) {
+        this.provider = provider;
+    }
+    // end AnhlT
+
 }
