@@ -18,7 +18,6 @@ public class Showtime {
     private long id;
 
     private LocalTime showTime;
-    private LocalDate showDay;
 
     @ManyToMany
     @JoinTable(name = "movie_showtime", joinColumns = @JoinColumn(name = "movie_id"), inverseJoinColumns = @JoinColumn(name = "showtime_id"))
@@ -45,14 +44,6 @@ public class Showtime {
 
     public void setShowTime(LocalTime showTime) {
         this.showTime = showTime;
-    }
-
-    public LocalDate getShowDay() {
-        return showDay;
-    }
-
-    public void setShowDay(LocalDate showDay) {
-        this.showDay = showDay;
     }
 
     public Set<Movie> getMovies() {
