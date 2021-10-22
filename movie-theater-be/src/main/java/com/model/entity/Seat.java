@@ -2,10 +2,6 @@ package com.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
-<<<<<<< HEAD
-
-=======
->>>>>>> 54fa62ca00214a34a99419677dcb14df49902b06
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;

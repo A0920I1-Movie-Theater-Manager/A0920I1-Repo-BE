@@ -1,9 +1,5 @@
 package com.controller.hue;
 
-<<<<<<< HEAD:movie-theater-be/src/main/java/com/controller/hue/MovieController.java
-import com.model.dto.hue.MovieDTO;
-=======
->>>>>>> 741a35df26d2524d322d67b744e52f5a620c92bd:movie-theater-be/src/main/java/com/controller/hue/HueMovieController.java
 import com.model.dto.hue.SearchMovieDTO;
 import com.model.entity.*;
 import com.service.*;

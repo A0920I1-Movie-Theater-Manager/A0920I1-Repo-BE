@@ -76,7 +76,7 @@ public class UserServiceImpl implements com.service.serviceAnhLT.UserService {
 		roles.add(roleRepository.findByName(Role.ROLE_USER));
 		user.setRoles(roles);
 		user.setProvider(formDTO.getSocialProvider().getProviderType());
-		user.setDeleted(true);
+		user.setEnable(true);
 //		user.setProviderUserId(formDTO.getProviderUserId());
 		return user;
 	}

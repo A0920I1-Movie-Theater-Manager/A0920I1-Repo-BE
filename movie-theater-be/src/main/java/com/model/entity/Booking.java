@@ -1,18 +1,8 @@
 package com.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-<<<<<<< HEAD
-<<<<<<< HEAD
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
-=======
-
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-=======
->>>>>>> 741a35df26d2524d322d67b744e52f5a620c92bd
-import com.voodoodyne.jackson.jsog.JSOGGenerator;
->>>>>>> 54fa62ca00214a34a99419677dcb14df49902b06
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -32,9 +22,6 @@ public class Booking {
     private double totalPrice;
     private int point;
     private String bookingCode;
-
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private LocalDateTime dayTimeBooking;
 
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean received;

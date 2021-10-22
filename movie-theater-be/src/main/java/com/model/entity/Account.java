@@ -11,7 +11,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
-import com.voodoodyne.jackson.jsog.JSOGGenerator;
 @Entity
 @JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Account {
@@ -36,7 +35,16 @@ public class Account {
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean deleted;
 
+    public boolean isEnable() {
+        return enable;
+    }
 
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
+
+    @Type(type = "org.hibernate.type.NumericBooleanType")
+    private boolean enable;
     //AnhLT
     private String provider;
     //end AnhlT

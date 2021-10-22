@@ -19,7 +19,6 @@ import java.util.List;
 
 
 @Repository
-<<<<<<< HEAD
 public interface AccountRepository extends JpaRepository<Account,Long> {
     //AnhLT
     Account findByEmail(String email);
@@ -29,31 +28,26 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
     boolean existsByUsername(String username);
 
 
-=======
-public interface AccountRepository extends JpaRepository<Account, Long> {
->>>>>>> 54fa62ca00214a34a99419677dcb14df49902b06
-
-
 
     //HueHV
     @Query(value = "select * from account where account_code like 'NV%';", nativeQuery = true)
     List<Account> listAccountByAccountCodeEmployee();
 
-<<<<<<< HEAD
+
     //AnhLT
     Account findAccountByUsername(String username);
-=======
+
     //PhapNT- Kiểm tra email đã tồn tại
 // @Query(value = "SELECT email from  movietheater.account where email = ?1", nativeQuery = true)
-    boolean existsByEmail(String email);
+//    boolean existsByEmail(String email);
 
     //PhapNT-Kiểm tra số đt đã tồn tại
 // @Query(value = "SELECT phone from  movietheater.account where phone = ?1", nativeQuery = true)
-    boolean existsByPhone(String phone);
+//    boolean existsByPhone(String phone);
 
     //PhapNT-Kiểm tra tên đăng nhập đã tồn tại
 //  @Query(value = "SELECT username from  movietheater.account where username = ?1", nativeQuery = true)
-    boolean existsByUsername(String username);
+//    boolean existsByUsername(String username);
 
 
     //PhapNT- Hiển thị danh sách thành viên.
@@ -92,9 +86,6 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     @Query(value = "select * from account where account.fullname like %?1%", nativeQuery = true)
     List<Account> searchNameMember(String name);
 
-<<<<<<< HEAD
->>>>>>> 54fa62ca00214a34a99419677dcb14df49902b06
-=======
     //Viet hiển thị account theo id
     @Transactional
     @Query(value = "SELECT * FROM account where id = ?1", nativeQuery = true)
@@ -186,7 +177,6 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     @Modifying
     @Query(value = "update `account` set account.deleted = 0 where account.id=?1", nativeQuery = true)
     void deleteEmployeeAccountById(Long id);
->>>>>>> 741a35df26d2524d322d67b744e52f5a620c92bd
 
     //HoangLV
     boolean existsAccountsByAccountCode(String accountCode);
