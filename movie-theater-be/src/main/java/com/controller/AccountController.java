@@ -62,7 +62,7 @@ public class AccountController {
             return new ResponseEntity<>(accountUserDTO, HttpStatus.OK);
         }
     }
-
+// Việt lấy  danh sách booking
     @GetMapping(value = "/account/booking")
     public ResponseEntity<List<ManagerBooking>> managerTickets() {
 
@@ -75,14 +75,14 @@ public class AccountController {
             return new ResponseEntity<>(movieList, HttpStatus.OK);
         }
     }
-
+//Việt lấy danh sách booking theo account
     @GetMapping(value = "/account/booking/{idAccount}")
     public List<ManagerBooking> getAllFeedbackByIdAccount(@PathVariable("idAccount") String idAccount) {
         List<ManagerBooking> managerBookingList = accountService.findAllBookByIdAccount(idAccount);
         return managerBookingList;
 
     }
-
+        ///Việt đổi mật khẩu
     @PutMapping(value = "/public/changePassword/{id}")
     public ResponseEntity<AccountUserDTO> changePassWord(@PathVariable("id") long id, @RequestBody AccountUserDTO accountUserDTO) {
         Account account = accountService.findAccountUpdateById(id);

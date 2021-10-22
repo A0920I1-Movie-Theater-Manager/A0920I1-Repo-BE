@@ -15,12 +15,14 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     AccountRepository accountRepository;
 
+    //Viet hiển thị account theo id
     @Override
     public Account findAccountUpdateById(long id) {
-       return accountRepository.findAccountUpdateById(id);
+        return accountRepository.findAccountUpdateById(id);
 
     }
 
+    //  Viet lấy tất cả
     @Override
     public List<Account> findAll() {
         return accountRepository.findAll();
@@ -28,22 +30,25 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void updateAccount(AccountUserDTO accountUserDTO) {
-        accountRepository.updateAccountUser(accountUserDTO.getAccountCode(), accountUserDTO.getAddress(),accountUserDTO.getBirthday(),accountUserDTO.getEmail(),accountUserDTO.getFullname(),accountUserDTO.getGender(),accountUserDTO.getIdCard(),accountUserDTO.getImageUrl(),accountUserDTO.getPassword(),accountUserDTO.getPhone(),accountUserDTO.getTotalPoint(),accountUserDTO.getUsername(),accountUserDTO.getId());
+        accountRepository.updateAccountUser(accountUserDTO.getAccountCode(), accountUserDTO.getAddress(), accountUserDTO.getBirthday(), accountUserDTO.getEmail(), accountUserDTO.getFullname(), accountUserDTO.getGender(), accountUserDTO.getIdCard(), accountUserDTO.getImageUrl(), accountUserDTO.getPassword(), accountUserDTO.getPhone(), accountUserDTO.getTotalPoint(), accountUserDTO.getUsername(), accountUserDTO.getId());
     }
 
+    // Việt lấy danh sách vé
     @Override
     public List<ManagerBooking> ManagerTickets() {
         return accountRepository.ManagerTickets();
     }
 
+    //Viet hiển thị vè theo id accout
     @Override
     public List<ManagerBooking> findAllBookByIdAccount(String idAccount) {
         return accountRepository.findAllFeedbackBookByIdAccount(idAccount);
     }
 
+    //Viet Đổi mật khẩu
     @Override
     public void changePassword(AccountUserDTO accountUserDTO) {
-        accountRepository.changePassword(accountUserDTO.getAccountCode(), accountUserDTO.getAddress(),accountUserDTO.getBirthday(),accountUserDTO.getEmail(),accountUserDTO.getFullname(),accountUserDTO.getGender(),accountUserDTO.getIdCard(),accountUserDTO.getImageUrl(),accountUserDTO.getPassword(),accountUserDTO.getPhone(),accountUserDTO.getTotalPoint(),accountUserDTO.getUsername(),accountUserDTO.getId());
+        accountRepository.changePassword(accountUserDTO.getAccountCode(), accountUserDTO.getAddress(), accountUserDTO.getBirthday(), accountUserDTO.getEmail(), accountUserDTO.getFullname(), accountUserDTO.getGender(), accountUserDTO.getIdCard(), accountUserDTO.getImageUrl(), accountUserDTO.getPassword(), accountUserDTO.getPhone(), accountUserDTO.getTotalPoint(), accountUserDTO.getUsername(), accountUserDTO.getId());
 
     }
 }
