@@ -2,10 +2,7 @@ package com.repository;
 
 import com.model.entity.Genre;
 import org.springframework.data.jpa.repository.JpaRepository;
-<<<<<<< HEAD
-=======
 import org.springframework.data.jpa.repository.Modifying;
->>>>>>> 54fa62ca00214a34a99419677dcb14df49902b06
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
