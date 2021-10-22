@@ -1,6 +1,8 @@
 package com.controller;
 
 import com.model.dto.AccountMemberDTO;
+import com.model.dto.Viet.AccountUserDTO;
+import com.model.dto.Viet.ManagerBooking;
 import com.model.entity.Account;
 import com.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +17,11 @@ import java.util.List;
 @RequestMapping(value = "api")
 @CrossOrigin("http://localhost:4200")
 public class AccountController {
-
-    @Autowired
+    private @Autowired
     AccountService accountService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private @Autowired
+    PasswordEncoder passwordEncoder;
+
 
     //PhapNT-Hiển thị danh sách thành viên.
     @GetMapping("/list-member")
@@ -81,5 +83,81 @@ public class AccountController {
     @PostMapping("/check-usernameMember")
     public boolean checkUsernameMember(@RequestBody String username) {
         return accountService.checkUsernameMember(username);
+    }
+
+    //ViệtNT lấy thông tin tài khoản bằng id 06/10/2021
+
+    @GetMapping(value = "/accountFindById/{id}")
+    public ResponseEntity<Account> getUserById(@PathVariable long id) {
+        System.out.print(id);
+        Account account = accountService.findAccountUpdateById(id);
+        return new ResponseEntity<>(account, HttpStatus.OK);
+    }
+
+    //VietNT lấy tất cả User 08/10/2021
+    @GetMapping(value = "/account")
+    public ResponseEntity<List<Account>> getAllUser() {
+
+        List<Account> accountList = accountService.findAll();
+
+        if (accountList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+
+            return new ResponseEntity<>(accountList, HttpStatus.OK);
+        }
+    }
+
+    //VietNT Update User
+    @PutMapping(value = "/public/update/{id}")
+    public ResponseEntity<AccountUserDTO> updateAccountUser(@PathVariable("id") long id, @RequestBody AccountUserDTO accountUserDTO) {
+        Account account = accountService.findAccountUpdateById(id);
+        System.out.println(id);
+
+        if (account == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+           accountUserDTO.setPassword( passwordEncoder.encode(accountUserDTO.getPassword())) ;
+
+            accountService.updateAccount(accountUserDTO);
+
+
+            return new ResponseEntity<>(accountUserDTO, HttpStatus.OK);
+        }
+    }
+// Việt lấy  danh sách booking
+    @GetMapping(value = "/account/booking")
+    public ResponseEntity<List<ManagerBooking>> managerTickets() {
+
+        List<ManagerBooking> movieList = accountService.ManagerTickets();
+
+        if (movieList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+
+            return new ResponseEntity<>(movieList, HttpStatus.OK);
+        }
+    }
+//Việt lấy danh sách booking theo account
+    @GetMapping(value = "/account/booking/{idAccount}")
+    public List<ManagerBooking> getAllFeedbackByIdAccount(@PathVariable("idAccount") String idAccount) {
+        List<ManagerBooking> managerBookingList = accountService.findAllBookByIdAccount(idAccount);
+        return managerBookingList;
+
+    }
+        ///Việt đổi mật khẩu
+    @PutMapping(value = "/public/changePassword/{id}")
+    public ResponseEntity<AccountUserDTO> changePassWord(@PathVariable("id") long id, @RequestBody AccountUserDTO accountUserDTO) {
+        Account account = accountService.findAccountUpdateById(id);
+        System.out.println(id);
+
+        if (account == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+
+            accountService.changePassword(accountUserDTO);
+
+            return new ResponseEntity<>(accountUserDTO, HttpStatus.OK);
+        }
     }
 }

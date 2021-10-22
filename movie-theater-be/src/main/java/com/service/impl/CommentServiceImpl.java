@@ -1,7 +1,6 @@
 package com.service.impl;
 
 import com.model.entity.Comment;
-import com.model.entity.Movie;
 import com.repository.CommentRepository;
 import com.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;

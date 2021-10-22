@@ -1,7 +1,6 @@
 package com.service;
 
 import com.model.entity.Comment;
-import com.model.entity.Movie;
 
 import java.util.List;
 
