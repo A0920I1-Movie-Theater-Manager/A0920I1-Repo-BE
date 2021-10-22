@@ -2,6 +2,7 @@ package com.controller.controllerAnhLT;
 
 import com.dto.dtoAnhLT.*;
 import com.exceptionAnhLT.UserAlreadyExistAuthenticationException;
+import com.model.entity.Account;
 import com.securityAnhLT.jwt.TokenProvider;
 import com.service.serviceAnhLT.UserService;
 import com.utilAnhLT.GeneralUtils;
@@ -12,10 +13,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -65,4 +63,14 @@ public class AuthController {
 	public boolean checkUsername(@RequestBody String username){
 		return userService.checkUsername(username);
 	}
+
+    @GetMapping(value = "/findAccount")
+    public ResponseEntity<?> findAccountByUser(@RequestParam String username) {
+        Account account = userService.findAccountByUsername(username);
+        if (account != null) {
+            return ResponseEntity.ok(account);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

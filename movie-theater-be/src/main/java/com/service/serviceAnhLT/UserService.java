@@ -26,4 +26,6 @@ public interface UserService {
 	boolean checkPhone(String phone);
 
 	boolean checkUsername(String username);
+
+	Account findAccountByUsername(String username);
 }

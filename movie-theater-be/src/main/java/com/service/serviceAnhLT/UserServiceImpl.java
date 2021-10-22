@@ -125,6 +125,11 @@ public class UserServiceImpl implements com.service.serviceAnhLT.UserService {
 		return userRepository.existsByUsername(username);
 	}
 
+	@Override
+	public Account findAccountByUsername(String username) {
+		return userRepository.findAccountByUsername(username);
+	}
+
 	private Account updateExistingUser(Account existingUser, OAuth2UserInfo oAuth2UserInfo) {
 		existingUser.setFullname(oAuth2UserInfo.getName());
 		return userRepository.save(existingUser);
