@@ -48,22 +48,19 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public List<Movie> searchMovie(SearchMovieDTO searchMovieDTO) {
-        System.out.println(searchMovieDTO.getIs3D());
+        System.out.println(searchMovieDTO.isIs3D());
         if (searchMovieDTO.getTitle() == null){
             searchMovieDTO.setTitle("");
         }
         if (searchMovieDTO.getProduction() == null){
             searchMovieDTO.setProduction("");
         }
-        if (searchMovieDTO.getReleaseDate() == null){
-            searchMovieDTO.setReleaseDate(null);
-        }
-        if (searchMovieDTO.getIs3D() == null){
-            searchMovieDTO.setIs3D("");
+        if (searchMovieDTO.getReleaseDate() == null) {
+            searchMovieDTO.setReleaseDate("");
         }
 
         return movieRepository.searchMovie(searchMovieDTO.getTitle(), searchMovieDTO.getProduction(),
-                searchMovieDTO.getReleaseDate(), searchMovieDTO.getIs3D());
+                searchMovieDTO.getReleaseDate(), searchMovieDTO.isIs3D());
     }
 
     @Override

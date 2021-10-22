@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8653b984-4f35-43ca-b53e-883f23fcbf10" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_voodoodyne_jackson_jsog_jackson_jsog_1_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/common/EncoderPasswordMember.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-theater-be/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/movie-theater-be/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/config/SimpleCORSFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/config/SimpleCORSFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/dto/AccountDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/dto/AccountMemberDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/AccountRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/AccountRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/Booking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/Genre.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/Genre.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/Movie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/MovieImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/MovieImage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/Payment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/Price.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/Price.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/Promotion.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/Promotion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/Screen.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/Screen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/Seat.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/Seat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/Showtime.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/Showtime.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/repository/AccountRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/repository/AccountRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/service/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/service/AccountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/service/impl/AccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/service/impl/AccountServiceImpl.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1z2XTXyc40EUtxvOMpXErTIsAQe" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/movie-theater-be" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="Dsonar.projectKey= A0920I1_ReviewCodeSpring2_PhapNT" />
+      <command value="mvn sonar:sonar \   -Dsonar.projectKey= A0920I1_ReviewCodeSpring_PhapNT  \   -Dsonar.projectName= A0920I1_ReviewCodeSpring_PhapNT \   -Dsonar.host.url= http://18.117.194.147:9000/projects \   -Dsonar.login= f13971e95cab04dc1a1a9ae0337419b1bce5660c " />
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="MovieTheaterApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="movie-theater" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.MovieTheaterApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8653b984-4f35-43ca-b53e-883f23fcbf10" name="Default Changelist" comment="" />
+      <created>1633347164092</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1633347164092</updated>
+      <workItem from="1633347166372" duration="1992000" />
+      <workItem from="1633488991426" duration="872000" />
+      <workItem from="1633517416608" duration="13402000" />
+      <workItem from="1633570620534" duration="11495000" />
+      <workItem from="1633613673681" duration="1223000" />
+      <workItem from="1633616783181" duration="977000" />
+      <workItem from="1633660116404" duration="3487000" />
+      <workItem from="1633702390702" duration="650000" />
+      <workItem from="1633745089174" duration="2253000" />
+      <workItem from="1633769783976" duration="1751000" />
+      <workItem from="1633793982600" duration="1252000" />
+      <workItem from="1633833302780" duration="3262000" />
+      <workItem from="1633916742005" duration="9291000" />
+      <workItem from="1634002973873" duration="4238000" />
+      <workItem from="1634041614379" duration="633000" />
+      <workItem from="1634091144525" duration="4953000" />
+      <workItem from="1634180687457" duration="728000" />
+      <workItem from="1634200566129" duration="644000" />
+      <workItem from="1634224577856" duration="13000" />
+      <workItem from="1634294906339" duration="5712000" />
+      <workItem from="1634359866723" duration="1477000" />
+      <workItem from="1634443792307" duration="1269000" />
+      <workItem from="1634547650076" duration="1960000" />
+      <workItem from="1634699882478" duration="6314000" />
+      <workItem from="1634726337481" duration="8603000" />
+      <workItem from="1634801165567" duration="7009000" />
+      <workItem from="1634820387172" duration="4507000" />
+      <workItem from="1634871094638" duration="682000" />
+      <workItem from="1634888829065" duration="766000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser" timestamp="1634718209865">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1634718209865" />
+    <state x="551" y="281" width="433" height="267" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1633845218245">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="551" y="281" width="433" height="267" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824@0.0.1536.824" timestamp="1633845218245" />
+    <state x="298" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1634737148121">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="298" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1634737148121" />
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1634889832716">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1634889832716" />
+    <state width="1493" height="236" key="GridCell.Tab.0.bottom" timestamp="1634828989370">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="236" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1634828989370" />
+    <state width="1493" height="236" key="GridCell.Tab.0.center" timestamp="1634828989370">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="236" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1634828989370" />
+    <state width="1493" height="236" key="GridCell.Tab.0.left" timestamp="1634828989370">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="236" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1634828989370" />
+    <state width="1493" height="236" key="GridCell.Tab.0.right" timestamp="1634828989370">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="236" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1634828989370" />
+    <state width="1493" height="236" key="GridCell.Tab.1.bottom" timestamp="1634828989370">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="236" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1634828989370" />
+    <state width="1493" height="236" key="GridCell.Tab.1.center" timestamp="1634828989370">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="236" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1634828989370" />
+    <state width="1493" height="236" key="GridCell.Tab.1.left" timestamp="1634828989370">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="236" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1634828989370" />
+    <state width="1493" height="236" key="GridCell.Tab.1.right" timestamp="1634828989370">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="236" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1634828989370" />
+    <state x="478" y="60" key="SettingsEditor" timestamp="1634737797305">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="478" y="60" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1634737797305" />
+    <state x="425" y="187" width="672" height="677" key="run.anything.popup" timestamp="1634132927246">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1634132927246" />
+    <state x="66" y="146" key="search.everywhere.popup" timestamp="1634737668799">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="66" y="146" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1634737668799" />
+  </component>
+</project>

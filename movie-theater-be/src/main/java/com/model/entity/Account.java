@@ -1,10 +1,15 @@
 package com.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+<<<<<<< HEAD
 
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
+=======
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
+>>>>>>> 54fa62ca00214a34a99419677dcb14df49902b06
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -203,6 +208,7 @@ public class Account {
     public void setMovies(List<Movie> movies) {
         this.movies = movies;
     }
+<<<<<<< HEAD
 
     //anhLT
     public String getProvider() {
@@ -215,3 +221,6 @@ public class Account {
     // end AnhlT
 
 }
+=======
+}
+>>>>>>> 54fa62ca00214a34a99419677dcb14df49902b06

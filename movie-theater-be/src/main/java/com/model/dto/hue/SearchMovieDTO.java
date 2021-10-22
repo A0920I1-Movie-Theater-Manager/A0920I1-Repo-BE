@@ -5,8 +5,17 @@ import java.time.LocalDate;
 public class SearchMovieDTO {
     private String title;
     private String production;
-    private LocalDate releaseDate;
-    private String is3D;
+    private String releaseDate;
+
+    public boolean isIs3D() {
+        return is3D;
+    }
+
+    public void setIs3D(boolean is3D) {
+        this.is3D = is3D;
+    }
+
+    private boolean is3D;
 
     public String getTitle() {
         return title;
@@ -24,19 +33,13 @@ public class SearchMovieDTO {
         this.production = production;
     }
 
-    public LocalDate getReleaseDate() {
+    public String getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(LocalDate releaseDate) {
+    public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
 
-    public String getIs3D() {
-        return is3D;
-    }
 
-    public void setIs3D(String is3D) {
-        this.is3D = is3D;
-    }
 }
