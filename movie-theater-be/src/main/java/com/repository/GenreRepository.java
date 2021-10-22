@@ -2,8 +2,14 @@ package com.repository;
 
 import com.model.entity.Genre;
 import org.springframework.data.jpa.repository.JpaRepository;
+<<<<<<< HEAD
+=======
+import org.springframework.data.jpa.repository.Modifying;
+>>>>>>> 54fa62ca00214a34a99419677dcb14df49902b06
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 
@@ -11,4 +17,15 @@ import java.util.List;
 public interface GenreRepository extends JpaRepository<Genre, Long> {
     @Query(value = "SELECT * FROM movietheater.genre", nativeQuery = true)
     List<Genre> findAllGenre();
+    //HueHV
+    @Transactional
+    @Modifying
+    @Query(nativeQuery = true, value = "insert into genre_movie (genre_id, movie_id) values (?1, ?2);")
+    void addGenreToMovie(long genre_id, long movie_id);
+
+    //HueHV
+    @Transactional
+    @Modifying
+    @Query(nativeQuery = true, value = "update genre_movie set genre_id=?1 where movie_id=?2")
+    void updateGenreToMovie(long genre_id, long movie_id);
 }

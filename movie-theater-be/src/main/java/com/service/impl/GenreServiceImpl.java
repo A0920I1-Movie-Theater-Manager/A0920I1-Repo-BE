@@ -16,4 +16,18 @@ public class GenreServiceImpl implements GenreService {
     public List<Genre> findAllGenre() {
         return genreRepository.findAllGenre();
     }
+    @Override
+    public void addGenreToMovie(long genre_id, long movie_id) {
+        genreRepository.addGenreToMovie(genre_id, movie_id);
+    }
+
+    @Override
+    public void updateGenreToMovie(long genre_id, long movie_id) {
+        genreRepository.updateGenreToMovie(genre_id, movie_id);
+    }
+
+    @Override
+    public List<Genre> findAll() {
+        return genreRepository.findAll();
+    }
 }

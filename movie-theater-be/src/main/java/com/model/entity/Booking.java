@@ -1,23 +1,33 @@
 package com.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import org.hibernate.annotations.Type;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+
 import java.util.List;
+
 import java.util.Set;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime dayTimeBooking;
 
     private double totalPrice;
     private int point;
     private String bookingCode;
+
 
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean received;
@@ -59,6 +69,14 @@ public class Booking {
 
     public void setPoint(int point) {
         this.point = point;
+    }
+
+    public LocalDateTime getDayTimeBooking() {
+        return dayTimeBooking;
+    }
+
+    public void setDayTimeBooking(LocalDateTime dayTimeBooking) {
+        this.dayTimeBooking = dayTimeBooking;
     }
 
     public String getBookingCode() {
