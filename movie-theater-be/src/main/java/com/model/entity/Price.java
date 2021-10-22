@@ -1,5 +1,6 @@
 package com.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.Type;
@@ -21,6 +22,7 @@ public class Price {
     private double price;
 
     @OneToMany(mappedBy = "price", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Showtime> showtimes;
 
     public long getId() {
