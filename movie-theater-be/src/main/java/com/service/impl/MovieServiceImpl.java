@@ -15,28 +15,39 @@ public class MovieServiceImpl implements MovieService {
     @Autowired
     private MovieRepository movieRepository;
 
+    //TuHC - lay phim dang chieu
     @Override
     public List<Movie> findAllMovieShowing(LocalDate today) {
         return movieRepository.findAllMovieShowing(today);
     }
 
+    //TuHC - lay phim sap chieu
     @Override
     public List<Movie> findAllMovieComingSoon(LocalDate today) {
         return movieRepository.findAllMovieComingSoon(today);
     }
 
+    //TuHc - lay phim theo id
     @Override
     public Movie findMovieById(long id) {
         return movieRepository.findMovieById(id);
     }
 
+    //TuHC - tim kiem phim
     @Override
     public List<Movie> searchMovie(String keyword, LocalDate today) {
         return movieRepository.searchMovie(keyword, today);
     }
 
+    //TuHC - lay top 5 phim
     @Override
     public List<Movie> listTopFiveMovie() {
         return movieRepository.listTopFiveMovie();
+    }
+
+    //TuHC - lay phim dang chieu va sap chieu
+    @Override
+    public List<Movie> findAllMovieShowingAndComingSoon() {
+        return movieRepository.findAllMovieShowingAndComingSoon();
     }
 }

@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.model.dto.TopFiveMovieDTO;
 import com.model.entity.Comment;
 import com.model.entity.Movie;
 import com.service.CommentService;
@@ -58,8 +59,9 @@ public class MovieController {
 
     //    TuHC - chi tiet phim
     @GetMapping(value = "/detail-movie/{id}")
-    public ResponseEntity<Movie> getMovieById(@PathVariable("id") long id) {
-        Movie movie = movieService.findMovieById(id);
+    public ResponseEntity<Movie> getMovieById(@PathVariable("id") String id) {
+        long movieId = Long.parseLong(id);
+        Movie movie = movieService.findMovieById(movieId);
         if (movie != null) {
             return new ResponseEntity<>(movie, HttpStatus.OK);
         } else {
@@ -90,9 +92,22 @@ public class MovieController {
         }
     }
 
+//    TuHC - them comment
     @PostMapping(value = "/add-comment")
     public ResponseEntity<Comment> addNewComment(@RequestBody Comment comment){
-        commentService.addNewComment(comment.getContent(), comment.getMovie());
+        System.out.println(comment.toString());
+//        commentService.addNewComment(comment.getContent(), comment.getMovie().getId());
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+//    TuHC - lay phim dang chieu va sap chieu
+    @GetMapping(value = "/all-movie")
+    public ResponseEntity<List<Movie>> findAllMovieShowingAndComingSoon(){
+        List<Movie> movies = movieService.findAllMovieShowingAndComingSoon();
+        if(movies.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }else {
+            return new ResponseEntity<>(movies, HttpStatus.OK);
+        }
     }
 }

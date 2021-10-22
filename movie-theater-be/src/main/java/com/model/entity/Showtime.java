@@ -21,7 +21,7 @@ public class Showtime {
     private LocalTime showTime;
 
     @ManyToMany
-    @JoinTable(name = "movie_showtime", joinColumns = @JoinColumn(name = "movie_id"), inverseJoinColumns = @JoinColumn(name = "showtime_id"))
+    @JoinTable(name = "movie_showtime", joinColumns = @JoinColumn(name = "showtime_id"), inverseJoinColumns = @JoinColumn(name = "movie_id"))
     private Set<Movie> movies;
 
     @OneToMany(mappedBy = "showtime", cascade = CascadeType.ALL)

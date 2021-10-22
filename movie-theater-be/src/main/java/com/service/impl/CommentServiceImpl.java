@@ -13,14 +13,15 @@ import java.util.List;
 public class CommentServiceImpl implements CommentService {
     @Autowired
     private CommentRepository commentRepository;
+//    TuHC - lay comment theo phim
     @Override
     public List<Comment> findAllCommentByMovieId(long id) {
         return commentRepository.findAllCommentByMovieId(id);
     }
-
+//TuHC - them moi comment
     @Override
-    public void addNewComment(String content, Movie movie) {
-        commentRepository.addNewComment(content, movie);
+    public void addNewComment(String content, long account, long movie, int seen) {
+        commentRepository.addNewComment(content, account, movie, seen);
     }
 
 }

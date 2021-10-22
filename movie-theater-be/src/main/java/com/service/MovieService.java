@@ -13,4 +13,5 @@ public interface MovieService {
     Movie findMovieById(long id);
     List<Movie> searchMovie(String keyword, LocalDate today);
     List<Movie> listTopFiveMovie();
+    List<Movie> findAllMovieShowingAndComingSoon();
 }
