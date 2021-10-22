@@ -98,10 +98,10 @@ public class MovieController {
                 long showTimesDTO = showtimeService.getIdByShowDayAndShowTime(movie.getShowtime().get(i).getShowtime(), movie.getShowtime().get(i).getPrice()).getId();
                 showtimeService.joinTableMovieAndShowtime(idMovie, showTimesDTO);
             }
-            for(int i = 0;i<movie.getMovieImages().size();i++){
-                System.out.println(movie.getMovieImages().get(i));
-                movieImageService.addImageByIdMovie(movie.getMovieImages().get(i), idMovie);
-            }
+//            for(int i = 0;i<movie.getMovieImages().size();i++){
+//                System.out.println(movie.getMovieImages().get(i));
+//                movieImageService.addImageByIdMovie(movie.getMovieImages().get(i), idMovie);
+//            }
 
             return new ResponseEntity<>(HttpStatus.OK);
         }

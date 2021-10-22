@@ -23,7 +23,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     @Modifying
     @Query(value = "SELECT * FROM movie " +
             " where title like %?1% and production like %?2% and release_date like %?3% and is3D like ?4 ", nativeQuery = true)
-    List<Movie> searchMovie(String title, String production,LocalDate releaseDate, String is3D);
+    List<Movie> searchMovie(String title, String production,String releaseDate, boolean is3D);
 
     //HueHV
     @Query(value = "select * from movie where id = ?1", nativeQuery = true)
