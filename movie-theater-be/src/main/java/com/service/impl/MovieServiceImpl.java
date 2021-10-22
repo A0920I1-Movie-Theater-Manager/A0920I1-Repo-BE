@@ -59,7 +59,7 @@ public class MovieServiceImpl implements MovieService {
             searchMovieDTO.setReleaseDate(null);
         }
         if (searchMovieDTO.getIs3D() == null){
-            searchMovieDTO.setIs3D("");
+            searchMovieDTO.setIs3D("false");
         }
 
         return movieRepository.searchMovie(searchMovieDTO.getTitle(), searchMovieDTO.getProduction(),
