@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface GenreService {
     void addGenreToMovie(long genre_id, long movie_id);
+    void updateGenreToMovie(long genre_id, long movie_id);
 
     List<Genre> findAll();
 }

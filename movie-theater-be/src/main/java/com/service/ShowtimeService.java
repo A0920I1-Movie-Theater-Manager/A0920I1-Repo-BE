@@ -1,6 +1,5 @@
 package com.service;
 
-import com.model.dto.hue.ShowTimesDTO;
 import com.model.entity.Showtime;
 
 import java.time.LocalTime;
@@ -18,4 +17,7 @@ public interface ShowtimeService {
 
     //HueHV
     void addShowTimes(LocalTime showTime,long price_id);
+
+    //HueHV
+    void updateShowTimes(LocalTime showTime,long price_id, long id);
 }

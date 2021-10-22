@@ -37,4 +37,9 @@ public class ShowtimeServiceImpl implements ShowtimeService {
     public void addShowTimes(LocalTime showTime, long price_id) {
         showtimeRepository.addShowTime(showTime, price_id);
     }
+
+    @Override
+    public void updateShowTimes(LocalTime showTime, long price_id, long id) {
+        showtimeRepository.updateShowTime(showTime, price_id, id);
+    }
 }

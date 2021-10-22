@@ -88,10 +88,6 @@ public class MovieController {
                     movie.getRunningTime(), movie.getProduction().trim(), movie.getTrailerUrl().trim(),
                     movie.getContent().trim(), movie.isIs3D(), movie.getAccountId());
             long idMovie = Long.parseLong(String.valueOf(movieService.getIdMovieByName(movie.getTitle()).getId()));
-            for(int i = 0;i<movie.getMovieImages().size();i++){
-                System.out.println(movie.getMovieImages().get(i));
-                movieImageService.addImageByIdMovie(movie.getMovieImages().get(i), idMovie);
-            }
             for(int i =0;i < movie.getGenres().size(); i++){
                 genreService.addGenreToMovie(Long.parseLong(movie.getGenres().get(i)), idMovie);
             }
@@ -102,7 +98,10 @@ public class MovieController {
                 long showTimesDTO = showtimeService.getIdByShowDayAndShowTime(movie.getShowtime().get(i).getShowtime(), movie.getShowtime().get(i).getPrice()).getId();
                 showtimeService.joinTableMovieAndShowtime(idMovie, showTimesDTO);
             }
-
+            for(int i = 0;i<movie.getMovieImages().size();i++){
+                System.out.println(movie.getMovieImages().get(i));
+                movieImageService.addImageByIdMovie(movie.getMovieImages().get(i), idMovie);
+            }
 
             return new ResponseEntity<>(HttpStatus.OK);
         }
@@ -125,6 +124,9 @@ public class MovieController {
                     movie.getRunningTime(), movie.getProduction().trim(), movie.getTrailerUrl().trim(),
                     movie.getContent().trim(), movie.isIs3D(), movie.getAccountId(), id);
 
+            for(int i=0; i< movie.getGenres().size();i++){
+
+            }
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }
@@ -152,13 +154,6 @@ public class MovieController {
     @GetMapping("/list-employee")
     public List<Account> getAllAccountByCodeEmployee() {
         return accountService.listAccountByCodeEmployee();
-    }
-
-    //HueHV, phương thức thêm thể loại cho 1 bộ phim   >>>>>>>>>>>>>>>>>>>2
-    @PostMapping("/add-genre")
-    public ResponseEntity<?> addGenreToMovie(@RequestBody GenreMovieDTO genreMovieDTO) {
-            genreService.addGenreToMovie(genreMovieDTO.getGenre_id(), genreMovieDTO.getMovie_id());
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     //HueHV, phương thức lấy danh sách thể loại phim

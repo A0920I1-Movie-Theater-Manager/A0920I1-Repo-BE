@@ -19,6 +19,11 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
+    public void updateGenreToMovie(long genre_id, long movie_id) {
+        genreRepository.updateGenreToMovie(genre_id, movie_id);
+    }
+
+    @Override
     public List<Genre> findAll() {
         return genreRepository.findAll();
     }
