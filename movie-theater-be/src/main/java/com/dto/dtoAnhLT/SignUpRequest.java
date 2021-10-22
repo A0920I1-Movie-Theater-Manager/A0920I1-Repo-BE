@@ -3,7 +3,6 @@ package com.dto.dtoAnhLT;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
 
 public class SignUpRequest {
 
