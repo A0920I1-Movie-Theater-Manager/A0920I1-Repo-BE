@@ -1,5 +1,7 @@
 package com.model.entity;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+<<<<<<< HEAD
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 <<<<<<< HEAD
 
@@ -13,6 +15,11 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import org.hibernate.annotations.Type;
 >>>>>>> 54fa62ca00214a34a99419677dcb14df49902b06
+=======
+
+
+
+>>>>>>> 741a35df26d2524d322d67b744e52f5a620c92bd
 import javax.persistence.*;
 import java.time.LocalTime;
 import java.util.List;

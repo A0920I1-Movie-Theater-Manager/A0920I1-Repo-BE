@@ -2,12 +2,15 @@ package com.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
 =======
 
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+=======
+>>>>>>> 741a35df26d2524d322d67b744e52f5a620c92bd
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 >>>>>>> 54fa62ca00214a34a99419677dcb14df49902b06
 import org.hibernate.annotations.Type;
@@ -15,11 +18,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-
-import java.util.List;
-
 import java.util.Set;
-import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
 @Entity
 @JsonIdentityInfo(generator= JSOGGenerator.class)
@@ -34,6 +33,8 @@ public class Booking {
     private int point;
     private String bookingCode;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime dayTimeBooking;
 
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean received;
@@ -52,6 +53,7 @@ public class Booking {
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account account;
+
 
     public long getId() {
         return id;
@@ -75,14 +77,6 @@ public class Booking {
 
     public void setPoint(int point) {
         this.point = point;
-    }
-
-    public LocalDateTime getDayTimeBooking() {
-        return dayTimeBooking;
-    }
-
-    public void setDayTimeBooking(LocalDateTime dayTimeBooking) {
-        this.dayTimeBooking = dayTimeBooking;
     }
 
     public String getBookingCode() {
@@ -131,5 +125,13 @@ public class Booking {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public LocalDateTime getDayTimeBooking() {
+        return dayTimeBooking;
+    }
+
+    public void setDayTimeBooking(LocalDateTime dayTimeBooking) {
+        this.dayTimeBooking = dayTimeBooking;
     }
 }

@@ -1,11 +1,13 @@
 package com.repository;
 
-import com.model.entity.Movie;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import com.model.entity.Movie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +16,15 @@ import java.util.List;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
+    //    TuHC - lay danh sach phim dang chieu
+    @Query(value = "SELECT * FROM movietheater.movie " +
+            "where :today >= showing_from and :today <= showing_to", nativeQuery = true)
+    List<Movie> findAllMovieShowing(@Param("today") LocalDate today);
+
+    //    TuHC - lay danh sach phim sap chieu
+    @Query(value = "SELECT * FROM movietheater.movie " +
+            "where :today < showing_from", nativeQuery = true)
+    List<Movie> findAllMovieComingSoon(@Param("today") LocalDate today);
 
     //HueHV
     @Query(value = "SELECT * FROM movie", nativeQuery = true)
@@ -56,5 +67,33 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
             "production = ?9, trailer_Url = ?10, content = ?11, is3D = ?12, account_Id = ?13 where movie.id = ?14 ", nativeQuery = true)
     void updateMovie(String title, LocalDate showing_From, LocalDate showing_To, String cast, String director, LocalDate release_Date, String rated, int running_Time,
                      String production,String trailer_Url, String content, boolean is3D, long account_Id, long id);
+
+    //    TuHC - tim kiem phim theo ten phim, dao dien, dien vien va phim dang duoc chieu
+    @Query(value = "SELECT * FROM movietheater.movie " +
+            "where (movie.title like %:keyword%) " +
+            "and (:today between showing_from and showing_to)", nativeQuery = true)
+    List<Movie> searchMovie(@Param("keyword") String keyword, @Param("today") LocalDate today);
+
+    //    TuHC- top 5 movie
+    @Query(value = "SELECT movie.id, movie.cast, movie.content, movie.director, " +
+            "movie.is3d, movie.production, movie.rated, movie.release_date, " +
+            "movie.running_time, movie.showing_from, movie.showing_to, " +
+            "movie.title, movie.trailer_url, movie.account_id " +
+            "FROM movietheater.movie " +
+            "inner join movie_showtime on movie_showtime.movie_id = movie.id " +
+            "inner join showtime on showtime.id = movie_showtime.showtime_id " +
+            "inner join screen on screen.showtime_id = showtime.id " +
+            "inner join seat on seat.screen_id = screen.id " +
+            "inner join booking_seat on booking_seat.seat_id = seat.id " +
+            "group by movie.id " +
+            "order by count(movie.id)desc " +
+            "limit 5", nativeQuery = true)
+    List<Movie> listTopFiveMovie();
+
+    //TuHC - lay phim dang chieu va sap chieu
+    @Query(value = "SELECT * FROM movietheater.movie \n" +
+            "where ((curdate() > showing_from) and (curdate() < showing_to))\n" +
+            "or curdate() < showing_from", nativeQuery = true)
+    List<Movie> findAllMovieShowingAndComingSoon();
 }
 

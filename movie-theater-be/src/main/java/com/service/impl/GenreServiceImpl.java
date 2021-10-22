@@ -11,8 +11,11 @@ import java.util.List;
 @Service
 public class GenreServiceImpl implements GenreService {
     @Autowired
-    GenreRepository genreRepository;
-
+    private GenreRepository genreRepository;
+    @Override
+    public List<Genre> findAllGenre() {
+        return genreRepository.findAllGenre();
+    }
     @Override
     public void addGenreToMovie(long genre_id, long movie_id) {
         genreRepository.addGenreToMovie(genre_id, movie_id);

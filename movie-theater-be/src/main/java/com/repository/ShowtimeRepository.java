@@ -1,9 +1,11 @@
 package com.repository;
 
+
 import com.model.entity.Showtime;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,4 +42,12 @@ public interface ShowtimeRepository extends JpaRepository<Showtime, Long> {
     @Modifying
     @Query(value = "update showtime set show_time=?1, price_id=?2 where id=?3", nativeQuery = true)
     void updateShowTime(LocalTime showTime, long price_id, long id);
+
+    //    TuHC - lay showtime bang movieid
+    @Query(value = "SELECT showtime.id, showtime.show_time, showtime.price_id " +
+            "FROM movietheater.showtime " +
+            "INNER JOIN movie_showtime ON movie_showtime.showtime_id = showtime.id " +
+            "INNER JOIN movie ON movie.id = movie_showtime.movie_id " +
+            "WHERE movie.id = :id", nativeQuery = true)
+    List<Showtime> findShowtimeByMovieId(@Param("id") long id);
 }

@@ -31,6 +31,19 @@ public class MovieServiceImpl implements MovieService {
         return movieRepository.findAll();
     }
 
+    //TuHC - lay phim dang chieu
+    @Override
+    public List<Movie> findAllMovieShowing(LocalDate today) {
+        return movieRepository.findAllMovieShowing(today);
+    }
+
+    //TuHC - lay phim sap chieu
+    @Override
+    public List<Movie> findAllMovieComingSoon(LocalDate today) {
+        return movieRepository.findAllMovieComingSoon(today);
+    }
+
+    //TuHc - lay phim theo id
     @Override
     public Movie findMovieById(long id) {
         return movieRepository.findMovieById(id);
@@ -78,5 +91,22 @@ public class MovieServiceImpl implements MovieService {
     public void updateMovie(String title, LocalDate showing_From, LocalDate showing_To, String cast, String director, LocalDate release_Date, String rated, int running_Time,
                             String production, String trailer_Url, String content, boolean is3D, long account_Id, long id) {
         movieRepository.updateMovie(title, showing_From, showing_To, cast, director, release_Date, rated, running_Time, production, trailer_Url, content, is3D, account_Id, id);
+    }
+    //TuHC - tim kiem phim
+    @Override
+    public List<Movie> searchMovie(String keyword, LocalDate today) {
+        return movieRepository.searchMovie(keyword, today);
+    }
+
+    //TuHC - lay top 5 phim
+    @Override
+    public List<Movie> listTopFiveMovie() {
+        return movieRepository.listTopFiveMovie();
+    }
+
+    //TuHC - lay phim dang chieu va sap chieu
+    @Override
+    public List<Movie> findAllMovieShowingAndComingSoon() {
+        return movieRepository.findAllMovieShowingAndComingSoon();
     }
 }

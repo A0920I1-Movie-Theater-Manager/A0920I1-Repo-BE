@@ -1,6 +1,9 @@
 package com.controller.hue;
 
+<<<<<<< HEAD:movie-theater-be/src/main/java/com/controller/hue/MovieController.java
 import com.model.dto.hue.MovieDTO;
+=======
+>>>>>>> 741a35df26d2524d322d67b744e52f5a620c92bd:movie-theater-be/src/main/java/com/controller/hue/HueMovieController.java
 import com.model.dto.hue.SearchMovieDTO;
 import com.model.entity.*;
 import com.service.*;
@@ -16,7 +19,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "api")
 @CrossOrigin("http://localhost:4200")
-public class MovieController {
+public class HueMovieController {
     @Autowired
     MovieService movieService;
 
@@ -76,7 +79,7 @@ public class MovieController {
 
     //HueHV, phương thức tạo mới 1 bộ phim
     @PostMapping(value = "/create-movie", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createMovie(@RequestBody MovieDTO movie) {
+    public ResponseEntity<?> createMovie(@RequestBody com.model.dto.hue.MovieDTO movie) {
         if (movie == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
@@ -113,7 +116,7 @@ public class MovieController {
 
     //HueHV, phương thức chỉnh sửa 1 bộ phim
     @PatchMapping(value = "/update-movie/{id}")
-    public ResponseEntity<?> updateMovie(@PathVariable(value = "id") long id, @RequestBody MovieDTO movie) {
+    public ResponseEntity<?> updateMovie(@PathVariable(value = "id") long id, @RequestBody com.model.dto.hue.MovieDTO movie) {
         if (movie == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {

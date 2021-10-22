@@ -1,10 +1,8 @@
 package com.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import org.hibernate.annotations.Type;
-import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -27,22 +25,29 @@ public class Movie {
     private int runningTime;
     private String production;
     private String trailerUrl;
+
+    @Column(columnDefinition="LONGTEXT")
     private String content;
 
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean is3D;
 
+
     @ManyToMany(mappedBy = "movies")
     private Set<Genre> genres;
+
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
+
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     private List<MovieImage> movieImages;
 
+
     @ManyToMany(mappedBy = "movies")
     private Set<Showtime> showtimes;
+
 
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "id")

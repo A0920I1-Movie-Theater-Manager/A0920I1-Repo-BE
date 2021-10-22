@@ -1,8 +1,5 @@
 package com.controller;
-<<<<<<< HEAD
 
-
-=======
 import com.model.dto.AccountMemberDTO;
 import com.model.entity.Account;
 import com.service.AccountService;
@@ -10,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
->>>>>>> 54fa62ca00214a34a99419677dcb14df49902b06
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
