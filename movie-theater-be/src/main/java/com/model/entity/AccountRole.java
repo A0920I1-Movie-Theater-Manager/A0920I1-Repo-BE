@@ -1,21 +1,19 @@
 package com.model.entity;
-import com.voodoodyne.jackson.jsog.JSOGGenerator;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
-
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 @Entity
 @JsonIdentityInfo(generator= JSOGGenerator.class)
-public class Comment {
+public class AccountRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String content;
 
     @ManyToOne
-    @JoinColumn(name = "movie_id", referencedColumnName = "id")
-    private Movie movie;
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    private Role role;
 
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "id")
@@ -29,20 +27,12 @@ public class Comment {
         this.id = id;
     }
 
-    public String getContent() {
-        return content;
+    public Role getRole() {
+        return role;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Movie getMovie() {
-        return movie;
-    }
-
-    public void setMovie(Movie movie) {
-        this.movie = movie;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public Account getAccount() {

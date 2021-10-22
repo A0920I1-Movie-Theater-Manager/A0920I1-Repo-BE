@@ -1,17 +1,14 @@
 package com.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
-
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,12 +30,14 @@ public class Account {
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean deleted;
 
-    @ManyToMany
-    @JoinTable(name = "account_role", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    private List<AccountRole> accountRoles;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Comment> comments;
+
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    private List<Movie> movies;
 
     public long getId() {
         return id;
@@ -152,12 +151,12 @@ public class Account {
         this.deleted = deleted;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public List<AccountRole> getAccountRoles() {
+        return accountRoles;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setAccountRoles(List<AccountRole> accountRoles) {
+        this.accountRoles = accountRoles;
     }
 
     public List<Comment> getComments() {
@@ -166,5 +165,13 @@ public class Account {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public List<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
     }
 }

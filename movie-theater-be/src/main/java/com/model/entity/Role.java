@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
-import java.util.Set;
-
+import java.util.List;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,8 +15,8 @@ public class Role {
 
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
-    private Set<Account> accounts;
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
+    private List<AccountRole> accountRoles;
 
     public long getId() {
         return id;
@@ -34,11 +34,11 @@ public class Role {
         this.name = name;
     }
 
-    public Set<Account> getAccounts() {
-        return accounts;
+    public List<AccountRole> getAccountRoles() {
+        return accountRoles;
     }
 
-    public void setAccounts(Set<Account> accounts) {
-        this.accounts = accounts;
+    public void setAccountRoles(List<AccountRole> accountRoles) {
+        this.accountRoles = accountRoles;
     }
 }

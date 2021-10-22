@@ -6,9 +6,9 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
-
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Promotion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
