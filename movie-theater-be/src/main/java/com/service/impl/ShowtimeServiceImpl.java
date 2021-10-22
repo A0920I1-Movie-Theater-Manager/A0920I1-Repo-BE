@@ -1,12 +1,10 @@
 package com.service.impl;
 
-import com.model.dto.hue.ShowTimesDTO;
 import com.model.entity.Showtime;
 import com.repository.ShowtimeRepository;
 import com.service.ShowtimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalTime;
 import java.util.List;
 
@@ -41,5 +39,10 @@ public class ShowtimeServiceImpl implements ShowtimeService {
     @Override
     public void updateShowTimes(LocalTime showTime, long price_id, long id) {
         showtimeRepository.updateShowTime(showTime, price_id, id);
+    }
+//    TuHC - lay gio chieu theo phim
+    @Override
+    public List<Showtime> findShowtimeByMovieId(long id) {
+        return showtimeRepository.findShowtimeByMovieId(id);
     }
 }

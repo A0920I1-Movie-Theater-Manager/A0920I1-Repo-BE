@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import javax.persistence.*;
 import java.util.Set;
-import com.voodoodyne.jackson.jsog.JSOGGenerator;
 @Entity
 @JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Genre {

@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import java.util.List;
+
 @Repository
 public interface MovieImageRepository extends JpaRepository<MovieImage, Long> {
 

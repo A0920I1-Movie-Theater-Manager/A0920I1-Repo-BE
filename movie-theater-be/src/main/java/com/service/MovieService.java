@@ -4,7 +4,6 @@ import com.model.dto.hue.SearchMovieDTO;
 import com.model.entity.Movie;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -33,4 +32,10 @@ public interface MovieService {
     //HueHV
     void updateMovie(String title, LocalDate showing_From, LocalDate showing_To, String cast, String director, LocalDate release_Date, String rated, int running_Time,
                      String production, String trailer_Url, String content, boolean is3D, long account_Id, long id);
+//    TuHC
+    List<Movie> findAllMovieShowing(LocalDate today);
+    List<Movie> findAllMovieComingSoon(LocalDate today);
+    List<Movie> searchMovie(String keyword, LocalDate today);
+    List<Movie> listTopFiveMovie();
+    List<Movie> findAllMovieShowingAndComingSoon();
 }

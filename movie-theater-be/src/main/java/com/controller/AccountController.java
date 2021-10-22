@@ -1,4 +1,5 @@
 package com.controller;
+
 import com.model.dto.AccountMemberDTO;
 import com.model.entity.Account;
 import com.service.AccountService;
@@ -24,53 +25,61 @@ public class AccountController {
     @GetMapping("/list-member")
     public ResponseEntity<List<Account>> getAllMember() {
         List<Account> accounts = accountService.findAllMember();
-        if(accounts.isEmpty()){
+        if (accounts.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new  ResponseEntity <List<Account>>(accounts,HttpStatus.OK);
+        return new ResponseEntity<List<Account>>(accounts, HttpStatus.OK);
     }
-//PhapNT- Chỉnh sửa thành viên
+
+    //PhapNT- Chỉnh sửa thành viên
     @PutMapping("/update-member/{id}")
-    public ResponseEntity<?> updateMember(@PathVariable("id") long id , @RequestBody AccountMemberDTO accountMemberDTO){
+    public ResponseEntity<?> updateMember(@PathVariable("id") long id, @RequestBody AccountMemberDTO accountMemberDTO) {
         accountMemberDTO.setPassword(passwordEncoder.encode(accountMemberDTO.getPassword()));
-       accountService.updateMember(accountMemberDTO,id);
-       return new ResponseEntity<>(HttpStatus.OK);
+        accountService.updateMember(accountMemberDTO, id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
-//PhapNT- Thêm thành viên
+
+    //PhapNT- Thêm thành viên
     @PostMapping("/create-member")
-    public ResponseEntity<?> createMember(@RequestBody AccountMemberDTO accountMemberDTO){
+    public ResponseEntity<?> createMember(@RequestBody AccountMemberDTO accountMemberDTO) {
         passwordEncoder.encode(accountMemberDTO.getPassword());
         accountService.createMember(accountMemberDTO);
         return new ResponseEntity<AccountMemberDTO>(HttpStatus.CREATED);
     }
+
     //PhapNT-
     @GetMapping("/public/findById-member/{id}")
-    public ResponseEntity<Account> getIdMember(@PathVariable ("id") long id){
-       Account accounts = accountService.findByIdMember(id);
+    public ResponseEntity<Account> getIdMember(@PathVariable("id") long id) {
+        Account accounts = accountService.findByIdMember(id);
         System.out.println();
-        return new ResponseEntity<Account>(accounts,HttpStatus.OK);
+        return new ResponseEntity<Account>(accounts, HttpStatus.OK);
     }
+
     @DeleteMapping("delete-member/{id}")
-    public ResponseEntity<Void> deleteMember(@PathVariable("id") long id){
+    public ResponseEntity<Void> deleteMember(@PathVariable("id") long id) {
         accountService.deleteMember(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @GetMapping("searchName-member")
-    public ResponseEntity<List<Account>> searchNameMember(@RequestParam("name") String name){
-      List<Account> accounts = accountService.findByNameMember(name);
-        return new ResponseEntity<List<Account>>(accounts,HttpStatus.OK);
+    public ResponseEntity<List<Account>> searchNameMember(@RequestParam("name") String name) {
+        List<Account> accounts = accountService.findByNameMember(name);
+        return new ResponseEntity<List<Account>>(accounts, HttpStatus.OK);
     }
+
     @PostMapping("/check-emailMember")
-    public boolean checkEmailMember(@RequestBody String email){
+    public boolean checkEmailMember(@RequestBody String email) {
         return accountService.checkEmailMember(email);
 
     }
+
     @PostMapping("/check-phoneMember")
-    public boolean checkPhoneMember(@RequestBody String phone){
+    public boolean checkPhoneMember(@RequestBody String phone) {
         return accountService.checkPhoneMember(phone);
     }
+
     @PostMapping("/check-usernameMember")
-    public boolean checkUsernameMember(@RequestBody String username){
+    public boolean checkUsernameMember(@RequestBody String username) {
         return accountService.checkUsernameMember(username);
     }
 }

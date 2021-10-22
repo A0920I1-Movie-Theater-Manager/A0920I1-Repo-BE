@@ -1,7 +1,6 @@
 package com.service;
 
 import com.model.entity.Showtime;
-
 import java.time.LocalTime;
 import java.util.List;
 
@@ -20,4 +19,7 @@ public interface ShowtimeService {
 
     //HueHV
     void updateShowTimes(LocalTime showTime,long price_id, long id);
+
+    //    TuHC
+    List<Showtime> findShowtimeByMovieId(long id);
 }
