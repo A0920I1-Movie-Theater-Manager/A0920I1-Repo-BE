@@ -22,6 +22,9 @@ public class Booking {
     private int point;
     private String bookingCode;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime dayTimeBooking;
+
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean received;
 
