@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7aa3e829-3920-4af2-bb7b-d718eb18e852" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/controller/PriceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/controller/PriceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/Price.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/Price.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/model/entity/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/repository/PriceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/repository/PriceRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/service/PriceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/service/PriceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/service/impl/PriceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-theater-be/src/main/java/com/service/impl/PriceServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-theater-be/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/movie-theater-be/src/main/resources/application.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="D:\A0720I1_DHNT\A09\coding\A0920I1-Repo-BE\.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1zDnAjFvx6hVbOlSBOPXEf03IKu" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/movie-theater-be" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7aa3e829-3920-4af2-bb7b-d718eb18e852" name="Default Changelist" comment="" />
+      <created>1633691384900</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1633691384900</updated>
+      <workItem from="1633691390572" duration="53000" />
+      <workItem from="1633916925008" duration="32000" />
+      <workItem from="1634285851064" duration="32000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="586" y="188" key="FileChooserDialogImpl" timestamp="1634285881800">
+      <screen x="75" y="0" width="1461" height="864" />
+    </state>
+    <state x="586" y="188" key="FileChooserDialogImpl/75.0.1461.864@75.0.1461.864" timestamp="1634285881800" />
+  </component>
+</project>
