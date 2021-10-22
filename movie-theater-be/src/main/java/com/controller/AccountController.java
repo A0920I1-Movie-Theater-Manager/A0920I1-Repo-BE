@@ -62,12 +62,19 @@ public class AccountController {
     // thêm mới nhân viên (HoangLV)
     @PostMapping(value="employee-account-create",consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createEmployee(@RequestBody CreateEmployeeAccount createEmployeeAccount){
+        if(createEmployeeAccount.getAccountCode() != null && createEmployeeAccount.getUsername() != null && createEmployeeAccount.getPassword() != null
+                && createEmployeeAccount.getBirthday() != null && createEmployeeAccount.getGender() != null && createEmployeeAccount.getIdCard() != null
+                && createEmployeeAccount.getEmail() != null && createEmployeeAccount.getAddress() != null && createEmployeeAccount.getFullname() != null
+                && createEmployeeAccount.getIdCard() != null && createEmployeeAccount.getPhone() != null){
         createEmployeeAccount.setDeleted(true);
         createEmployeeAccount.setTotalPoint(0);
         accountService.createEmployeeAccount(createEmployeeAccount);
        Account account = accountService.findAccountByEmployeeName(createEmployeeAccount.getAccountCode());
         accountService.createAccountRole(account.getId(),2);
         return new ResponseEntity<>(HttpStatus.CREATED);
+        }else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     // Xóa nhân viên theo id  nhân viên (HoangLV)
