@@ -1,6 +1,5 @@
 package com.repository;
 
-import com.model.dto.AccountDTO;
 import com.model.entity.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -14,10 +13,19 @@ import java.util.List;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
-    //PhapNT- Hiển thị danh sách thành viên.
-    @Query(value = " select * from  movietheater.account where deleted=0", nativeQuery = true)
-    List<Account> findAllMember();
+//        @Query(value = "SELECT email from  movietheater.account where email = ?1", nativeQuery = true)
+    boolean existsByEmail(String email);
 
+//        @Query(value = "SELECT phone from  movietheater.account where phone = ?1", nativeQuery = true)
+    boolean existsByPhone(String phone);
+
+//        @Query(value = "SELECT username from  movietheater.account where username = ?1", nativeQuery = true)
+    boolean existsByUsername(String username);
+
+
+    //PhapNT- Hiển thị danh sách thành viên.
+    @Query(value = " select account.* from  movietheater.account where deleted=0", nativeQuery = true)
+    List<Account> findAllMember();
 
     //PhapNT- Chỉnh sửa thành viên.
     @Transactional
@@ -43,11 +51,16 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     @Query(value = "update `account` set account.deleted = 1 where account.id=?1", nativeQuery = true)
     void deleteMember(long id);
 
-
     //PhapNT- Chi tiết thành viên.
     @Query(value = "select * from account where account.id= ?1", nativeQuery = true)
     Account findByIdMember(long id);
 
+    //PhapNT-Tìm Kiếm theo tên
     @Query(value = "select * from account where account.fullname like %?1%", nativeQuery = true)
     List<Account> searchNameMember(String name);
+
+    //PhapNT- Kiểm tra email đã tồn tại
+//    @Query(value = "SELECT email from  movietheater.account where email = ?1", nativeQuery = true)
+    //PhapNT-Kiểm tra số đt đã tồn tại
+    //PhapNT-Kiểm tra tên đăng nhập đã tồn tại
 }

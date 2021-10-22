@@ -2,6 +2,7 @@ package com.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -160,17 +161,17 @@ public class Account {
         this.accountRoles = accountRoles;
     }
 
-//    public List<Comment> getComments() {
-//        return comments;
-//    }
+    public List<Comment> getComments() {
+        return comments;
+    }
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
-//
-//    public List<Movie> getMovies() {
-//        return movies;
-//    }
+
+    public List<Movie> getMovies() {
+        return movies;
+    }
 
     public void setMovies(List<Movie> movies) {
         this.movies = movies;

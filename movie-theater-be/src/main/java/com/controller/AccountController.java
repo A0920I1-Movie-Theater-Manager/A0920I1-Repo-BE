@@ -1,16 +1,12 @@
 package com.controller;
 
-import com.model.dto.AccountDTO;
+import com.model.dto.AccountMemberDTO;
 import com.model.entity.Account;
-import com.repository.AccountRepository;
 import com.service.AccountService;
-import org.omg.CORBA.RepositoryIdHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +18,10 @@ public class AccountController {
 
     @Autowired
     AccountService accountService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
+    //PhapNT-Hiển thị danh sách thành viên.
     @GetMapping("/list-member")
     public ResponseEntity<List<Account>> getAllMember() {
         List<Account> accounts = accountService.findAllMember();
@@ -31,18 +30,30 @@ public class AccountController {
         }
         return new  ResponseEntity <List<Account>>(accounts,HttpStatus.OK);
     }
-
+//PhapNT- Chỉnh sửa thành viên
     @PutMapping("/update-member/{id}")
-    public ResponseEntity<?> updateMember(@PathVariable("id") long id , @RequestBody AccountDTO accountDTO){
-       accountService.updateMember(accountDTO,id);
+    public ResponseEntity<?> updateMember(@PathVariable("id") long id , @RequestBody AccountMemberDTO accountMemberDTO){
+        accountMemberDTO.setPassword(passwordEncoder.encode(accountMemberDTO.getPassword()));
+       accountService.updateMember(accountMemberDTO,id);
        return new ResponseEntity<>(HttpStatus.OK);
     }
-
+//PhapNT- Thêm thành viên
     @PostMapping("/create-member")
-    public ResponseEntity<AccountDTO> createMember(@RequestBody AccountDTO accountDTO ){
-        accountService.createMember(accountDTO);
-        return new ResponseEntity<AccountDTO>(HttpStatus.CREATED);
+    public ResponseEntity<?> createMember(@RequestBody AccountMemberDTO accountMemberDTO){
+//        if (accountService.existsByEmailMember(accountMemberDTO.getEmail())!= null) {
+//            return ResponseEntity.badRequest().body("Email đã được đăng ký!!!");
+//        }
+//        if (accountService.existsByUsernameMember(accountMemberDTO.getUsername()) != null) {
+//            return ResponseEntity.badRequest().body("Tên đăng nhập đã được đăng ký!!!");
+//        }
+//        if (accountService.existsByPhoneMember(accountMemberDTO.getPhone()) != null) {
+//            return ResponseEntity.badRequest().body("Số điện thoại đã được đăng ký!!!");
+//        }
+        passwordEncoder.encode(accountMemberDTO.getPassword());
+        accountService.createMember(accountMemberDTO);
+        return new ResponseEntity<AccountMemberDTO>(HttpStatus.CREATED);
     }
+    //PhapNT-
     @GetMapping("/public/findById-member/{id}")
     public ResponseEntity<Account> getIdMember(@PathVariable ("id") long id){
        Account accounts = accountService.findByIdMember(id);
@@ -58,5 +69,18 @@ public class AccountController {
     public ResponseEntity<List<Account>> searchNameMember(@RequestParam("name") String name){
       List<Account> accounts = accountService.findByNameMember(name);
         return new ResponseEntity<List<Account>>(accounts,HttpStatus.OK);
+    }
+    @PostMapping("/check-emailMember")
+    public boolean checkEmailMember(@RequestBody String email){
+        return accountService.checkEmailMember(email);
+
+    }
+    @PostMapping("/check-phoneMember")
+    public boolean checkPhoneMember(@RequestBody String phone){
+        return accountService.checkPhoneMember(phone);
+    }
+    @PostMapping("/check-usernameMember")
+    public boolean checkUsernameMember(@RequestBody String username){
+        return accountService.checkUsernameMember(username);
     }
 }

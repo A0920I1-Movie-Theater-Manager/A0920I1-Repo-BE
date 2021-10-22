@@ -2,7 +2,7 @@ package com.model.dto;
 
 import java.time.LocalDate;
 
-public class AccountDTO {
+public class AccountMemberDTO {
     private long id;
     private String username;
     private String accountCode;
@@ -17,10 +17,9 @@ public class AccountDTO {
     private int totalPoint;
     private String imageUrl;
     private boolean deleted ;
-
     private long roleId;
 
-    public AccountDTO() {
+    public AccountMemberDTO() {
     }
 
     public boolean isDeleted() {
@@ -114,7 +113,6 @@ public class AccountDTO {
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
