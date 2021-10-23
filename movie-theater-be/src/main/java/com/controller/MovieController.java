@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.model.entity.Comment;
 import com.model.entity.Movie;
-import com.service.CommentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,8 +26,6 @@ public class MovieController {
     private GenreService genreService;
     @Autowired
     private MovieService movieService;
-    @Autowired
-    private CommentService commentService;
 
     @GetMapping(value = "/getAllMovie")
     public ResponseEntity<List<Genre>> getAllGenre() {
@@ -71,9 +67,8 @@ public class MovieController {
 
     //    TuHC - chi tiet phim
     @GetMapping(value = "/detail-movie/{id}")
-    public ResponseEntity<Movie> getMovieById(@PathVariable("id") String id) {
-        long movieId = Long.parseLong(id);
-        Movie movie = movieService.findMovieById(movieId);
+    public ResponseEntity<Movie> getMovieById(@PathVariable("id") long id) {
+        Movie movie = movieService.findMovieById(id);
         if (movie != null) {
             return new ResponseEntity<>(movie, HttpStatus.OK);
         } else {
@@ -90,26 +85,6 @@ public class MovieController {
         } else {
             return new ResponseEntity<>(movies, HttpStatus.OK);
         }
-    }
-
-    //    TuHC - lay comment cho 1 bo phim
-    @GetMapping(value = "/get-comment/{id}")
-    public ResponseEntity<List<Comment>> getAllCommentByMovieId(@PathVariable("id") long id) {
-        List<Comment> comments = commentService.findAllCommentByMovieId(id);
-
-        if (comments.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
-            return new ResponseEntity<>(comments, HttpStatus.OK);
-        }
-    }
-
-    //    TuHC - them comment
-    @PostMapping(value = "/add-comment")
-    public ResponseEntity<Comment> addNewComment(@RequestBody Comment comment) {
-        System.out.println(comment.toString());
-//        commentService.addNewComment(comment.getContent(), comment.getMovie().getId());
-        return new ResponseEntity(HttpStatus.OK);
     }
 
     //    TuHC - lay phim dang chieu va sap chieu
