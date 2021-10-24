@@ -31,10 +31,12 @@ public class SimpleCORSFilter implements Filter {
         response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me");
         chain.doFilter(req, res);
     }
+
     @Override
     public void init(FilterConfig filterConfig) {
     }
     @Override
     public void destroy() {
     }
+
 }

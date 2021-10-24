@@ -1,18 +1,8 @@
-package com.model.entity;
+package com.model.dto.employeeAccount;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-
-import org.hibernate.annotations.Type;
-
-import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
-import com.voodoodyne.jackson.jsog.JSOGGenerator;
-@Entity
-@JsonIdentityInfo(generator= JSOGGenerator.class)
-public class Account {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+public class UpdateEmployeeAccount {
     private long id;
 
     private String username;
@@ -25,21 +15,7 @@ public class Account {
     private String phone;
     private String email;
     private String gender;
-    private int totalPoint;
     private String imageUrl;
-
-    @Type(type = "org.hibernate.type.NumericBooleanType")
-    private boolean deleted;
-
-
-    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
-    private List<AccountRole> accountRoles;
-
-    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
-    private List<Comment> comments;
-
-    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
-    private List<Movie> movies;
 
     public long getId() {
         return id;
@@ -129,14 +105,6 @@ public class Account {
         this.gender = gender;
     }
 
-    public int getTotalPoint() {
-        return totalPoint;
-    }
-
-    public void setTotalPoint(int totalPoint) {
-        this.totalPoint = totalPoint;
-    }
-
     public String getImageUrl() {
         return imageUrl;
     }
@@ -144,42 +112,4 @@ public class Account {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
-
-
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
-
-    }
-
-    public List<AccountRole> getAccountRoles() {
-        return accountRoles;
-    }
-
-    public void setAccountRoles(List<AccountRole> accountRoles) {
-        this.accountRoles = accountRoles;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-   }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public List<Movie> getMovies() {
-        return movies;
-    }
-
-    public void setMovies(List<Movie> movies) {
-        this.movies = movies;
-    }
-
-
-
 }
-
