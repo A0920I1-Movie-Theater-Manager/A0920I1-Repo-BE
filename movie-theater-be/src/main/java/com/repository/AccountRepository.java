@@ -2,18 +2,12 @@ package com.repository;
 
 import com.model.dto.Viet.ManagerBooking;
 import com.model.entity.Account;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-
-
 import org.springframework.data.repository.query.Param;
-
-
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -26,7 +20,6 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
     boolean existsByEmail(String email);
     boolean existsByPhone(String phone);
     boolean existsByUsername(String username);
-
 
 
     //HueHV
@@ -104,24 +97,28 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
     //Việt quản lý vé người dùng
     @Transactional
     @Modifying
-    @Query(value = "SELECT movie.id,movie.title,booking.day_time_booking,booking.total_price,booking.received\n" +
-            "FROM movie\n" +
-            "INNER JOIN booking\n" +
-            "ON movie.account_id = booking.account_id\n" +
-            "INNER JOIN `account`\n" +
-            "ON `account`.id = booking.account_id\n" +
-            "group by  movie.id, movie.title", nativeQuery = true)
+    @Query(value = "select movie.id , movie.title, booking.total_price, booking.day_time_booking, booking.received \n" +
+            "from movie_showtime\n" +
+            "inner join movie on movie.id = movie_showtime.movie_id\n" +
+            "inner join showtime on showtime.id = movie_showtime.showtime_id\n" +
+            "inner join screen on screen.showtime_id = showtime.id\n" +
+            "inner join seat on seat.screen_id = screen.id\n" +
+            "inner join booking_seat on booking_seat.seat_id = seat.id\n" +
+            "inner join booking on booking_seat.booking_id = booking.id\n" +
+            "group by movie.id", nativeQuery = true)
     List<ManagerBooking> ManagerTickets();
 //Việt lấy danh sách theo account id
 
-    @Query(
-            value = "select movie.id, movie.account_id, movie.title,  booking.day_time_booking,booking.total_price , booking.received from movie\n" +
-                    "inner join booking\n" +
-                    "on movie.account_id= booking.account_id\n" +
-                    "where  movie.account_id =:idAccount",
-
-            nativeQuery = true
-    )
+    @Query(value = "select movie.id , movie.title, booking.total_price, booking.day_time_booking, booking.received \n" +
+            "from movie_showtime\n" +
+            "inner join movie on movie.id = movie_showtime.movie_id\n" +
+            "inner join showtime on showtime.id = movie_showtime.showtime_id\n" +
+            "inner join screen on screen.showtime_id = showtime.id\n" +
+            "inner join seat on seat.screen_id = screen.id\n" +
+            "inner join booking_seat on booking_seat.seat_id = seat.id\n" +
+            "inner join booking on booking_seat.booking_id = booking.id\n" +
+            "where booking.account_id = :idAccount \n" +
+            "group by movie.id", nativeQuery = true)
     List<ManagerBooking> findAllFeedbackBookByIdAccount(@Param("idAccount") String idAccount);
 
     // Việt đổi mật khẩu
@@ -129,8 +126,6 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
     @Modifying
     @Query(value = "  UPDATE account  SET account_code = ?1, address = ?2, birthday = ?3,email = ?4,fullname = ?5, gender = ?6,id_card = ?7,image_url = ?8,password = ?9,phone= ?10, total_point =?11,username=?12 WHERE id = ?13", nativeQuery = true)
     void changePassword(String accountCode, String address, LocalDate birthday, String email, String fullname, String gender, String idCard, String imageUrl, String password, String phone, int totalPoint, String username, long id);
-
-
 
 
     // Danh sách nhân viên (HoangLV)
