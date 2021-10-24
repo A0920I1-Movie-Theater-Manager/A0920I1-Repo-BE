@@ -117,8 +117,15 @@ public class AccountController {
         if (account == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-           accountUserDTO.setPassword( passwordEncoder.encode(accountUserDTO.getPassword())) ;
 
+           accountUserDTO.setPassword( passwordEncoder.encode(accountUserDTO.getPassword().trim())) ;
+            accountUserDTO.setAccountCode(accountUserDTO.getAccountCode().trim());
+            accountUserDTO.setAddress(accountUserDTO.getPassword().trim());
+            accountUserDTO.setBirthday(accountUserDTO.getBirthday());
+            accountUserDTO.setEmail(accountUserDTO.getEmail().trim());
+            accountUserDTO.setFullname(accountUserDTO.getFullname().trim());
+            accountUserDTO.setIdCard(accountUserDTO.getIdCard().trim());
+            accountUserDTO.setUsername(accountUserDTO.getUsername().trim());
             accountService.updateAccount(accountUserDTO);
 
 
