@@ -12,7 +12,6 @@ import java.util.List;
 public class PriceServiceImpl implements PriceService {
     @Autowired
     PriceRepository priceRepository;
-
     @Override
     public void addPriceMovie(String time, String day, boolean is3D, double price) {
         priceRepository.addPriceMovie(time, day, is3D, price);
@@ -21,5 +20,9 @@ public class PriceServiceImpl implements PriceService {
     @Override
     public List<Price> listPrice() {
         return priceRepository.listPrice();
+    }
+    @Override
+    public List<Price> getAll() {
+        return priceRepository.getAll();
     }
 }

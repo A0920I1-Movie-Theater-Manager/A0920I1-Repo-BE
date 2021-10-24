@@ -1,8 +1,14 @@
 package com.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+<<<<<<< HEAD
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
+=======
+
+
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
+>>>>>>> 4b56a2f19236f879ed29af19e334f3f33d1228a3
 import javax.persistence.*;
 import java.time.LocalTime;
 import java.util.List;

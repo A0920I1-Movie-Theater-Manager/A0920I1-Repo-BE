@@ -22,4 +22,6 @@ public interface PriceRepository extends JpaRepository<Price, Long> {
     @Modifying
     @Query(value = "insert into price (time, day, is3D, price) values (?1, ?2, ?3, ?4) ", nativeQuery = true)
     void addPriceMovie(String time, String day, boolean is3D,double price);
+    @Query(value = "select * from price ", nativeQuery = true)
+    List<Price> getAll();
 }

@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/A0920I1-Repo-BE.iml" filepath="$PROJECT_DIR$/.idea/A0920I1-Repo-BE.iml" />
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/movie-theater-be/movie-theater.iml" filepath="$PROJECT_DIR$/movie-theater-be/movie-theater.iml" />
+=======
+>>>>>>> e182946086dabdddf6601127848fc73ccfba4331
     </modules>
   </component>
 </project>
