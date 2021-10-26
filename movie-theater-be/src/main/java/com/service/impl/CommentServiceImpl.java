@@ -1,5 +1,6 @@
 package com.service.impl;
 
+import com.model.dto.CommentDTO;
 import com.model.entity.Comment;
 import com.model.entity.Movie;
 import com.repository.CommentRepository;
@@ -13,15 +14,17 @@ import java.util.List;
 public class CommentServiceImpl implements CommentService {
     @Autowired
     private CommentRepository commentRepository;
-//    TuHC - lay comment theo phim
+
+    //    TuHC - lay comment theo phim
     @Override
     public List<Comment> findAllCommentByMovieId(long id) {
         return commentRepository.findAllCommentByMovieId(id);
     }
-//TuHC - them moi comment
+
+    //TuHC - them moi comment
     @Override
-    public void addNewComment(String content, long account, long movie, int seen) {
-        commentRepository.addNewComment(content, account, movie, seen);
+    public void addNewComment(CommentDTO commentDTO) {
+        commentRepository.addNewComment(commentDTO.getContent(), commentDTO.getAccount(), commentDTO.getMovie(), commentDTO.isSeen());
     }
 
 }
