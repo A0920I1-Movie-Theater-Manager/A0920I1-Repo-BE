@@ -18,8 +18,6 @@
     </properties>
 
     <dependencies>
-<<<<<<< HEAD
-
 <!--        <dependency>-->
 <!--            <groupId>org.springframework.security</groupId>-->
 <!--            <artifactId>spring-security-web</artifactId>-->
@@ -31,8 +29,7 @@
 <!--            <artifactId>spring-boot-starter-security</artifactId>-->
 <!--            <version>1.5.2.RELEASE</version>-->
 <!--        </dependency>-->
-=======
->>>>>>> 4b56a2f19236f879ed29af19e334f3f33d1228a3
+
         <dependency>
             <groupId>com.voodoodyne.jackson.jsog</groupId>
             <artifactId>jackson-jsog</artifactId>
@@ -90,14 +87,7 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
-<<<<<<< HEAD
 
-<<<<<<< HEAD
-=======
-
-=======
->>>>>>> fad3790ccd17a60fdb8dfcb30db515666cecd9a9
->>>>>>> 4b56a2f19236f879ed29af19e334f3f33d1228a3
         <!--        TuHC - thu vien jackson-->
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
         <dependency>
