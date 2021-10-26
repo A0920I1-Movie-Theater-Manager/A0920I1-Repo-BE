@@ -1,7 +1,5 @@
 package com.model.dto.hue;
 
-import java.time.LocalDate;
-
 public class SearchMovieDTO {
     private String title;
     private String production;

@@ -3,12 +3,14 @@ package com.model.entity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
+
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
-import com.voodoodyne.jackson.jsog.JSOGGenerator;
+import java.util.Set;
+
 @Entity
 @JsonIdentityInfo(generator= JSOGGenerator.class)
 public class Account {
@@ -29,8 +31,24 @@ public class Account {
     private int totalPoint;
     private String imageUrl;
 
+
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean deleted;
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
+
+    @Type(type = "org.hibernate.type.NumericBooleanType")
+    private boolean enable;
+    //AnhLT
+    private String provider;
+    //end AnhlT
+
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<AccountRole> accountRoles;
@@ -40,6 +58,21 @@ public class Account {
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Movie> movies;
+
+
+    // AnhLT Login
+    @ManyToMany
+    @JoinTable(name = "account_role_test", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+    // end AnhLT
 
     public long getId() {
         return id;
@@ -145,17 +178,21 @@ public class Account {
         this.imageUrl = imageUrl;
     }
 
+
     public boolean isDeleted() {
         return deleted;
     }
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
+
     }
 
     public List<AccountRole> getAccountRoles() {
         return accountRoles;
     }
+
+
 
     public void setAccountRoles(List<AccountRole> accountRoles) {
         this.accountRoles = accountRoles;
@@ -163,7 +200,7 @@ public class Account {
 
     public List<Comment> getComments() {
         return comments;
-    }
+   }
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
@@ -176,4 +213,17 @@ public class Account {
     public void setMovies(List<Movie> movies) {
         this.movies = movies;
     }
+
+    //anhLT
+    public String getProvider() {
+        return provider;
+    }
+
+    public void setProvider(String provider) {
+        this.provider = provider;
+    }
+    // end AnhlT
+
 }
+
+

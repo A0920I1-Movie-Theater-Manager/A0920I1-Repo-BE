@@ -1,4 +1,5 @@
 package com.model.entity;
+
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import org.hibernate.annotations.Type;
