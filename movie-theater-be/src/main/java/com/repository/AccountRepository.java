@@ -21,8 +21,6 @@ import java.util.List;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
-
-
     //HueHV
     @Query(value = "select * from account where account_code like 'NV%';", nativeQuery = true)
     List<Account> listAccountByAccountCodeEmployee();
