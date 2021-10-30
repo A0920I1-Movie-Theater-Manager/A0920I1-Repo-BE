@@ -74,8 +74,8 @@ public class HueMovieController {
     }
 
     //HueHV, phương thức tạo mới 1 bộ phim
-    @PostMapping(value = "/create-movie", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createMovie(@RequestBody com.model.dto.hue.MovieDTO movie) {
+    @PostMapping(value = "/create-movie/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> createMovie(@RequestBody com.model.dto.hue.MovieDTO movie, @RequestParam(value = "id") long id) {
         if (movie == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
@@ -83,7 +83,7 @@ public class HueMovieController {
                     movie.getCast().trim(), movie.getDirector().trim(),
                     movie.getReleaseDate(), movie.getRated(),
                     movie.getRunningTime(), movie.getProduction().trim(), movie.getTrailerUrl().trim(),
-                    movie.getContent().trim(), movie.isIs3D(), movie.getAccountId());
+                    movie.getContent().trim(), movie.isIs3D(), id);
             long idMovie = Long.parseLong(String.valueOf(movieService.getIdMovieByName(movie.getTitle()).getId()));
             for(int i =0;i < movie.getGenres().size(); i++){
                 genreService.addGenreToMovie(Long.parseLong(movie.getGenres().get(i)), idMovie);

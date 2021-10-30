@@ -109,4 +109,9 @@ public class MovieServiceImpl implements MovieService {
     public List<Movie> findAllMovieShowingAndComingSoon() {
         return movieRepository.findAllMovieShowingAndComingSoon();
     }
+
+    @Override
+    public List<Movie> findAllMovieSeenByAccount(long accountId) {
+        return movieRepository.findAllMovieSeenByAccount(accountId);
+    }
 }

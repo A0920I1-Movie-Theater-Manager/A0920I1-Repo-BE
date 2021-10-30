@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import java.util.Optional;
+
+
 @Service
 public class ScreenServiceImpl implements ScreenService {
     @Autowired
@@ -17,4 +20,16 @@ public class ScreenServiceImpl implements ScreenService {
     public List<Screen> findAll() {
         return screenRepository.findAll();
     }
+
+
+    @Override
+    public Optional<Screen> findScreenById(String id) {
+        return screenRepository.findById(Long.parseLong(id));
+    }
+
+    @Override
+    public List<Screen> findScreenByName(String keyWord) {
+        return screenRepository.findAllByName(keyWord);
+    }
+
 }

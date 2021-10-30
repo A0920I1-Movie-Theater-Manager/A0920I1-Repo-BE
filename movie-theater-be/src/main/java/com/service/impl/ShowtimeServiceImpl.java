@@ -4,9 +4,13 @@ import com.model.entity.Showtime;
 import com.repository.ShowtimeRepository;
 import com.service.ShowtimeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.model.dto.ShowTimeDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.time.LocalTime;
 import java.util.List;
+
 
 @Service
 public class ShowtimeServiceImpl implements ShowtimeService {
@@ -44,5 +48,14 @@ public class ShowtimeServiceImpl implements ShowtimeService {
     @Override
     public List<Showtime> findShowtimeByMovieId(long id) {
         return showtimeRepository.findShowtimeByMovieId(id);
+    }
+    @Override
+    public Page<ShowTimeDTO> getAllShowTime(Pageable pageable) {
+        return showtimeRepository.getAllShowTime(pageable);
+    }
+
+    @Override
+    public Page<ShowTimeDTO> searchByName(String name, Pageable pageable) {
+        return showtimeRepository.searchByName(name, pageable);
     }
 }

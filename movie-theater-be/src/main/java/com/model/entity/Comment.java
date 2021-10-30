@@ -63,4 +63,15 @@ public class Comment {
     public void setSeen(boolean seen) {
         this.seen = seen;
     }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", seen=" + seen +
+                ", movie=" + movie +
+                ", account=" + account +
+                '}';
+    }
 }
