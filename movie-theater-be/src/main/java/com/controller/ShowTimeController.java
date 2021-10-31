@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "api")
 @CrossOrigin("http://localhost:4200")
-public class ShowTimeController {
+public class ShowtimeController {
     @Autowired
     ShowtimeServiceImpl showtimeService;
     @GetMapping("/showtime-list")
