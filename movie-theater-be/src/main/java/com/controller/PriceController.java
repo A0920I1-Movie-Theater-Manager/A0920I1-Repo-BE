@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "api")
+@RequestMapping(value = "api/auth")
 @CrossOrigin("http://localhost:4200")
 public class PriceController {
     @Autowired

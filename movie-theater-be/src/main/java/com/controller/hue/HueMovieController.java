@@ -75,10 +75,11 @@ public class HueMovieController {
 
     //HueHV, phương thức tạo mới 1 bộ phim
     @PostMapping(value = "/create-movie/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createMovie(@RequestBody com.model.dto.hue.MovieDTO movie, @RequestParam(value = "id") long id) {
+    public ResponseEntity<?> createMovie(@RequestBody com.model.dto.hue.MovieDTO movie, @PathVariable(value = "id") long id) {
         if (movie == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
+            System.out.println(id);
             movieService.createMovie(movie.getTitle().trim(), movie.getShowingFrom(), movie.getShowingTo(),
                     movie.getCast().trim(), movie.getDirector().trim(),
                     movie.getReleaseDate(), movie.getRated(),
@@ -111,15 +112,15 @@ public class HueMovieController {
     }
 
     //HueHV, phương thức chỉnh sửa 1 bộ phim
-    @PatchMapping(value = "/update-movie/{id}")
-    public ResponseEntity<?> updateMovie(@PathVariable(value = "id") long id, @RequestBody com.model.dto.hue.MovieDTO movie) {
+    @PatchMapping(value = "/update-movie/{id}/{idAccount}")
+    public ResponseEntity<?> updateMovie(@PathVariable(value = "id") long id, @PathVariable(value = "idAccount") long accountId, @RequestBody com.model.dto.hue.MovieDTO movie) {
         if (movie == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             movieService.updateMovie(movie.getTitle().trim(), movie.getShowingFrom(), movie.getShowingTo(),
                     movie.getCast().trim(), movie.getDirector().trim(), movie.getReleaseDate(), movie.getRated(),
                     movie.getRunningTime(), movie.getProduction().trim(), movie.getTrailerUrl().trim(),
-                    movie.getContent().trim(), movie.isIs3D(), movie.getAccountId(), id);
+                    movie.getContent().trim(), movie.isIs3D(), accountId, id);
 
             for(int i=0; i< movie.getGenres().size();i++){
 
