@@ -9,6 +9,8 @@ import com.model.dto.employeeAccount.CreateEmployeeAccount;
 import com.model.dto.employeeAccount.UpdateEmployeeAccount;
 
 import com.model.entity.Account;
+import com.model.entity.Role;
+import com.repository.RoleRepository;
 import com.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,8 +23,12 @@ import payload.request.LoginRequest;
 import payload.request.ResetPassRequest;
 import payload.request.VerifyRequest;
 
+
 import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
+
+import java.util.HashSet;
+
 import java.util.List;
 
 @RestController
@@ -32,8 +38,13 @@ public class AccountController {
 
     private @Autowired
     AccountService accountService;
-    private @Autowired
-    PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private RoleRepository roleRepository;
+
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     // danh sánh nhân viên (HoangLV)
@@ -81,10 +92,16 @@ public class AccountController {
                 && createEmployeeAccount.getEmail() != null && createEmployeeAccount.getAddress() != null && createEmployeeAccount.getFullname() != null
                 && createEmployeeAccount.getIdCard() != null && createEmployeeAccount.getPhone() != null && createEmployeeAccount.getImageUrl() != null) {
             createEmployeeAccount.setDeleted(true);
+            createEmployeeAccount.setEnable(true);
             createEmployeeAccount.setTotalPoint(0);
+            createEmployeeAccount.setPassword(passwordEncoder.encode(createEmployeeAccount.getPassword()));
             accountService.createEmployeeAccount(createEmployeeAccount);
-            Account account = accountService.findAccountByEmployeeName(createEmployeeAccount.getAccountCode());
-            accountService.createAccountRole(account.getId(), 2);
+
+//            Account account = accountService.findAccountByEmployeeName(createEmployeeAccount.getAccountCode());
+//
+//            accountService.createAccountRole(account.getId(), 3);
+
+
             return new ResponseEntity<>(HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -276,6 +293,7 @@ public class AccountController {
         }
     }
 
+
     @PostMapping("/public/verify")
     public ResponseEntity<?> VerifyEmail(@RequestBody VerifyRequest code) {
         Boolean isVerified = accountService.findAccountByVerificationCode(code.getCode());
@@ -314,3 +332,5 @@ public class AccountController {
         return ResponseEntity.ok(new MessageResponse("success"));
     }
 }
+
+

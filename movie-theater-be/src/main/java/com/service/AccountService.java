@@ -1,8 +1,7 @@
 package com.service;
 
-
-
 import com.model.dto.AccountMemberDTO;
+
 import com.model.dto.Viet.AccountUserDTO;
 import com.model.dto.Viet.ManagerBooking;
 import com.model.entity.Account;
@@ -20,6 +19,7 @@ public interface AccountService {
 
     //HueHV
     List<Account> listAccountByCodeEmployee();
+
     List<Account> findAllMember();
     void updateMember(AccountMemberDTO accountMemberDTO, long id);
     void createMember(AccountMemberDTO accountMemberDTO);
@@ -29,6 +29,7 @@ public interface AccountService {
     boolean checkEmailMember(String email);
     boolean checkPhoneMember(String phone);
     boolean checkUsernameMember(String username);
+
 
     //Hiển thị account theo id
     Account findAccountUpdateById(long id);
@@ -83,7 +84,6 @@ public interface AccountService {
     boolean checkPhoneEmployee(String phone);
     boolean checkUsernameEmployee(String username);
     boolean checkAccountCodeEmployee(String accountCode);
-
 
 
 }

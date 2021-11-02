@@ -13,24 +13,34 @@ import java.util.List;
 
 
 @Repository
-public interface AccountRepository extends JpaRepository<Account, Long> {
+public interface AccountRepository extends JpaRepository<Account,Long> {
+    //AnhLT
+    Account findByEmail(String email);
+    //AnhLT
+    boolean existsByEmail(String email);
+    boolean existsByPhone(String phone);
+    boolean existsByUsername(String username);
 
 
     //HueHV
     @Query(value = "select * from account where account_code like 'NV%';", nativeQuery = true)
     List<Account> listAccountByAccountCodeEmployee();
 
+
+    //AnhLT
+    Account findAccountByUsername(String username);
+
     //PhapNT- Kiểm tra email đã tồn tại
 // @Query(value = "SELECT email from  movietheater.account where email = ?1", nativeQuery = true)
-    boolean existsByEmail(String email);
+//    boolean existsByEmail(String email);
 
     //PhapNT-Kiểm tra số đt đã tồn tại
 // @Query(value = "SELECT phone from  movietheater.account where phone = ?1", nativeQuery = true)
-    boolean existsByPhone(String phone);
+//    boolean existsByPhone(String phone);
 
     //PhapNT-Kiểm tra tên đăng nhập đã tồn tại
 //  @Query(value = "SELECT username from  movietheater.account where username = ?1", nativeQuery = true)
-    boolean existsByUsername(String username);
+//    boolean existsByUsername(String username);
 
 
     //PhapNT- Hiển thị danh sách thành viên.
@@ -144,8 +154,8 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     //Thêm mới nhân viên
     @Transactional
     @Modifying
-    @Query(value = "insert into account(`account_code`, `address`, `birthday`, `email`, `fullname`, `gender`, `id_card`, `image_url`, `password`, `phone`, `username`,`deleted`,`total_point`) values (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8,?9,?10,?11,?12,?13)", nativeQuery = true)
-    void createEmployeeAccount(String accountCode, String address, LocalDate birthday, String email, String fullname, String gender, String idCard, String imageUrl, String password, String phone, String username, boolean deleted, int totalPoint);
+    @Query(value = "insert into account(`account_code`, `address`, `birthday`, `email`, `fullname`, `gender`, `id_card`, `image_url`, `password`, `phone`, `username`,`deleted`,`total_point`,`enable` ) values (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8,?9,?10,?11,?12,?13,?14)", nativeQuery = true)
+    void createEmployeeAccount(String accountCode, String address, LocalDate birthday, String email, String fullname, String gender, String idCard, String imageUrl, String password, String phone, String username, boolean deleted, int totalPoint, boolean enable);
 
     //Thêm role cho nhân viên(HoangLV)
     @Transactional
