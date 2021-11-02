@@ -31,8 +31,8 @@
 <!--            <artifactId>spring-boot-starter-security</artifactId>-->
 <!--            <version>1.5.2.RELEASE</version>-->
 <!--        </dependency>-->
-=======
->>>>>>> 4b56a2f19236f879ed29af19e334f3f33d1228a3
+    =======
+    >>>>>>> 4b56a2f19236f879ed29af19e334f3f33d1228a3
         <dependency>
             <groupId>com.voodoodyne.jackson.jsog</groupId>
             <artifactId>jackson-jsog</artifactId>
