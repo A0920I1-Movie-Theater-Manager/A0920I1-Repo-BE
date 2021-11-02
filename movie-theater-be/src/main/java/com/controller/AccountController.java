@@ -9,6 +9,8 @@ import com.model.dto.employeeAccount.CreateEmployeeAccount;
 import com.model.dto.employeeAccount.UpdateEmployeeAccount;
 
 import com.model.entity.Account;
+import com.model.entity.Role;
+import com.repository.RoleRepository;
 import com.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
 
 @RestController
@@ -26,6 +29,10 @@ public class AccountController {
 
     private @Autowired
     AccountService accountService;
+
+    @Autowired
+    private RoleRepository roleRepository;
+
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -76,10 +83,16 @@ public class AccountController {
                 && createEmployeeAccount.getEmail() != null && createEmployeeAccount.getAddress() != null && createEmployeeAccount.getFullname() != null
                 && createEmployeeAccount.getIdCard() != null && createEmployeeAccount.getPhone() != null && createEmployeeAccount.getImageUrl() != null) {
             createEmployeeAccount.setDeleted(true);
+            createEmployeeAccount.setEnable(true);
             createEmployeeAccount.setTotalPoint(0);
+            createEmployeeAccount.setPassword(passwordEncoder.encode(createEmployeeAccount.getPassword()));
             accountService.createEmployeeAccount(createEmployeeAccount);
-            Account account = accountService.findAccountByEmployeeName(createEmployeeAccount.getAccountCode());
-            accountService.createAccountRole(account.getId(), 2);
+
+//            Account account = accountService.findAccountByEmployeeName(createEmployeeAccount.getAccountCode());
+//
+//            accountService.createAccountRole(account.getId(), 3);
+
+
             return new ResponseEntity<>(HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

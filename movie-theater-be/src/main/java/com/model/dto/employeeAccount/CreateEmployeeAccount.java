@@ -1,6 +1,10 @@
 package com.model.dto.employeeAccount;
 
+import com.model.entity.Role;
+
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 public class CreateEmployeeAccount {
     private long id;
@@ -16,9 +20,27 @@ public class CreateEmployeeAccount {
     private String email;
     private String gender;
     private String imageUrl;
-    private long role;
+//    private long role;
     private int totalPoint;
     private boolean deleted ;
+    private boolean enable ;
+//    private Set<Role> roles;
+
+//    public Set<Role> getRoles() {
+//        return roles;
+//    }
+//
+//    public void setRoles(Set<Role> roles) {
+//        this.roles = roles;
+//    }
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
 
     public long getId() {
         return id;
@@ -116,13 +138,13 @@ public class CreateEmployeeAccount {
         this.imageUrl = imageUrl;
     }
 
-    public long getRole() {
-        return role;
-    }
-
-    public void setRole(long role) {
-        this.role = role;
-    }
+//    public long getRole() {
+//        return role;
+//    }
+//
+//    public void setRole(long role) {
+//        this.role = role;
+//    }
 
     public int getTotalPoint() {
         return totalPoint;

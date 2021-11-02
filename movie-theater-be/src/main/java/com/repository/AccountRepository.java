@@ -153,8 +153,8 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
     //Thêm mới nhân viên
     @Transactional
     @Modifying
-    @Query(value = "insert into account(`account_code`, `address`, `birthday`, `email`, `fullname`, `gender`, `id_card`, `image_url`, `password`, `phone`, `username`,`deleted`,`total_point`) values (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8,?9,?10,?11,?12,?13)", nativeQuery = true)
-    void createEmployeeAccount(String accountCode, String address, LocalDate birthday, String email, String fullname, String gender, String idCard, String imageUrl, String password, String phone, String username, boolean deleted, int totalPoint);
+    @Query(value = "insert into account(`account_code`, `address`, `birthday`, `email`, `fullname`, `gender`, `id_card`, `image_url`, `password`, `phone`, `username`,`deleted`,`total_point`,`enable` ) values (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8,?9,?10,?11,?12,?13,?14)", nativeQuery = true)
+    void createEmployeeAccount(String accountCode, String address, LocalDate birthday, String email, String fullname, String gender, String idCard, String imageUrl, String password, String phone, String username, boolean deleted, int totalPoint, boolean enable);
 
     //Thêm role cho nhân viên(HoangLV)
     @Transactional

@@ -5,6 +5,7 @@ import com.model.dto.AccountMemberDTO;
 import com.model.dto.Viet.AccountUserDTO;
 import com.model.dto.Viet.ManagerBooking;
 import com.model.entity.Account;
+import com.model.entity.Role;
 import com.repository.AccountRepository;
 
 
@@ -12,10 +13,12 @@ import com.model.dto.employeeAccount.CreateEmployeeAccount;
 import com.model.dto.employeeAccount.UpdateEmployeeAccount;
 
 
+import com.repository.RoleRepository;
 import com.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -23,7 +26,8 @@ import java.util.List;
 public class AccountServiceImpl implements AccountService {
     @Autowired
     AccountRepository accountRepository;
-
+    @Autowired
+    private RoleRepository roleRepository;
 
     //Viet hiển thị account theo id
     @Override
@@ -151,20 +155,44 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void createEmployeeAccount(CreateEmployeeAccount createEmployeeAccount) {
 
-        accountRepository.createEmployeeAccount(createEmployeeAccount.getAccountCode(),
-                createEmployeeAccount.getAddress(),
-                createEmployeeAccount.getBirthday(),
-                createEmployeeAccount.getEmail(),
-                createEmployeeAccount.getFullname(),
-                createEmployeeAccount.getGender(),
-                createEmployeeAccount.getIdCard(),
-                createEmployeeAccount.getImageUrl(),
-                createEmployeeAccount.getPassword(),
-                createEmployeeAccount.getPhone(),
-                createEmployeeAccount.getUsername(),
-                createEmployeeAccount.isDeleted(),
-                createEmployeeAccount.getTotalPoint()
-        );
+//        accountRepository.createEmployeeAccount(createEmployeeAccount.getAccountCode(),
+//                createEmployeeAccount.getAddress(),
+//                createEmployeeAccount.getBirthday(),
+//                createEmployeeAccount.getEmail(),
+//                createEmployeeAccount.getFullname(),
+//                createEmployeeAccount.getGender(),
+//                createEmployeeAccount.getIdCard(),
+//                createEmployeeAccount.getImageUrl(),
+//                createEmployeeAccount.getPassword(),
+//                createEmployeeAccount.getPhone(),
+//                createEmployeeAccount.getUsername(),
+//                createEmployeeAccount.isDeleted(),
+//                createEmployeeAccount.getTotalPoint(),
+//                createEmployeeAccount.isEnable()
+//        );
+        Account account = new Account();
+        account.setAccountCode(createEmployeeAccount.getAccountCode());
+        account.setAddress(createEmployeeAccount.getAddress());
+        account.setBirthday(createEmployeeAccount.getBirthday());
+        account.setEmail(createEmployeeAccount.getEmail());
+        account.setFullname(createEmployeeAccount.getFullname());
+        account.setGender(createEmployeeAccount.getGender());
+        account.setIdCard(createEmployeeAccount.getIdCard());
+        account.setImageUrl(createEmployeeAccount.getImageUrl());
+        account.setPassword(createEmployeeAccount.getPassword());
+        account.setPhone(createEmployeeAccount.getPhone());
+        account.setUsername(createEmployeeAccount.getUsername());
+        account.setDeleted(createEmployeeAccount.isDeleted());
+        account.setEnable(createEmployeeAccount.isEnable());
+        account.setTotalPoint(createEmployeeAccount.getTotalPoint());
+
+        final HashSet<Role> roles = new HashSet<Role>();
+        roles.add(roleRepository.findByName(Role.ROLE_USER));
+        roles.add(roleRepository.findByName(Role.ROLE_MODERATOR));
+        account.setRoles(roles);
+
+
+        accountRepository.save(account);
 
     }
 
