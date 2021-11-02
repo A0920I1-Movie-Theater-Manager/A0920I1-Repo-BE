@@ -95,7 +95,7 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
             "inner join seat on seat.screen_id = screen.id\n" +
             "inner join booking_seat on booking_seat.seat_id = seat.id\n" +
             "inner join booking on booking_seat.booking_id = booking.id\n" +
-            "group by movie.id", nativeQuery = true)
+            "group by movie.id ", nativeQuery = true)
     List<ManagerBooking> ManagerTickets();
 //Việt lấy danh sách theo account id
 
@@ -109,6 +109,7 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
             "inner join booking on booking_seat.booking_id = booking.id\n" +
             "where booking.account_id = :idAccount \n" +
             "group by movie.id", nativeQuery = true)
+
     List<ManagerBooking> findAllFeedbackBookByIdAccount(@Param("idAccount") String idAccount);
 
     // Việt đổi mật khẩu
@@ -165,4 +166,42 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 
     //HoangLV
     boolean existsAccountsByAccountCode(String accountCode);
+    //VietNT
+/*
+    Account findAccountByUserName(String username);
+
+    @Query(value = "select id from movietheater.account where username = ?1", nativeQuery = true)
+
+    Integer findIdUserByUserName(String username);
+*/
+
+    @Query(value = "SELECT username from  movietheater.account where username = ?1", nativeQuery = true)
+
+    String existsByUserName(String username);
+
+    @Query(value = "SELECT email FROM movietheater.account where email= ?1", nativeQuery = true)
+
+    String existsByEmailUser(String email);
+
+    /*@Modifying
+    @Query(value = "insert into account(user_name,encrypt_pw,is_enabled,verification_code,email) values (?1,?2,?3,?4,?5)", nativeQuery = true)
+    void addNew(String username, String password, Boolean isEnable, String verifiedCode,String email);*/
+    @Transactional
+    @Query(value = "select * from movietheater.account where verification_code =?1",nativeQuery = true)
+    Account findAccountByVerificationCode(String verifyCode);
+    @Transactional
+    @Modifying
+    @Query(value ="update movietheater.account set verification_code=?1 where username =?2",nativeQuery = true)
+    void addVerificationCode(String code,String username);
+    @Transactional
+    @Query(value = "select * from movietheater.account", nativeQuery = true)
+    List<Account> getAllAccount();
+    @Transactional
+    @Modifying
+    @Query(value = "insert into account(username,password) values (?1,?2)", nativeQuery = true)
+    void addNewAccount(String username, String password);
+    @Transactional
+    @Modifying
+    @Query(value = "update account set password =?1,verification_code=null where verification_code=?2 ",nativeQuery = true)
+    void saveNewPassword(String password, String code);
 }

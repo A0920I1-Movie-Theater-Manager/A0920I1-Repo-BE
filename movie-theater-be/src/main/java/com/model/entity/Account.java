@@ -14,7 +14,7 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
+    private Boolean isEnabled;
     private String username;
     private String accountCode;
     private String password;
@@ -23,6 +23,7 @@ public class Account {
     private String idCard;
     private String address;
     private String phone;
+    private String verificationCode;
     private String email;
     private String gender;
     private int totalPoint;
@@ -40,6 +41,22 @@ public class Account {
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Movie> movies;
+
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
+    }
+
+    public Boolean getEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        isEnabled = enabled;
+    }
 
     public long getId() {
         return id;
