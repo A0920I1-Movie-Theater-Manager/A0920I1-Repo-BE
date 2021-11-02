@@ -10,7 +10,8 @@ import com.model.dto.employeeAccount.CreateEmployeeAccount;
 import com.model.dto.employeeAccount.UpdateEmployeeAccount;
 
 
-
+import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 
@@ -47,6 +48,13 @@ public interface AccountService {
 
     //Viet Doi mat khau nguoi dung
     void changePassword(AccountUserDTO accountDTO);
+        //Viet tim tai khoan
+    Boolean findAccountByVerificationCode(String code);
+    String existsByUserName(String username);
+    Boolean findAccountByVerificationCodeToResetPassword(String code);
+    void saveNewPassword(String password,String code);
+    void addVerificationCode(String username) throws MessagingException, UnsupportedEncodingException;
+
 
     // Danh sách nhân viên HoangLV
     List<Account> getAllEmployeeAccount();
@@ -76,5 +84,6 @@ public interface AccountService {
     boolean checkPhoneEmployee(String phone);
     boolean checkUsernameEmployee(String username);
     boolean checkAccountCodeEmployee(String accountCode);
+
 
 }

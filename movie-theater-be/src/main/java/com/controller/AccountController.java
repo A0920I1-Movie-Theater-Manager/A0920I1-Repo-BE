@@ -18,8 +18,17 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import payload.reponse.MessageResponse;
+import payload.request.LoginRequest;
+import payload.request.ResetPassRequest;
+import payload.request.VerifyRequest;
+
+
+import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
 
 import java.util.HashSet;
+
 import java.util.List;
 
 @RestController
@@ -114,16 +123,19 @@ public class AccountController {
     public boolean checkEmailEmployee(@RequestBody String email) {
         return accountService.checkEmailEmployee(email);
     }
+
     // HoangLV
     @PostMapping("/check-phone-employee")
     public boolean checkPhoneEmployee(@RequestBody String phone) {
         return accountService.checkPhoneEmployee(phone);
     }
+
     // HoangLV
     @PostMapping("/check-username-employee")
     public boolean checkUsernameEmployee(@RequestBody String username) {
         return accountService.checkUsernameEmployee(username);
     }
+
     // HoangLV
     @PostMapping("/check-accountCode-employee")
     public boolean checkAccountCodeEmployee(@RequestBody String accountCode) {
@@ -228,7 +240,7 @@ public class AccountController {
         } else {
 
 
-            accountUserDTO.setPassword( passwordEncoder.encode(accountUserDTO.getPassword().trim())) ;
+          /*  accountUserDTO.setPassword(passwordEncoder.encode(accountUserDTO.getPassword().trim()));*/
             accountUserDTO.setAccountCode(accountUserDTO.getAccountCode().trim());
             accountUserDTO.setAddress(accountUserDTO.getAddress().trim());
             accountUserDTO.setBirthday(accountUserDTO.getBirthday());
@@ -280,4 +292,45 @@ public class AccountController {
             return new ResponseEntity<>(accountUserDTO, HttpStatus.OK);
         }
     }
+
+
+    @PostMapping("/public/verify")
+    public ResponseEntity<?> VerifyEmail(@RequestBody VerifyRequest code) {
+        Boolean isVerified = accountService.findAccountByVerificationCode(code.getCode());
+        if (isVerified) {
+            return ResponseEntity.ok(new MessageResponse("activated"));
+        } else {
+            return ResponseEntity.ok(new MessageResponse("error"));
+        }
+    }
+
+    @PostMapping("/public/reset-password")
+    public ResponseEntity<?> reset(@RequestBody LoginRequest loginRequest) throws MessagingException, UnsupportedEncodingException {
+
+        if (accountService.existsByUserName(loginRequest.getUsername()) != null) {
+            accountService.addVerificationCode(loginRequest.getUsername());
+            return ResponseEntity.ok(new MessageResponse("Sent email "));
+        }
+        return ResponseEntity
+                .badRequest()
+                .body(new MessageResponse("Tài khoản không đúng"));
+    }
+
+    @PostMapping("/public/verify-password")
+    public ResponseEntity<?> VerifyPassword(@RequestBody VerifyRequest code) {
+        Boolean isVerified = accountService.findAccountByVerificationCodeToResetPassword(code.getCode());
+        if (isVerified) {
+            return ResponseEntity.ok(new MessageResponse("accepted"));
+        } else {
+            return ResponseEntity.ok(new MessageResponse("error"));
+        }
+    }
+
+    @PostMapping("/public/do-reset-password")
+    public ResponseEntity<?> doResetPassword(@RequestBody ResetPassRequest resetPassRequest) {
+        accountService.saveNewPassword(passwordEncoder.encode(resetPassRequest.getPassword()), resetPassRequest.getCode());
+        return ResponseEntity.ok(new MessageResponse("success"));
+    }
 }
+
+

@@ -17,7 +17,7 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
+    private Boolean isEnabled;
     private String username;
     private String accountCode;
     private String password;
@@ -26,6 +26,7 @@ public class Account {
     private String idCard;
     private String address;
     private String phone;
+    private String verificationCode;
     private String email;
     private String gender;
     private int totalPoint;
@@ -60,6 +61,23 @@ public class Account {
     private List<Movie> movies;
 
 
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
+    }
+
+    public Boolean getEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        isEnabled = enabled;
+    }
+
+
     // AnhLT Login
     @ManyToMany
     @JoinTable(name = "account_role_test", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -73,6 +91,7 @@ public class Account {
         this.roles = roles;
     }
     // end AnhLT
+
 
     public long getId() {
         return id;
