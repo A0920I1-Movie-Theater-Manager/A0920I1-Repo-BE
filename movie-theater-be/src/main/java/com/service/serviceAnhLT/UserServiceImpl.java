@@ -57,7 +57,21 @@ public class UserServiceImpl implements com.service.serviceAnhLT.UserService {
 
 	private Account buildUser(final SignUpRequest formDTO) {
 		Account user = new Account();
-//		user.setAccountCode();
+		int code ;
+		String accountCode;
+		for(;;){
+			code = (int) Math.floor(((Math.random() * 899999) + 100000));
+			accountCode = "KH-" + code;
+			if (userRepository.existsByAccountCode(accountCode)){
+
+			}else {
+				break;
+			}
+		}
+
+		System.out.println(accountCode);
+
+		user.setAccountCode(accountCode);
 		user.setFullname(formDTO.getFullName());
 		user.setEmail(formDTO.getEmail());
 		user.setPhone(formDTO.getPhone());

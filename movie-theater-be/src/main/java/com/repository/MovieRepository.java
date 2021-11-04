@@ -95,5 +95,18 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
             "where ((curdate() > showing_from) and (curdate() < showing_to))\n" +
             "or curdate() < showing_from", nativeQuery = true)
     List<Movie> findAllMovieShowingAndComingSoon();
+
+//    TuHC - lay nhung phim da xem theo account
+    @Query(value = "SELECT distinct movie.*" +
+            "FROM movietheater.movie \n" +
+            "inner join movie_showtime on movie_showtime.movie_id = movie.id \n" +
+            "inner join showtime on showtime.id = movie_showtime.showtime_id \n" +
+            "inner join screen on screen.showtime_id = showtime.id \n" +
+            "inner join seat on seat.screen_id = screen.id \n" +
+            "inner join booking_seat on booking_seat.seat_id = seat.id\n" +
+            "inner join booking on booking.id = booking_seat.booking_id\n" +
+            "inner join account on account.id = booking.account_id\n" +
+            "where account.id = :accountId", nativeQuery = true)
+    List<Movie> findAllMovieSeenByAccount(@Param("accountId") long accountId);
 }
 

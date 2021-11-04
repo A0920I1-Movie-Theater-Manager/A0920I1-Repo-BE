@@ -20,7 +20,7 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
     boolean existsByEmail(String email);
     boolean existsByPhone(String phone);
     boolean existsByUsername(String username);
-
+    boolean existsByAccountCode(String accountCode);
 
     //HueHV
     @Query(value = "select * from account where account_code like 'NV%';", nativeQuery = true)
@@ -45,7 +45,7 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
 
     //PhapNT- Hiển thị danh sách thành viên.
     @Query(value = "select * from account inner join account_role_test on account.id = account_role_test.account_id " +
-            "where account.deleted = true  and (account_role_test.role_id = 1) and (account_role_test.role_id != 3) and (account_role_test.role_id != 2)" , nativeQuery = true)
+            "where account.deleted = true  and account.account_code like '%KH%' " , nativeQuery = true)
     List<Account> findAllMember();
 
     //PhapNT- Chỉnh sửa thành viên.
@@ -132,7 +132,7 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
     Account findAccountById(long id);
     // Danh sách nhân viên (HoangLV)
     @Query(value = "select * from account inner join account_role_test on account.id = account_role_test.account_id " +
-            "where account.deleted = true  and (account_role_test.role_id = 3 or account_role_test.role_id = 2)", nativeQuery = true)
+            "where account.deleted = true  and (account_role_test.role_id = 3)", nativeQuery = true)
     List<Account> getAllAccountEmployee();
 
     // Lấy thông tin nhân viên theo id (HoangLV)
