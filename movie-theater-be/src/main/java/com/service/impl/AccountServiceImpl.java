@@ -1,10 +1,12 @@
 package com.service.impl;
 
 
+import com.dto.dtoAnhLT.SocialProvider;
 import com.model.dto.AccountMemberDTO;
 import com.model.dto.Viet.AccountUserDTO;
 import com.model.dto.Viet.ManagerBooking;
 import com.model.entity.Account;
+import com.model.entity.Role;
 import com.repository.AccountRepository;
 
 
@@ -12,11 +14,23 @@ import com.model.dto.employeeAccount.CreateEmployeeAccount;
 import com.model.dto.employeeAccount.UpdateEmployeeAccount;
 
 
+import com.repository.RoleRepository;
 import com.service.AccountService;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
+
+import java.util.HashSet;
+
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -24,6 +38,10 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     AccountRepository accountRepository;
 
+    @Autowired
+    JavaMailSender javaMailSender;
+
+    private RoleRepository roleRepository;
 
     //Viet hiển thị account theo id
     @Override
@@ -43,6 +61,8 @@ public class AccountServiceImpl implements AccountService {
         accountRepository.updateAccountUser(accountUserDTO.getAccountCode(), accountUserDTO.getAddress(), accountUserDTO.getBirthday(), accountUserDTO.getEmail(), accountUserDTO.getFullname(), accountUserDTO.getGender(), accountUserDTO.getIdCard(), accountUserDTO.getImageUrl(), accountUserDTO.getPassword(), accountUserDTO.getPhone(), accountUserDTO.getTotalPoint(), accountUserDTO.getUsername(), accountUserDTO.getId());
     }
 
+
+
     // Việt lấy danh sách vé
     @Override
     public List<ManagerBooking> ManagerTickets() {
@@ -59,6 +79,65 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void changePassword(AccountUserDTO accountUserDTO) {
         accountRepository.changePassword(accountUserDTO.getAccountCode(), accountUserDTO.getAddress(), accountUserDTO.getBirthday(), accountUserDTO.getEmail(), accountUserDTO.getFullname(), accountUserDTO.getGender(), accountUserDTO.getIdCard(), accountUserDTO.getImageUrl(), accountUserDTO.getPassword(), accountUserDTO.getPhone(), accountUserDTO.getTotalPoint(), accountUserDTO.getUsername(), accountUserDTO.getId());
+    }
+
+    @Override
+    public Boolean findAccountByVerificationCode(String code) {
+        Account account = accountRepository.findAccountByVerificationCode(code);
+        if (account == null || account.getEnabled()) {
+            return false;
+        } else {
+            account.setEnabled(true);
+            account.setVerificationCode(null);
+            accountRepository.save(account);
+            return true;
+        }
+    }
+
+    @Override
+    public String existsByUserName(String username) {
+        return accountRepository.existsByUserName(username);
+    }
+
+    @Override
+    public Boolean findAccountByVerificationCodeToResetPassword(String code) {
+        Account account = accountRepository.findAccountByVerificationCode(code);
+        return account != null;
+
+    }
+
+    @Override
+    public void saveNewPassword(String password, String code) {
+        accountRepository.saveNewPassword(password,code);
+
+    }
+
+    @Override
+    public void addVerificationCode(String username) throws MessagingException, UnsupportedEncodingException {
+        String code = RandomString.make(64);
+        accountRepository.addVerificationCode(code, username);
+        Account account = accountRepository.findAccountByVerificationCode(code);
+        this.sendVerificationEmailForResetPassWord(account.getUsername(), code, account.getEmail());
+    }
+
+
+
+    public void sendVerificationEmailForResetPassWord(String userName, String randomCode, String email) throws MessagingException, UnsupportedEncodingException {
+        String subject = "Hãy xác thực email của bạn";
+        String mailContent = "";
+        String confirmUrl = "http://localhost:4200/verify-reset-password?code=" + randomCode;
+
+
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, "UTF-8");
+        helper.setFrom("anht19102000@gmail.com","RẠP PHIM A0920I1");
+        helper.setTo(email);
+        helper.setSubject(subject);
+        mailContent = "<p sytle='color:red;'>Xin chào " + userName + " ,<p>" + "<p> Nhấn vào link sau để xác thực email của bạn:</p>" +
+                "<h3><a href='" + confirmUrl + "'>Link Xác thực( nhấn vào đây)!</a></h3>" +
+                "<p>RẠP PHIM A0920I1 XIN CẢM ƠN</p>";
+        helper.setText(mailContent, true);
+        javaMailSender.send(message);
     }
 
     //HueHv
@@ -121,13 +200,18 @@ public class AccountServiceImpl implements AccountService {
     // Danh sách nhân viên HoangLV
     @Override
     public List<Account> getAllEmployeeAccount() {
+        List<Account> list = accountRepository.getAllAccountEmployee();
+        System.out.println(list.size());
+        for (Account value: list){
+            System.out.println(value.getEmail());
+        }
         return accountRepository.getAllAccountEmployee();
     }
 
     // Lấy nhân viên theo id HoangLV
     @Override
     public Account getAccountById(long id) {
-        return accountRepository.getAccountById(id);
+        return accountRepository.findAccountById(id);
     }
 
     // Chỉnh sửa thông tin nhân viên HoangLV
@@ -151,20 +235,44 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void createEmployeeAccount(CreateEmployeeAccount createEmployeeAccount) {
 
-        accountRepository.createEmployeeAccount(createEmployeeAccount.getAccountCode(),
-                createEmployeeAccount.getAddress(),
-                createEmployeeAccount.getBirthday(),
-                createEmployeeAccount.getEmail(),
-                createEmployeeAccount.getFullname(),
-                createEmployeeAccount.getGender(),
-                createEmployeeAccount.getIdCard(),
-                createEmployeeAccount.getImageUrl(),
-                createEmployeeAccount.getPassword(),
-                createEmployeeAccount.getPhone(),
-                createEmployeeAccount.getUsername(),
-                createEmployeeAccount.isDeleted(),
-                createEmployeeAccount.getTotalPoint()
-        );
+//        accountRepository.createEmployeeAccount(createEmployeeAccount.getAccountCode(),
+//                createEmployeeAccount.getAddress(),
+//                createEmployeeAccount.getBirthday(),
+//                createEmployeeAccount.getEmail(),
+//                createEmployeeAccount.getFullname(),
+//                createEmployeeAccount.getGender(),
+//                createEmployeeAccount.getIdCard(),
+//                createEmployeeAccount.getImageUrl(),
+//                createEmployeeAccount.getPassword(),
+//                createEmployeeAccount.getPhone(),
+//                createEmployeeAccount.getUsername(),
+//                createEmployeeAccount.isDeleted(),
+//                createEmployeeAccount.getTotalPoint(),
+//                createEmployeeAccount.isEnable()
+//        );
+        Account account = new Account();
+        account.setAccountCode(createEmployeeAccount.getAccountCode());
+        account.setAddress(createEmployeeAccount.getAddress());
+        account.setBirthday(createEmployeeAccount.getBirthday());
+        account.setEmail(createEmployeeAccount.getEmail());
+        account.setFullname(createEmployeeAccount.getFullname());
+        account.setGender(createEmployeeAccount.getGender());
+        account.setIdCard(createEmployeeAccount.getIdCard());
+        account.setImageUrl(createEmployeeAccount.getImageUrl());
+        account.setPassword(createEmployeeAccount.getPassword());
+        account.setPhone(createEmployeeAccount.getPhone());
+        account.setUsername(createEmployeeAccount.getUsername());
+        account.setDeleted(createEmployeeAccount.isDeleted());
+        account.setEnable(createEmployeeAccount.isEnable());
+        account.setTotalPoint(createEmployeeAccount.getTotalPoint());
+        account.setProvider(SocialProvider.LOCAL.getProviderType());
+        final HashSet<Role> roles = new HashSet<Role>();
+        roles.add(roleRepository.findByName(Role.ROLE_USER));
+        roles.add(roleRepository.findByName(Role.ROLE_MODERATOR));
+        account.setRoles(roles);
+
+
+        accountRepository.save(account);
 
     }
 

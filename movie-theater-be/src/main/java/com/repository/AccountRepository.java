@@ -44,7 +44,8 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
 
 
     //PhapNT- Hiển thị danh sách thành viên.
-    @Query(value = " select account.* from  movietheater.account where deleted=0", nativeQuery = true)
+    @Query(value = "select * from account inner join account_role_test on account.id = account_role_test.account_id " +
+            "where account.deleted = true  and (account_role_test.role_id = 1) and (account_role_test.role_id != 3) and (account_role_test.role_id != 2)" , nativeQuery = true)
     List<Account> findAllMember();
 
     //PhapNT- Chỉnh sửa thành viên.
@@ -105,7 +106,7 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
             "inner join seat on seat.screen_id = screen.id\n" +
             "inner join booking_seat on booking_seat.seat_id = seat.id\n" +
             "inner join booking on booking_seat.booking_id = booking.id\n" +
-            "group by movie.id", nativeQuery = true)
+            "group by movie.id ", nativeQuery = true)
     List<ManagerBooking> ManagerTickets();
 //Việt lấy danh sách theo account id
 
@@ -119,6 +120,7 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
             "inner join booking on booking_seat.booking_id = booking.id\n" +
             "where booking.account_id = :idAccount \n" +
             "group by movie.id", nativeQuery = true)
+
     List<ManagerBooking> findAllFeedbackBookByIdAccount(@Param("idAccount") String idAccount);
 
     // Việt đổi mật khẩu
@@ -127,10 +129,10 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
     @Query(value = "  UPDATE account  SET account_code = ?1, address = ?2, birthday = ?3,email = ?4,fullname = ?5, gender = ?6,id_card = ?7,image_url = ?8,password = ?9,phone= ?10, total_point =?11,username=?12 WHERE id = ?13", nativeQuery = true)
     void changePassword(String accountCode, String address, LocalDate birthday, String email, String fullname, String gender, String idCard, String imageUrl, String password, String phone, int totalPoint, String username, long id);
 
-
+    Account findAccountById(long id);
     // Danh sách nhân viên (HoangLV)
-    @Query(value = "select * from account inner join account_role on account.id = account_role.id " +
-            "where account.deleted = 1 and account_role.role_id = 2 ", nativeQuery = true)
+    @Query(value = "select * from account inner join account_role_test on account.id = account_role_test.account_id " +
+            "where account.deleted = true  and (account_role_test.role_id = 3 or account_role_test.role_id = 2)", nativeQuery = true)
     List<Account> getAllAccountEmployee();
 
     // Lấy thông tin nhân viên theo id (HoangLV)
@@ -153,8 +155,8 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
     //Thêm mới nhân viên
     @Transactional
     @Modifying
-    @Query(value = "insert into account(`account_code`, `address`, `birthday`, `email`, `fullname`, `gender`, `id_card`, `image_url`, `password`, `phone`, `username`,`deleted`,`total_point`) values (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8,?9,?10,?11,?12,?13)", nativeQuery = true)
-    void createEmployeeAccount(String accountCode, String address, LocalDate birthday, String email, String fullname, String gender, String idCard, String imageUrl, String password, String phone, String username, boolean deleted, int totalPoint);
+    @Query(value = "insert into account(`account_code`, `address`, `birthday`, `email`, `fullname`, `gender`, `id_card`, `image_url`, `password`, `phone`, `username`,`deleted`,`total_point`,`enable` ) values (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8,?9,?10,?11,?12,?13,?14)", nativeQuery = true)
+    void createEmployeeAccount(String accountCode, String address, LocalDate birthday, String email, String fullname, String gender, String idCard, String imageUrl, String password, String phone, String username, boolean deleted, int totalPoint, boolean enable);
 
     //Thêm role cho nhân viên(HoangLV)
     @Transactional
@@ -175,4 +177,42 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
 
     //HoangLV
     boolean existsAccountsByAccountCode(String accountCode);
+    //VietNT
+/*
+    Account findAccountByUserName(String username);
+
+    @Query(value = "select id from movietheater.account where username = ?1", nativeQuery = true)
+
+    Integer findIdUserByUserName(String username);
+*/
+
+    @Query(value = "SELECT username from  movietheater.account where username = ?1", nativeQuery = true)
+
+    String existsByUserName(String username);
+
+    @Query(value = "SELECT email FROM movietheater.account where email= ?1", nativeQuery = true)
+
+    String existsByEmailUser(String email);
+
+    /*@Modifying
+    @Query(value = "insert into account(user_name,encrypt_pw,is_enabled,verification_code,email) values (?1,?2,?3,?4,?5)", nativeQuery = true)
+    void addNew(String username, String password, Boolean isEnable, String verifiedCode,String email);*/
+    @Transactional
+    @Query(value = "select * from movietheater.account where verification_code =?1",nativeQuery = true)
+    Account findAccountByVerificationCode(String verifyCode);
+    @Transactional
+    @Modifying
+    @Query(value ="update movietheater.account set verification_code=?1 where username =?2",nativeQuery = true)
+    void addVerificationCode(String code,String username);
+    @Transactional
+    @Query(value = "select * from movietheater.account", nativeQuery = true)
+    List<Account> getAllAccount();
+    @Transactional
+    @Modifying
+    @Query(value = "insert into account(username,password) values (?1,?2)", nativeQuery = true)
+    void addNewAccount(String username, String password);
+    @Transactional
+    @Modifying
+    @Query(value = "update account set password =?1,verification_code=null where verification_code=?2 ",nativeQuery = true)
+    void saveNewPassword(String password, String code);
 }

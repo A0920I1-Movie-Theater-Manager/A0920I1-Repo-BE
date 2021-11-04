@@ -17,7 +17,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "api/movie")
+@RequestMapping(value = "api/auth/movie")
 @CrossOrigin("http://localhost:4200")
 public class MovieController {
     private LocalDate today = LocalDate.now();

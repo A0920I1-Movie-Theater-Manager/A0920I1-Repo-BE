@@ -9,6 +9,8 @@ import com.model.dto.employeeAccount.CreateEmployeeAccount;
 import com.model.dto.employeeAccount.UpdateEmployeeAccount;
 
 import com.model.entity.Account;
+import com.model.entity.Role;
+import com.repository.RoleRepository;
 import com.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,16 +18,30 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import payload.reponse.MessageResponse;
+import payload.request.LoginRequest;
+import payload.request.ResetPassRequest;
+import payload.request.VerifyRequest;
+
+
+import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
+
+import java.util.HashSet;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "api")
+@RequestMapping(value = "/api")
 @CrossOrigin("http://localhost:4200")
 public class AccountController {
 
     private @Autowired
     AccountService accountService;
+
+    @Autowired
+    private RoleRepository roleRepository;
+
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -64,6 +80,7 @@ public class AccountController {
     // sửa thông tin nhân viên (HoangLV)
     @PutMapping("employee-account-edit")
     public ResponseEntity<?> updateEmployee(@RequestBody UpdateEmployeeAccount updateEmployeeAccount) {
+        updateEmployeeAccount.setPassword(passwordEncoder.encode(updateEmployeeAccount.getPassword()));
         accountService.updateEmployeeAccount(updateEmployeeAccount);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -76,10 +93,16 @@ public class AccountController {
                 && createEmployeeAccount.getEmail() != null && createEmployeeAccount.getAddress() != null && createEmployeeAccount.getFullname() != null
                 && createEmployeeAccount.getIdCard() != null && createEmployeeAccount.getPhone() != null && createEmployeeAccount.getImageUrl() != null) {
             createEmployeeAccount.setDeleted(true);
+            createEmployeeAccount.setEnable(true);
             createEmployeeAccount.setTotalPoint(0);
+            createEmployeeAccount.setPassword(passwordEncoder.encode(createEmployeeAccount.getPassword()));
             accountService.createEmployeeAccount(createEmployeeAccount);
-            Account account = accountService.findAccountByEmployeeName(createEmployeeAccount.getAccountCode());
-            accountService.createAccountRole(account.getId(), 2);
+
+//            Account account = accountService.findAccountByEmployeeName(createEmployeeAccount.getAccountCode());
+//
+//            accountService.createAccountRole(account.getId(), 3);
+
+
             return new ResponseEntity<>(HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -101,16 +124,19 @@ public class AccountController {
     public boolean checkEmailEmployee(@RequestBody String email) {
         return accountService.checkEmailEmployee(email);
     }
+
     // HoangLV
     @PostMapping("/check-phone-employee")
     public boolean checkPhoneEmployee(@RequestBody String phone) {
         return accountService.checkPhoneEmployee(phone);
     }
+
     // HoangLV
     @PostMapping("/check-username-employee")
     public boolean checkUsernameEmployee(@RequestBody String username) {
         return accountService.checkUsernameEmployee(username);
     }
+
     // HoangLV
     @PostMapping("/check-accountCode-employee")
     public boolean checkAccountCodeEmployee(@RequestBody String accountCode) {
@@ -215,7 +241,8 @@ public class AccountController {
         } else {
 
 
-            accountUserDTO.setPassword( passwordEncoder.encode(accountUserDTO.getPassword().trim())) ;
+          /*  accountUserDTO.setPassword(passwordEncoder.encode(accountUserDTO.getPassword().trim()));*/
+            System.out.println(accountUserDTO.getAccountCode().trim());
             accountUserDTO.setAccountCode(accountUserDTO.getAccountCode().trim());
             accountUserDTO.setAddress(accountUserDTO.getAddress().trim());
             accountUserDTO.setBirthday(accountUserDTO.getBirthday());
@@ -224,7 +251,6 @@ public class AccountController {
             accountUserDTO.setIdCard(accountUserDTO.getIdCard().trim());
             accountUserDTO.setUsername(accountUserDTO.getUsername().trim());
             accountService.updateAccount(accountUserDTO);
-
 
             return new ResponseEntity<>(accountUserDTO, HttpStatus.OK);
         }
@@ -267,4 +293,45 @@ public class AccountController {
             return new ResponseEntity<>(accountUserDTO, HttpStatus.OK);
         }
     }
+
+
+    @PostMapping("/auth/verify")
+    public ResponseEntity<?> VerifyEmail(@RequestBody VerifyRequest code) {
+        Boolean isVerified = accountService.findAccountByVerificationCode(code.getCode());
+        if (isVerified) {
+            return ResponseEntity.ok(new MessageResponse("activated"));
+        } else {
+            return ResponseEntity.ok(new MessageResponse("error"));
+        }
+    }
+
+    @PostMapping("/auth/reset-password")
+    public ResponseEntity<?> reset(@RequestBody LoginRequest loginRequest) throws MessagingException, UnsupportedEncodingException {
+        System.out.println("reset passsword");
+        if (accountService.existsByUserName(loginRequest.getUsername()) != null) {
+            accountService.addVerificationCode(loginRequest.getUsername());
+            return ResponseEntity.ok(new MessageResponse("Sent email "));
+        }
+        return ResponseEntity
+                .badRequest()
+                .body(new MessageResponse("Tài khoản không đúng"));
+    }
+
+    @PostMapping("/auth/verify-password")
+    public ResponseEntity<?> VerifyPassword(@RequestBody VerifyRequest code) {
+        Boolean isVerified = accountService.findAccountByVerificationCodeToResetPassword(code.getCode());
+        if (isVerified) {
+            return ResponseEntity.ok(new MessageResponse("accepted"));
+        } else {
+            return ResponseEntity.ok(new MessageResponse("error"));
+        }
+    }
+
+    @PostMapping("/auth/do-reset-password")
+    public ResponseEntity<?> doResetPassword(@RequestBody ResetPassRequest resetPassRequest) {
+        accountService.saveNewPassword(passwordEncoder.encode(resetPassRequest.getPassword()), resetPassRequest.getCode());
+        return ResponseEntity.ok(new MessageResponse("success"));
+    }
 }
+
+
