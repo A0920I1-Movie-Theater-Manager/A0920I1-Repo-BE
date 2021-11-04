@@ -32,7 +32,7 @@ import java.util.HashSet;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "api")
+@RequestMapping(value = "/api")
 @CrossOrigin("http://localhost:4200")
 public class AccountController {
 
@@ -80,6 +80,7 @@ public class AccountController {
     // sửa thông tin nhân viên (HoangLV)
     @PutMapping("employee-account-edit")
     public ResponseEntity<?> updateEmployee(@RequestBody UpdateEmployeeAccount updateEmployeeAccount) {
+        updateEmployeeAccount.setPassword(passwordEncoder.encode(updateEmployeeAccount.getPassword()));
         accountService.updateEmployeeAccount(updateEmployeeAccount);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -241,6 +242,7 @@ public class AccountController {
 
 
           /*  accountUserDTO.setPassword(passwordEncoder.encode(accountUserDTO.getPassword().trim()));*/
+            System.out.println(accountUserDTO.getAccountCode().trim());
             accountUserDTO.setAccountCode(accountUserDTO.getAccountCode().trim());
             accountUserDTO.setAddress(accountUserDTO.getAddress().trim());
             accountUserDTO.setBirthday(accountUserDTO.getBirthday());
@@ -249,7 +251,6 @@ public class AccountController {
             accountUserDTO.setIdCard(accountUserDTO.getIdCard().trim());
             accountUserDTO.setUsername(accountUserDTO.getUsername().trim());
             accountService.updateAccount(accountUserDTO);
-
 
             return new ResponseEntity<>(accountUserDTO, HttpStatus.OK);
         }
@@ -294,7 +295,7 @@ public class AccountController {
     }
 
 
-    @PostMapping("/public/verify")
+    @PostMapping("/auth/verify")
     public ResponseEntity<?> VerifyEmail(@RequestBody VerifyRequest code) {
         Boolean isVerified = accountService.findAccountByVerificationCode(code.getCode());
         if (isVerified) {
@@ -304,9 +305,9 @@ public class AccountController {
         }
     }
 
-    @PostMapping("/public/reset-password")
+    @PostMapping("/auth/reset-password")
     public ResponseEntity<?> reset(@RequestBody LoginRequest loginRequest) throws MessagingException, UnsupportedEncodingException {
-
+        System.out.println("reset passsword");
         if (accountService.existsByUserName(loginRequest.getUsername()) != null) {
             accountService.addVerificationCode(loginRequest.getUsername());
             return ResponseEntity.ok(new MessageResponse("Sent email "));
@@ -316,7 +317,7 @@ public class AccountController {
                 .body(new MessageResponse("Tài khoản không đúng"));
     }
 
-    @PostMapping("/public/verify-password")
+    @PostMapping("/auth/verify-password")
     public ResponseEntity<?> VerifyPassword(@RequestBody VerifyRequest code) {
         Boolean isVerified = accountService.findAccountByVerificationCodeToResetPassword(code.getCode());
         if (isVerified) {
@@ -326,7 +327,7 @@ public class AccountController {
         }
     }
 
-    @PostMapping("/public/do-reset-password")
+    @PostMapping("/auth/do-reset-password")
     public ResponseEntity<?> doResetPassword(@RequestBody ResetPassRequest resetPassRequest) {
         accountService.saveNewPassword(passwordEncoder.encode(resetPassRequest.getPassword()), resetPassRequest.getCode());
         return ResponseEntity.ok(new MessageResponse("success"));

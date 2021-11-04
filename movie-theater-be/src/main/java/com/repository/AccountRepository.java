@@ -44,7 +44,8 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
 
 
     //PhapNT- Hiển thị danh sách thành viên.
-    @Query(value = " select account.* from  movietheater.account where deleted=0", nativeQuery = true)
+    @Query(value = "select * from account inner join account_role_test on account.id = account_role_test.account_id " +
+            "where account.deleted = true  and (account_role_test.role_id = 1) and (account_role_test.role_id != 3) and (account_role_test.role_id != 2)" , nativeQuery = true)
     List<Account> findAllMember();
 
     //PhapNT- Chỉnh sửa thành viên.
@@ -128,10 +129,10 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
     @Query(value = "  UPDATE account  SET account_code = ?1, address = ?2, birthday = ?3,email = ?4,fullname = ?5, gender = ?6,id_card = ?7,image_url = ?8,password = ?9,phone= ?10, total_point =?11,username=?12 WHERE id = ?13", nativeQuery = true)
     void changePassword(String accountCode, String address, LocalDate birthday, String email, String fullname, String gender, String idCard, String imageUrl, String password, String phone, int totalPoint, String username, long id);
 
-
+    Account findAccountById(long id);
     // Danh sách nhân viên (HoangLV)
-    @Query(value = "select * from account inner join account_role on account.id = account_role.id " +
-            "where account.deleted = 1 and account_role.role_id = 2 ", nativeQuery = true)
+    @Query(value = "select * from account inner join account_role_test on account.id = account_role_test.account_id " +
+            "where account.deleted = true  and (account_role_test.role_id = 3 or account_role_test.role_id = 2)", nativeQuery = true)
     List<Account> getAllAccountEmployee();
 
     // Lấy thông tin nhân viên theo id (HoangLV)

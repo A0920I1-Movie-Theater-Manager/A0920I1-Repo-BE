@@ -1,6 +1,7 @@
 package com.service.impl;
 
 
+import com.dto.dtoAnhLT.SocialProvider;
 import com.model.dto.AccountMemberDTO;
 import com.model.dto.Viet.AccountUserDTO;
 import com.model.dto.Viet.ManagerBooking;
@@ -17,7 +18,6 @@ import com.repository.RoleRepository;
 import com.service.AccountService;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -30,6 +30,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -129,7 +130,7 @@ public class AccountServiceImpl implements AccountService {
 
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, "UTF-8");
-        helper.setFrom("nguyentatviettk@gmail.com","RẠP PHIM A0920I1");
+        helper.setFrom("anht19102000@gmail.com","RẠP PHIM A0920I1");
         helper.setTo(email);
         helper.setSubject(subject);
         mailContent = "<p sytle='color:red;'>Xin chào " + userName + " ,<p>" + "<p> Nhấn vào link sau để xác thực email của bạn:</p>" +
@@ -199,13 +200,18 @@ public class AccountServiceImpl implements AccountService {
     // Danh sách nhân viên HoangLV
     @Override
     public List<Account> getAllEmployeeAccount() {
+        List<Account> list = accountRepository.getAllAccountEmployee();
+        System.out.println(list.size());
+        for (Account value: list){
+            System.out.println(value.getEmail());
+        }
         return accountRepository.getAllAccountEmployee();
     }
 
     // Lấy nhân viên theo id HoangLV
     @Override
     public Account getAccountById(long id) {
-        return accountRepository.getAccountById(id);
+        return accountRepository.findAccountById(id);
     }
 
     // Chỉnh sửa thông tin nhân viên HoangLV
@@ -259,7 +265,7 @@ public class AccountServiceImpl implements AccountService {
         account.setDeleted(createEmployeeAccount.isDeleted());
         account.setEnable(createEmployeeAccount.isEnable());
         account.setTotalPoint(createEmployeeAccount.getTotalPoint());
-
+        account.setProvider(SocialProvider.LOCAL.getProviderType());
         final HashSet<Role> roles = new HashSet<Role>();
         roles.add(roleRepository.findByName(Role.ROLE_USER));
         roles.add(roleRepository.findByName(Role.ROLE_MODERATOR));
