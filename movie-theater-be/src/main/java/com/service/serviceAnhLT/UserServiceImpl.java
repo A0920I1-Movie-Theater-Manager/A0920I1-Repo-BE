@@ -57,6 +57,7 @@ public class UserServiceImpl implements com.service.serviceAnhLT.UserService {
 
 	private Account buildUser(final SignUpRequest formDTO) {
 		Account user = new Account();
+//		user.setAccountCode();
 		user.setFullname(formDTO.getFullName());
 		user.setEmail(formDTO.getEmail());
 		user.setPhone(formDTO.getPhone());
