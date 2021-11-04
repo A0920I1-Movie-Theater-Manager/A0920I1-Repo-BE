@@ -18,15 +18,29 @@ public class SeatController {
     @Autowired
     private SeatService seatService;
 
-//    TuHC - lay ghe theo movie va showtime
+    //    TuHC - lay ghe theo movie va showtime
     @GetMapping(value = "/get-seat/{movieId}/{showtimeId}")
     public ResponseEntity<List<Seat>> getAllSeatByScreen(@PathVariable("movieId") long movieId,
-                                                         @PathVariable("showtimeId") long showtimeId){
+                                                         @PathVariable("showtimeId") long showtimeId) {
         List<Seat> seats = seatService.findAllSeatByMovieAndShowtime(movieId, showtimeId);
-        if(seats.isEmpty()){
+        if (seats.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }else {
+        } else {
             return new ResponseEntity<>(seats, HttpStatus.OK);
+        }
+    }
+
+    //    TuHC - lay ghe theo ten ghe va gio chieu
+    @GetMapping(value = "/get-single-seat/{seatName}/{showtimeId}/{movieId}")
+    public ResponseEntity<SeatDTO> getSeatBySeatNameAndShowtime(@PathVariable("seatName") String seatName,
+                                                                @PathVariable("showtimeId") long showtimeId,
+                                                                @PathVariable("movieId") long movieId) {
+        SeatDTO seat = seatService.findSeatBySeatNameAndShowtime(seatName, showtimeId, movieId);
+
+        if (seat == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(seat, HttpStatus.OK);
         }
     }
 }

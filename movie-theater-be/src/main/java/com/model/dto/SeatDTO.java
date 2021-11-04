@@ -1,28 +1,20 @@
 package com.model.dto;
 
+import java.time.LocalTime;
+
 //TuHC
-public class SeatDTO {
-    private String movieId;
-    private String showtimeId;
+public interface SeatDTO {
+    long getId();
 
-    public SeatDTO(String movieId, String showtimeId) {
-        this.movieId = movieId;
-        this.showtimeId = showtimeId;
-    }
+    int getVip();
 
-    public String getMovieId() {
-        return movieId;
-    }
+    String getName();
 
-    public void setMovieId(String movieId) {
-        this.movieId = movieId;
-    }
+    double getPrice();
 
-    public String getShowtimeId() {
-        return showtimeId;
-    }
+    double getBasePrice();
 
-    public void setShowtimeId(String showtimeId) {
-        this.showtimeId = showtimeId;
-    }
+    String getTitle();
+
+    LocalTime getShowtime();
 }
