@@ -5,6 +5,7 @@ import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
@@ -17,6 +18,7 @@ public class Showtime {
     private long id;
 
     private LocalTime showTime;
+    private LocalDate showDay;
 
     @ManyToMany
     @JoinTable(name = "movie_showtime", joinColumns = @JoinColumn(name = "showtime_id"), inverseJoinColumns = @JoinColumn(name = "movie_id"))
@@ -67,5 +69,13 @@ public class Showtime {
 
     public void setPrice(Price price) {
         this.price = price;
+    }
+
+    public LocalDate getShowDay() {
+        return showDay;
+    }
+
+    public void setShowDay(LocalDate showDay) {
+        this.showDay = showDay;
     }
 }
